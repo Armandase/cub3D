@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:18:41 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/12 10:35:48 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:40:04 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,9 @@ typedef struct s_texture{
 	int		floor;
 	int		ceiling;
 }	t_texture;
+
+typedef struct s_map{
+	char	**map;
+}t_map;
 
 #endif
