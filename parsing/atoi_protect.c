@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   atoi_protect.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/11 17:28:42 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/13 11:07:01 by adamiens         ###   ########.fr       */
+/*   Created: 2023/02/13 11:04:35 by adamiens          #+#    #+#             */
+/*   Updated: 2023/02/13 11:06:08 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+long long	atoi_protect(char *str)
+{
+	int			i;
+	long long	value;
 
-# include "../cub3d.h"
-
-void		extension_check(char *av);
-void		parsing(int ac, char **av);
-void		print_error_exit(char *error);
-void		map_check(char *map);
-long long	atoi_protect(char *str);
-
-#endif
+	i = 0;
+	value = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		value = (value * 10) + (str[i] - '0');
+		i++;
+		if (value > 2147483647)
+			return (-1);
+	}
+	if ((value == 0 && i == 0) || str[i] != '\0')
+		return (-1);
+	return (value);
+}
