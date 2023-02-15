@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 09:21:32 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/15 09:40:22 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/02/15 10:57:57 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	convert_str_rgb_to_int(char **colors, t_texture config, char *buf)
 	if (r == -1 || g == -1 || b == -1 || r > 256 || g > 256 || b > 256)
 	{
 		ft_free_strs(colors);
-		free_exit_config(config, buf);
+		free_texture_exit(config, buf);
 	}
 	sum = (r * 100000) + (g * 1000) + b;
 	ft_free_strs(colors);

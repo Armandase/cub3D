@@ -2,10 +2,10 @@ NAME		= cub3d
 SRCS		= srcs/main.c srcs/utils_overall.c\
 			  srcs/parsing/parsing.c srcs/parsing/extension.c\
 			  srcs/parsing/map_check.c srcs/parsing/atoi_protect.c \
-			  srcs/parsing/texture_utils.c
+			  srcs/parsing/texture_utils.c srcs/parsing/get_map.c
 CC			= gcc
-LIBS        = -Llibft -lft
-CFLAGS		= -Wall -Werror -Wextra -g -gdwarf-4
+LIBS        = -Llibs/libft -lft
+CFLAGS		= -Wall -Werror -Wextra -g
 OBJS		= ${SRCS:.c=.o}
 
 all: ${NAME}
@@ -14,7 +14,7 @@ all: ${NAME}
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 $(NAME): ${OBJS}
-	@make -s -C libft --no-print-directory
+	@make -s -C ./libs/libft --no-print-directory
 	${CC} ${CFLAGS} -o ${NAME} ${SRCS} ${LIBS}
 
 clean:
