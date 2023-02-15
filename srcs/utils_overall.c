@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   utils_overall.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/11 17:18:41 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/13 13:40:04 by adamiens         ###   ########.fr       */
+/*   Created: 2023/02/15 09:24:41 by adamiens          #+#    #+#             */
+/*   Updated: 2023/02/15 09:40:56 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "../includes/cub3d.h"
 
-# include "./libft/libft.h"
-# include "./parsing/parsing.h"
-# include <math.h>
-
-typedef struct s_texture{
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	int		floor;
-	int		ceiling;
-}	t_texture;
-
-typedef struct s_map{
-	char	**map;
-}t_map;
-
-#endif
+void	ft_free(void	**addr)
+{
+	if (*addr)
+	{
+		free(*addr);
+		*addr = NULL;
+	}
+}

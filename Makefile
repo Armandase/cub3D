@@ -1,7 +1,8 @@
 NAME		= cub3d
-SRCS		= main.c\
-			  parsing/parsing.c parsing/extension.c\
-			  parsing/map_check.c parsing/atoi_protect.c 
+SRCS		= srcs/main.c srcs/utils_overall.c\
+			  srcs/parsing/parsing.c srcs/parsing/extension.c\
+			  srcs/parsing/map_check.c srcs/parsing/atoi_protect.c \
+			  srcs/parsing/texture_utils.c
 CC			= gcc
 LIBS        = -Llibft -lft
 CFLAGS		= -Wall -Werror -Wextra -g -gdwarf-4
