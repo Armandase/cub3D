@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 09:21:32 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/16 09:04:15 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/02/16 09:31:30 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_texture	init_texture(void)
 	config.ea = NULL;
 	config.so = NULL;
 	config.we = NULL;
+	config.map = NULL;
 	return (config);
 }
 

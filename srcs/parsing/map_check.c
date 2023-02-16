@@ -1,5 +1,4 @@
 #include "../../includes/parsing.h"
-#include <stdlib.h>
 
 int	copy_path_texture(char **config_texture, char *buf)
 {
@@ -39,7 +38,7 @@ void	get_color(t_texture *config, char *buf, char way, int fd)
 		config->ceiling = convert_str_rgb_to_int(colors, *config, buf, fd);
 }
 
-int	check_config(t_texture *config, char *tmp, t_map *map, int fd)
+int	check_config(t_texture *config, char *tmp, int fd)
 {
 	int	ret;
 
@@ -61,14 +60,14 @@ int	check_config(t_texture *config, char *tmp, t_map *map, int fd)
 		get_color(config, tmp, 'C', fd);
 	else
 	{
-		get_map(config, tmp, map, fd);
+		get_map(config, tmp, fd);
 		return (-1);
 	}
 	ft_free((void *)&tmp);
 	return (ret);
 }
 
-void	configuration(int fd, t_texture *config, t_map *map)
+void	configuration(int fd, t_texture *config)
 {
 	char	*buf;
 	char	*tmp;
@@ -81,7 +80,7 @@ void	configuration(int fd, t_texture *config, t_map *map)
 			free_texture_exit(*config, buf, fd);
 		tmp = ft_strtrim(buf, " \n");
 		ft_free((void *)&buf);
-		ret = check_config(config, tmp, map, fd);
+		ret = check_config(config, tmp, fd);
 		if (ret == -1)
 			break ;
 		else if (ret > 0)
@@ -89,23 +88,12 @@ void	configuration(int fd, t_texture *config, t_map *map)
 	}
 }
 
-void	map_check(char	*av)
+void	map_check(char	*av, t_texture *config)
 {
 	int			fd;
-	t_texture	config;
-	t_map		map;
 
 	fd = open(av, O_RDONLY);
-	config = init_texture();
-	map.map = NULL;
 	if (fd < 0)
 		print_error_exit("Open error\n");
-	configuration(fd, &config, &map);
-	ft_printf("no:%s\nso:%s\nea:%s\nwe:%s\nfloor:%d\nceiling:%d\n",
-		config.no, config.so, config.ea, config.we,
-		config.floor, config.ceiling);
-	ft_free((void *)&config.no);
-	ft_free((void *)&config.so);
-	ft_free((void *)&config.ea);
-	ft_free((void *)&config.we);
+	configuration(fd, config);
 }

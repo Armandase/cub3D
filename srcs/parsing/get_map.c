@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:01:52 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/16 09:07:35 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/02/16 09:27:27 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ char	**copy_map(int fd, char *first_line)
 	return (strs);
 }
 
-void	get_map(t_texture *config, char *buf, t_map *map, int fd)
+void	get_map(t_texture *config, char *buf, int fd)
 {
-	map->map = copy_map(fd, buf);
+	config->map = copy_map(fd, buf);
 	//verif_map(map, config);
-	for(int	i = 0; map->map[i]; i++)
-		ft_printf("%s\n", map->map[i]);
-	ft_free_strs(map->map);
+	for(int	i = 0; config->map[i]; i++)
+		ft_printf("%s\n", config->map[i]);
+	ft_free_strs(config->map);
 	(void)config;
 	//free_texture_exit(*config, NULL);
 }

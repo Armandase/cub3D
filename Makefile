@@ -27,7 +27,4 @@ fclean : clean
 
 re: fclean all
 
-vg:
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=.vsupp ./minishell
-
-.PHONY: all clean fclean re vg
+.PHONY: all clean fclean re

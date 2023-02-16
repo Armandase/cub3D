@@ -3,6 +3,10 @@
 
 int	main(int ac, char **av)
 {
-	parsing(ac, av);
+	t_texture	config;
+
+	config = init_texture();
+	parsing(ac, av, &config);
+	//render(config);
 	return (0);
 }
