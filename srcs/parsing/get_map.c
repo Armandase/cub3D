@@ -6,27 +6,11 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:01:52 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/15 14:16:26 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/02/16 09:07:35 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
-
-int	verif_top_bot(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] && line[i] != '\n')
-	{
-		if (line[i] != '1' || line[i] != ' ')
-			return (1);
-		i++;
-	}
-	if (ft_strlen(&line[i]) > 1)
-		return (1);
-	return (0);
-}
 
 char	**add_strs_back(char *to_add, char	**strs)
 {
@@ -62,17 +46,17 @@ char	**copy_map(int fd, char *first_line)
 			break ;
 		strs = add_strs_back(to_add, strs);
 	}
+	close(fd);
 	return (strs);
 }
 
 void	get_map(t_texture *config, char *buf, t_map *map, int fd)
 {
 	map->map = copy_map(fd, buf);
-	//if (verif_top_bot(buf, map))
-	//	free_texture_exit(*config, buf);
+	//verif_map(map, config);
 	for(int	i = 0; map->map[i]; i++)
 		ft_printf("%s\n", map->map[i]);
-	(void)config;
 	ft_free_strs(map->map);
-	free_texture_exit(config, char *buf);
+	(void)config;
+	//free_texture_exit(*config, NULL);
 }
