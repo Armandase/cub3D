@@ -53,7 +53,7 @@ char	**copy_map(int fd, char *first_line)
 void	get_map(t_texture *config, char *buf, int fd)
 {
 	config->map = copy_map(fd, buf);
-	//verif_map(map, config);
+	ft_printf("MAP VALID: %d\n", verif_map(config));
 	for(int	i = 0; config->map[i]; i++)
 		ft_printf("%s\n", config->map[i]);
 	ft_free_strs(config->map);

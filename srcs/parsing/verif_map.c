@@ -12,48 +12,40 @@
 
 #include "../../includes/parsing.h"
 
-static int	max_line_length(char **map)
+bool	verif_map(t_texture *config)
 {
-	int	i;
-	int	j;
-	int	length;
+	const char	**map = (const char **)config->map;
+	bool		valid;
+	int			i;
+	int			j;
 
-	length = 0;
 	i = 0;
+	valid = true;
 	while (map[i] != NULL)
 	{
 		j = 0;
 		while (map[i][j])
 		{
+			if (map[i][j] != '1' && map[i][j] != '0' && ft_isspace(map[i][j]) == false && map[i][j] != 'N' && map[i][j] != '\n')
+				valid = false;
+			else if (ft_isspace(map[i][j]) == true && !(map[i + 1] != NULL
+				&& (map[i + 1][j] == '1' || ft_isspace(map[i + 1][j]))))
+			{
+				if (map[i + 1])
+					valid = false;
+			}
+			else if (i == 0 && map[i][j] != '1' && ft_isspace(map[i][j]) == false)
+				valid = false;
+			else if (map[i][j] == '0' && map[i][j + 1] == '\n')
+				valid = false;
+			else if (ft_isspace(map[i][j]) && map[i][j + 1] == '0')
+				valid = false;
+			else if (map[i][j] == '0' && !(map[i + 1] != NULL
+				&& (map[i + 1][j] == '1' || map[i + 1][j] == '0' || map[i + 1][j] == 'N')))
+				valid = false;
 			j++;
 		}
-		if (j > length)
-			length = j;
 		i++;
 	}
-	return (length);
-}
-
-static void	check_line_format(char *line, int max_length)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] && ft_isspace(line[i]))
-	{
-	}
-}
-
-void	verif_map(t_texture *config)
-{
-	const int	max_length = max_line_length(config->map);
-	const char	**map = config->map;
-	int			i;
-	int			j;
-
-	i = 0;
-	while (map[i] != NULL)
-	{
-		check_line_format(map[i], max_length);
-	}
+	return (valid);
 }
