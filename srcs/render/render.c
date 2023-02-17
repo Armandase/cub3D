@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:35:56 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/17 16:41:21 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/02/17 18:03:02 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ void	render(t_texture *config)
 	mlx.config = config;
 	if (mlx.init == NULL)
 		free_render_exit(config, &mlx, "Initialisation error\n");
-	mlx.win = mlx_new_window
-		(mlx.init, WIDTH, HEIGHT, "Cub3D");
+	mlx.win = mlx_new_window(mlx.init, WIDTH, HEIGHT, "Cub3D");
 	if (mlx.win == NULL)
 		free_render_exit(config, &mlx, "Initialisation error\n");
 	mlx.img = mlx_new_image(mlx.init, WIDTH, HEIGHT);
