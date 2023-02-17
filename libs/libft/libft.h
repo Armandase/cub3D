@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 10:42:11 by adamiens          #+#    #+#             */
-/*   Updated: 2023/01/25 19:07:26 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/02/17 15:56:53 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <stdarg.h>
+# include <stdbool.h>
 # include "get_next_line.h"
 
 typedef struct s_list
@@ -34,6 +35,7 @@ int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
+bool	ft_isspace(char c);
 char	*ft_itoa(int n);
 char	*ft_lltoa(long long n);
 void	*ft_memchr(const void *s, int c, size_t n);

@@ -12,9 +12,40 @@
 
 #include "../../includes/parsing.h"
 
-void	verif_map(t_map *map, t_texture *config)
+bool	verif_map(t_texture *config)
 {
-	int	i;
+	const char	**map = (const char **)config->map;
+	bool		valid;
+	int			i;
+	int			j;
 
 	i = 0;
+	valid = true;
+	while (map[i] != NULL)
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] != '1' && map[i][j] != '0' && ft_isspace(map[i][j]) == false && map[i][j] != 'N' && map[i][j] != '\n')
+				valid = false;
+			else if (ft_isspace(map[i][j]) == true && !(map[i + 1] != NULL
+				&& (map[i + 1][j] == '1' || ft_isspace(map[i + 1][j]))))
+			{
+				if (map[i + 1])
+					valid = false;
+			}
+			else if (i == 0 && map[i][j] != '1' && ft_isspace(map[i][j]) == false)
+				valid = false;
+			else if (map[i][j] == '0' && map[i][j + 1] == '\n')
+				valid = false;
+			else if (ft_isspace(map[i][j]) && map[i][j + 1] == '0')
+				valid = false;
+			else if (map[i][j] == '0' && !(map[i + 1] != NULL
+				&& (map[i + 1][j] == '1' || map[i + 1][j] == '0' || map[i + 1][j] == 'N')))
+				valid = false;
+			j++;
+		}
+		i++;
+	}
+	return (valid);
 }
