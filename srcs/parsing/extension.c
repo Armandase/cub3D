@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:30:11 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/15 09:39:21 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/02/17 15:45:12 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	print_error_exit(char *error)
 {
+	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(error, 2);
 	exit(1);
 }

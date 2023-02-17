@@ -1,9 +1,10 @@
-NAME		= cub3d
+NAME		= cub3D
 SRCS		= srcs/main.c srcs/utils_overall.c\
 			  srcs/parsing/parsing.c srcs/parsing/extension.c\
 			  srcs/parsing/map_check.c srcs/parsing/atoi_protect.c \
-			  srcs/parsing/texture_utils.c srcs/parsing/get_map.c
-CC			= gcc
+			  srcs/parsing/texture_utils.c srcs/parsing/get_map.c\
+			  srcs/parsing/verif_map.c
+CC			= clang
 LIBS        = -Llibs/libft -lft
 CFLAGS		= -Wall -Werror -Wextra -g
 OBJS		= ${SRCS:.c=.o}
