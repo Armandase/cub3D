@@ -8,15 +8,184 @@
 !_TAG_FIELD_DESCRIPTION	name	/tag name/
 !_TAG_FIELD_DESCRIPTION	pattern	/pattern/
 !_TAG_FIELD_DESCRIPTION	typeref	/Type and name of a variable or typedef/
+!_TAG_FIELD_DESCRIPTION!C++	name	/aliased names/
+!_TAG_FIELD_DESCRIPTION!ObjectiveC	category	/category attached to the class/
+!_TAG_FIELD_DESCRIPTION!ObjectiveC	protocols	/protocols that the class (or category) confirms to/
 !_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
 !_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_KIND_DESCRIPTION!C++	c,class	/classes/
+!_TAG_KIND_DESCRIPTION!C++	d,macro	/macro definitions/
+!_TAG_KIND_DESCRIPTION!C++	e,enumerator	/enumerators (values inside an enumeration)/
+!_TAG_KIND_DESCRIPTION!C++	f,function	/function definitions/
+!_TAG_KIND_DESCRIPTION!C++	g,enum	/enumeration names/
+!_TAG_KIND_DESCRIPTION!C++	h,header	/included header files/
+!_TAG_KIND_DESCRIPTION!C++	m,member	/class, struct, and union members/
+!_TAG_KIND_DESCRIPTION!C++	n,namespace	/namespaces/
+!_TAG_KIND_DESCRIPTION!C++	s,struct	/structure names/
+!_TAG_KIND_DESCRIPTION!C++	t,typedef	/typedefs/
+!_TAG_KIND_DESCRIPTION!C++	u,union	/union names/
+!_TAG_KIND_DESCRIPTION!C++	v,variable	/variable definitions/
+!_TAG_KIND_DESCRIPTION!ObjectiveC	C,category	/categories/
+!_TAG_KIND_DESCRIPTION!ObjectiveC	E,field	/Object field/
+!_TAG_KIND_DESCRIPTION!ObjectiveC	I,implementation	/class implementation/
+!_TAG_KIND_DESCRIPTION!ObjectiveC	M,macro	/A preprocessor macro/
+!_TAG_KIND_DESCRIPTION!ObjectiveC	P,protocol	/Protocol/
+!_TAG_KIND_DESCRIPTION!ObjectiveC	c,class	/Class' method/
+!_TAG_KIND_DESCRIPTION!ObjectiveC	e,enum	/An enumeration/
+!_TAG_KIND_DESCRIPTION!ObjectiveC	f,function	/A function/
+!_TAG_KIND_DESCRIPTION!ObjectiveC	i,interface	/class interface/
+!_TAG_KIND_DESCRIPTION!ObjectiveC	m,method	/Object's method/
+!_TAG_KIND_DESCRIPTION!ObjectiveC	p,property	/A property/
+!_TAG_KIND_DESCRIPTION!ObjectiveC	s,struct	/A type structure/
+!_TAG_KIND_DESCRIPTION!ObjectiveC	t,typedef	/A type alias/
+!_TAG_KIND_DESCRIPTION!ObjectiveC	v,var	/Global variable/
 !_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
 !_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
 !_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
 !_TAG_OUTPUT_VERSION	0.0	/current.age/
+!_TAG_PARSER_VERSION!C++	0.0	/current.age/
+!_TAG_PARSER_VERSION!ObjectiveC	0.0	/current.age/
 !_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
 !_TAG_PROC_CWD	/nfs/homes/ulayus/0cursus/cub3D/	//
 !_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	6.0.0	//
+!_TAG_ROLE_DESCRIPTION!C++!header	local	/local header/
+!_TAG_ROLE_DESCRIPTION!C++!header	system	/system header/
+!_TAG_ROLE_DESCRIPTION!C++!macro	undef	/undefined/
+BASE_10	libs/libft/printf_fd/ft_printf.h	/^# define BASE_10 /;"	d
+BASE_HEX_LW	libs/libft/printf_fd/ft_printf.h	/^# define BASE_HEX_LW /;"	d
+BASE_HEX_UP	libs/libft/printf_fd/ft_printf.h	/^# define BASE_HEX_UP /;"	d
+BUFFER_SIZE	libs/libft/get_next_line.h	/^#  define BUFFER_SIZE /;"	d
+CUB3D_H	includes/cub3d.h	/^# define CUB3D_H$/;"	d
+FONT_HEIGHT	libs/mlx/mlx_int.h	/^#define	FONT_HEIGHT	/;"	d
+FONT_WIDTH	libs/mlx/mlx_int.h	/^#define FONT_WIDTH	/;"	d
+FT_PRINTF_H	libs/libft/printf_fd/ft_printf.h	/^# define FT_PRINTF_H$/;"	d
+GET_NEXT_LINE_H	libs/libft/get_next_line.h	/^# define GET_NEXT_LINE_H$/;"	d
+HEIGHT	includes/render.h	/^# define HEIGHT /;"	d
+LIBFT_H	libs/libft/libft.h	/^# define LIBFT_H$/;"	d
+MAX_EVENT	libs/mlx/mlx_int.h	/^#define	MAX_EVENT	/;"	d
+MAX_PIXEL_NB	libs/mlx/mlx_int.h	/^#define MAX_PIXEL_NB	/;"	d
+MLX_H	libs/mlx/mlx.h	/^#define	MLX_H$/;"	d
+MlxWin	libs/mlx/mlx_new_window.h	/^@interface MlxWin : NSOpenGLView$/;"	i
+NSWindowEvent	libs/mlx/mlx_new_window.h	/^@interface NSWindowEvent : NSWindow$/;"	i
+PARSING_H	includes/parsing.h	/^# define PARSING_H$/;"	d
+RENDER_H	includes/render.h	/^# define RENDER_H$/;"	d
+UNIQ_BPP	libs/mlx/mlx_int.h	/^#define UNIQ_BPP	/;"	d
+WIDTH	includes/render.h	/^# define WIDTH /;"	d
+appid	libs/mlx/mlx_int.h	/^  void			*appid;$/;"	m	struct:mlx_ptr_s	typeref:typename:void *
+bits_per_px	includes/render.h	/^	int		bits_per_px;$/;"	m	struct:s_mlx	typeref:typename:int
+buffer	libs/mlx/mlx_int.h	/^  char			*buffer;$/;"	m	struct:mlx_img_list_s	typeref:typename:char *
+ceiling	includes/cub3d.h	/^	int		ceiling;$/;"	m	struct:s_texture	typeref:typename:int
+closeNotification:	libs/mlx/mlx_new_window.h	/^- (void) closeNotification:(NSNotification *)note;$/;"	m	interface:NSWindowEvent
+content	libs/libft/libft.h	/^	void			*content;$/;"	m	struct:s_list	typeref:typename:void *
+ctx	libs/mlx/mlx_new_window.h	/^  NSOpenGLContext	*ctx;$/;"	E	interface:MlxWin
+ctx	libs/mlx/mlx_new_window.h	/^- (NSOpenGLContext *) ctx;$/;"	m	interface:MlxWin
+ctxNeedsUpdate	libs/mlx/mlx_new_window.h	/^- (void) ctxNeedsUpdate;$/;"	m	interface:MlxWin
+ea	includes/cub3d.h	/^	char	*ea;$/;"	m	struct:s_texture	typeref:typename:char *
+endian	includes/render.h	/^	int		endian;$/;"	m	struct:s_mlx	typeref:typename:int
+event_funct	libs/mlx/mlx_new_window.h	/^  func_t	event_funct[MAX_EVENT];$/;"	E	interface:NSWindowEvent
+exposeNotification:	libs/mlx/mlx_new_window.h	/^- (void) exposeNotification:(NSNotification *)note;$/;"	m	interface:NSWindowEvent
+floor	includes/cub3d.h	/^	int		floor;$/;"	m	struct:s_texture	typeref:typename:int
+flushGLContext	libs/mlx/mlx_new_window.h	/^- (void) flushGLContext;$/;"	m	interface:MlxWin
+font	libs/mlx/mlx_int.h	/^  mlx_img_list_t	*font;$/;"	m	struct:mlx_ptr_s	typeref:typename:mlx_img_list_t *
+font_fshader	libs/mlx/mlx_int.h	/^  GLuint	font_fshader;$/;"	m	struct:glsl_info_s	typeref:typename:GLuint
+font_program	libs/mlx/mlx_int.h	/^  GLuint	font_program;$/;"	m	struct:glsl_info_s	typeref:typename:GLuint
+font_vshader	libs/mlx/mlx_int.h	/^  GLuint	font_vshader;$/;"	m	struct:glsl_info_s	typeref:typename:GLuint
+func_t	libs/mlx/mlx_int.h	/^typedef int (*func_t)();$/;"	t	typeref:typename:int (*)()
+glsl	libs/mlx/mlx_new_window.h	/^  glsl_info_t		glsl;$/;"	E	interface:MlxWin
+glsl_info_s	libs/mlx/mlx_int.h	/^typedef struct	glsl_info_s$/;"	s
+glsl_info_t	libs/mlx/mlx_int.h	/^} glsl_info_t;$/;"	t	typeref:struct:glsl_info_s
+height	libs/mlx/mlx_int.h	/^  int			height;$/;"	m	struct:mlx_img_list_s	typeref:typename:int
+image_fshader	libs/mlx/mlx_int.h	/^  GLuint	image_fshader;$/;"	m	struct:glsl_info_s	typeref:typename:GLuint
+image_program	libs/mlx/mlx_int.h	/^  GLuint	image_program;$/;"	m	struct:glsl_info_s	typeref:typename:GLuint
+image_vshader	libs/mlx/mlx_int.h	/^  GLuint	image_vshader;$/;"	m	struct:glsl_info_s	typeref:typename:GLuint
+img	includes/render.h	/^	void	*img;$/;"	m	struct:s_mlx	typeref:typename:void *
+img	libs/mlx/mlx_int.h	/^  mlx_img_list_t	*img;$/;"	m	struct:mlx_img_ctx_s	typeref:typename:mlx_img_list_t *
+img_addr	includes/render.h	/^	char	*img_addr;$/;"	m	struct:s_mlx	typeref:typename:char *
+img_height	includes/render.h	/^	int		img_height;$/;"	m	struct:s_mlx	typeref:typename:int
+img_list	libs/mlx/mlx_int.h	/^  mlx_img_ctx_t		*img_list;$/;"	m	struct:mlx_win_list_s	typeref:typename:mlx_img_ctx_t *
+img_list	libs/mlx/mlx_int.h	/^  mlx_img_list_t	*img_list;$/;"	m	struct:mlx_ptr_s	typeref:typename:mlx_img_list_t *
+img_width	includes/render.h	/^	int		img_width;$/;"	m	struct:s_mlx	typeref:typename:int
+init	includes/render.h	/^	void	*init;$/;"	m	struct:s_mlx	typeref:typename:void *
+initWithContentRect:styleMask:backing:defer:	libs/mlx/mlx_new_window.h	/^- (NSWindowEvent *) initWithContentRect:(NSRect)rect styleMask:(NSUInteger)winstyle backing:(NSB/;"	m	interface:NSWindowEvent
+initWithRect:andTitle:pfaAttrs:	libs/mlx/mlx_new_window.h	/^- (id) initWithRect: (NSRect)rect andTitle: (NSString *)title pfaAttrs: (NSOpenGLPixelFormatAttr/;"	m	interface:MlxWin
+keyflag	libs/mlx/mlx_new_window.h	/^  int		keyflag;$/;"	E	interface:NSWindowEvent
+keyrepeat	libs/mlx/mlx_new_window.h	/^  int		keyrepeat;$/;"	E	interface:NSWindowEvent
+line_len	includes/render.h	/^	int		line_len;$/;"	m	struct:s_mlx	typeref:typename:int
+loc_font_atlassize	libs/mlx/mlx_int.h	/^  GLint		loc_font_atlassize;$/;"	m	struct:glsl_info_s	typeref:typename:GLint
+loc_font_color	libs/mlx/mlx_int.h	/^  GLint		loc_font_color;$/;"	m	struct:glsl_info_s	typeref:typename:GLint
+loc_font_posinatlas	libs/mlx/mlx_int.h	/^  GLint		loc_font_posinatlas;$/;"	m	struct:glsl_info_s	typeref:typename:GLint
+loc_font_posinwin	libs/mlx/mlx_int.h	/^  GLint		loc_font_posinwin;$/;"	m	struct:glsl_info_s	typeref:typename:GLint
+loc_font_position	libs/mlx/mlx_int.h	/^  GLint		loc_font_position;$/;"	m	struct:glsl_info_s	typeref:typename:GLint
+loc_font_texture	libs/mlx/mlx_int.h	/^  GLint		loc_font_texture;$/;"	m	struct:glsl_info_s	typeref:typename:GLint
+loc_font_winhalfsize	libs/mlx/mlx_int.h	/^  GLint		loc_font_winhalfsize;$/;"	m	struct:glsl_info_s	typeref:typename:GLint
+loc_image_pos	libs/mlx/mlx_int.h	/^  GLint		loc_image_pos;$/;"	m	struct:glsl_info_s	typeref:typename:GLint
+loc_image_position	libs/mlx/mlx_int.h	/^  GLint		loc_image_position;$/;"	m	struct:glsl_info_s	typeref:typename:GLint
+loc_image_size	libs/mlx/mlx_int.h	/^  GLint		loc_image_size;$/;"	m	struct:glsl_info_s	typeref:typename:GLint
+loc_image_texture	libs/mlx/mlx_int.h	/^  GLint		loc_image_texture;$/;"	m	struct:glsl_info_s	typeref:typename:GLint
+loc_image_winhalfsize	libs/mlx/mlx_int.h	/^  GLint		loc_image_winhalfsize;$/;"	m	struct:glsl_info_s	typeref:typename:GLint
+loc_pixel_position	libs/mlx/mlx_int.h	/^  GLint		loc_pixel_position;$/;"	m	struct:glsl_info_s	typeref:typename:GLint
+loc_pixel_texture	libs/mlx/mlx_int.h	/^  GLint		loc_pixel_texture;$/;"	m	struct:glsl_info_s	typeref:typename:GLint
+loc_pixel_winhalfsize	libs/mlx/mlx_int.h	/^  GLint		loc_pixel_winhalfsize;$/;"	m	struct:glsl_info_s	typeref:typename:GLint
+loop_hook	libs/mlx/mlx_int.h	/^  void			(*loop_hook)(void *);$/;"	m	struct:mlx_ptr_s	typeref:typename:void (*)(void *)
+loop_hook_data	libs/mlx/mlx_int.h	/^  void			*loop_hook_data;$/;"	m	struct:mlx_ptr_s	typeref:typename:void *
+loop_timer	libs/mlx/mlx_int.h	/^  void			*loop_timer;$/;"	m	struct:mlx_ptr_s	typeref:typename:void *
+main_loop_active	libs/mlx/mlx_int.h	/^  int			main_loop_active;$/;"	m	struct:mlx_ptr_s	typeref:typename:int
+map	includes/cub3d.h	/^	char	**map;$/;"	m	struct:s_texture	typeref:typename:char **
+mlx_gl_draw	libs/mlx/mlx_new_window.h	/^- (void) mlx_gl_draw;$/;"	m	interface:MlxWin
+mlx_gl_draw_font:andCtx:andX:andY:andColor:glyphX:glyphY:	libs/mlx/mlx_new_window.h	/^- (void) mlx_gl_draw_font:(mlx_img_list_t *)img andCtx:(mlx_img_ctx_t *)imgctx andX:(int)x andY:/;"	m	interface:MlxWin
+mlx_gl_draw_img:andCtx:andX:andY:	libs/mlx/mlx_new_window.h	/^- (void) mlx_gl_draw_img:(mlx_img_list_t *)img andCtx:(mlx_img_ctx_t *)imgctx andX:(int)x andY:(/;"	m	interface:MlxWin
+mlx_img_ctx_s	libs/mlx/mlx_int.h	/^typedef struct	mlx_img_ctx_s$/;"	s
+mlx_img_ctx_t	libs/mlx/mlx_int.h	/^} mlx_img_ctx_t;$/;"	t	typeref:struct:mlx_img_ctx_s
+mlx_img_list_s	libs/mlx/mlx_int.h	/^typedef struct	mlx_img_list_s$/;"	s
+mlx_img_list_t	libs/mlx/mlx_int.h	/^} mlx_img_list_t;$/;"	t	typeref:struct:mlx_img_list_s
+mlx_ptr_s	libs/mlx/mlx_int.h	/^typedef struct		mlx_ptr_s$/;"	s
+mlx_ptr_t	libs/mlx/mlx_int.h	/^} mlx_ptr_t;$/;"	t	typeref:struct:mlx_ptr_s
+mlx_win_list_s	libs/mlx/mlx_int.h	/^typedef struct	mlx_win_list_s$/;"	s
+mlx_win_list_t	libs/mlx/mlx_int.h	/^} mlx_win_list_t;$/;"	t	typeref:struct:mlx_win_list_s
+nb_flush	libs/mlx/mlx_int.h	/^  int			nb_flush;$/;"	m	struct:mlx_win_list_s	typeref:typename:int
+next	libs/libft/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list *
+next	libs/mlx/mlx_int.h	/^  struct mlx_img_ctx_s	*next;$/;"	m	struct:mlx_img_ctx_s	typeref:struct:mlx_img_ctx_s *
+next	libs/mlx/mlx_int.h	/^  struct mlx_img_list_s	*next;$/;"	m	struct:mlx_img_list_s	typeref:struct:mlx_img_list_s *
+next	libs/mlx/mlx_int.h	/^  struct mlx_win_list_s	*next;$/;"	m	struct:mlx_win_list_s	typeref:struct:mlx_win_list_s *
+no	includes/cub3d.h	/^	char	*no;$/;"	m	struct:s_texture	typeref:typename:char *
+openglwin	libs/mlx/mlx_new_window.h	/^  int			openglwin;$/;"	E	interface:MlxWin
+pixelPutColor:X:Y:	libs/mlx/mlx_new_window.h	/^- (void) pixelPutColor: (int)color X:(int)x Y:(int)y;$/;"	m	interface:MlxWin
+pixel_fshader	libs/mlx/mlx_int.h	/^  GLuint	pixel_fshader;$/;"	m	struct:glsl_info_s	typeref:typename:GLuint
+pixel_nb	libs/mlx/mlx_new_window.h	/^  int			pixel_nb;$/;"	E	interface:MlxWin
+pixel_program	libs/mlx/mlx_int.h	/^  GLuint	pixel_program;$/;"	m	struct:glsl_info_s	typeref:typename:GLuint
+pixel_texture	libs/mlx/mlx_new_window.h	/^  GLuint		pixel_texture;$/;"	E	interface:MlxWin
+pixel_vbuffer	libs/mlx/mlx_new_window.h	/^  GLuint		pixel_vbuffer;$/;"	E	interface:MlxWin
+pixel_vshader	libs/mlx/mlx_int.h	/^  GLuint	pixel_vshader;$/;"	m	struct:glsl_info_s	typeref:typename:GLuint
+pixmgt	libs/mlx/mlx_int.h	/^  int			pixmgt;$/;"	m	struct:mlx_win_list_s	typeref:typename:int
+pixtexbuff	libs/mlx/mlx_new_window.h	/^  unsigned int		*pixtexbuff;$/;"	E	interface:MlxWin
+s_list	libs/libft/libft.h	/^typedef struct s_list$/;"	s
+s_mlx	includes/render.h	/^typedef struct s_mlx$/;"	s
+s_texture	includes/cub3d.h	/^typedef struct s_texture{$/;"	s
+selectGLContext	libs/mlx/mlx_new_window.h	/^- (void) selectGLContext;$/;"	m	interface:MlxWin
+setEvent:andFunc:andParam:	libs/mlx/mlx_new_window.h	/^- (void) setEvent:(int)event andFunc:(func_t)func andParam:(void *)param;$/;"	m	interface:MlxWin
+setEvent:andFunc:andParam:	libs/mlx/mlx_new_window.h	/^- (void) setEvent:(int)event andFunc:(func_t)func andParam:(void *)param;$/;"	m	interface:NSWindowEvent
+setKeyRepeat:	libs/mlx/mlx_new_window.h	/^- (void) setKeyRepeat:(int)mode;$/;"	m	interface:MlxWin
+setKeyRepeat:	libs/mlx/mlx_new_window.h	/^- (void) setKeyRepeat:(int)mode;$/;"	m	interface:NSWindowEvent
+size_x	libs/mlx/mlx_new_window.h	/^  int			size_x;$/;"	E	interface:MlxWin
+size_x	libs/mlx/mlx_new_window.h	/^  int		size_x;$/;"	E	interface:NSWindowEvent
+size_y	libs/mlx/mlx_new_window.h	/^  int			size_y;$/;"	E	interface:MlxWin
+size_y	libs/mlx/mlx_new_window.h	/^  int		size_y;$/;"	E	interface:NSWindowEvent
+so	includes/cub3d.h	/^	char	*so;$/;"	m	struct:s_texture	typeref:typename:char *
+t_list	libs/libft/libft.h	/^}	t_list;$/;"	t	typeref:struct:s_list
+t_ll	libs/libft/libft.h	/^typedef long long	t_ll;$/;"	t	typeref:typename:long long
+t_mlx	includes/render.h	/^}	t_mlx;$/;"	t	typeref:struct:s_mlx
+t_texture	includes/cub3d.h	/^}	t_texture;$/;"	t	typeref:struct:s_texture
+texture	libs/mlx/mlx_int.h	/^  GLuint		texture;$/;"	m	struct:mlx_img_ctx_s	typeref:typename:GLuint
+vbuffer	libs/mlx/mlx_int.h	/^  GLuint		vbuffer;$/;"	m	struct:mlx_img_ctx_s	typeref:typename:GLuint
+vertexes	libs/mlx/mlx_int.h	/^  GLfloat		vertexes[8];$/;"	m	struct:mlx_img_list_s	typeref:typename:GLfloat[8]
+void	libs/mlx/mlx_new_window.h	/^  void		*(event_param[MAX_EVENT]);$/;"	E	interface:NSWindowEvent
+we	includes/cub3d.h	/^	char	*we;$/;"	m	struct:s_texture	typeref:typename:char *
+width	libs/mlx/mlx_int.h	/^  int			width;$/;"	m	struct:mlx_img_list_s	typeref:typename:int
+win	includes/render.h	/^	void	*win;$/;"	m	struct:s_mlx	typeref:typename:void *
+win	libs/mlx/mlx_new_window.h	/^  NSWindowEvent		*win;$/;"	E	interface:MlxWin
+win	libs/mlx/mlx_new_window.h	/^- (NSWindowEvent *) win;$/;"	m	interface:MlxWin
+win_list	libs/mlx/mlx_int.h	/^  mlx_win_list_t	*win_list;$/;"	m	struct:mlx_ptr_s	typeref:typename:mlx_win_list_t *
+winid	libs/mlx/mlx_int.h	/^  void			*winid;$/;"	m	struct:mlx_win_list_s	typeref:typename:void *

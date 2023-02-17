@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:01:52 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/17 15:46:39 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/02/17 16:52:29 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	get_map(t_texture *config, char *buf, int fd)
 	config->map = copy_map(fd, buf);
 	if (verif_map(config) == false)
 		print_error_exit("Invalid map\n");
-	for(int	i = 0; config->map[i]; i++)
-		ft_printf("%s\n", config->map[i]);
 	ft_free_strs(config->map);
 	(void)config;
 	//free_texture_exit(*config, NULL);

@@ -1,5 +1,6 @@
 #include "../includes/cub3d.h"
 #include "../includes/parsing.h"
+#include "../includes/render.h"
 
 int	main(int ac, char **av)
 {
@@ -7,6 +8,6 @@ int	main(int ac, char **av)
 
 	config = init_texture();
 	parsing(ac, av, &config);
-	//render(config);
+	render(&config);
 	return (0);
 }
