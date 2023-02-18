@@ -16,6 +16,9 @@ typedef struct s_texture{
 	int		floor;
 	int		ceiling;
 	char	**map;
+	int		x;
+	int		y;
+	char	orientation;
 }	t_texture;
 
 typedef struct s_mlx
@@ -30,9 +33,6 @@ typedef struct s_mlx
 	int			bits_per_px;
 	int			line_len;
 	int			endian;
-	double		x;
-	double		y;
-	int			orientation;
 }	t_mlx;
 
 typedef struct s_raycast
