@@ -1,6 +1,13 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
+enum e_orientation
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+};
 typedef struct s_texture{
 	char	*no;
 	char	*so;
@@ -23,6 +30,35 @@ typedef struct s_mlx
 	int			bits_per_px;
 	int			line_len;
 	int			endian;
+	double		x;
+	double		y;
+	int			orientation;
 }	t_mlx;
+
+typedef struct s_raycast
+{
+	double	posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
+	double	rayDirX;
+	double	rayDirY;
+	int		start;
+	int		end;
+}	t_raycast;
+
+typedef struct s_dda
+{
+	int		mapX;
+	int		mapY;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	perpWallDist;
+	int		stepX;
+	int		stepY;
+}	t_dda;
+
 
 #endif

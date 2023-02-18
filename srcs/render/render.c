@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:35:56 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/17 18:03:02 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/02/18 16:38:10 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void	render(t_texture *config)
 	t_mlx	mlx;
 
 	mlx.init = mlx_init();
+	mlx.x = 6.0;
+	mlx.y = 5.0;
+	mlx.orientation = SOUTH;
 	mlx.config = config;
 	if (mlx.init == NULL)
 		free_render_exit(config, &mlx, "Initialisation error\n");
@@ -41,6 +44,7 @@ void	render(t_texture *config)
 	mlx.img_addr = mlx_get_data_addr
 		(mlx.img, &(mlx.bits_per_px),
 			&(mlx.line_len), &(mlx.endian));
+	raycasting(&mlx);
 	mlx_hook(mlx.win, KeyRelease, KeyReleaseMask, &handle_key, &mlx);
 	mlx_hook(mlx.win, DestroyNotify, StructureNotifyMask,
 		  &destroy_win, &mlx);
