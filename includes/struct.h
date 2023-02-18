@@ -49,6 +49,8 @@ typedef struct s_raycast
 	double	dirY;
 	double	rayDirX;
 	double	rayDirY;
+	double	planeX;
+	double	planeY;
 	int		start;
 	int		end;
 }	t_raycast;
