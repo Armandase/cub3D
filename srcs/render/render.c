@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:35:56 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/18 17:29:09 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/02/18 17:33:51 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ void	render(t_texture *config)
 	t_mlx	mlx;
 
 	mlx.init = mlx_init();
-	mlx.x = 14;
-	mlx.y = 2;
-	mlx.orientation = EAST;
 	mlx.config = config;
 	if (mlx.init == NULL)
 		free_render_exit(config, &mlx, "Initialisation error\n");

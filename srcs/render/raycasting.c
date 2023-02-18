@@ -5,18 +5,18 @@
 
 void	init_raycast(t_mlx *mlx, t_raycast *info)
 {
-	info->posX = mlx->x;
-	info->posY = mlx->y;
+	info->posX = mlx->config->y;
+	info->posY = mlx->config->x;
 	info->dirX = 0;
 	info->dirY = 0;
-	if (mlx->orientation == NORTH)
-		info->dirY = -1;
-	else if (mlx->orientation == SOUTH)
+	if (mlx->config->orientation == 'N')
 		info->dirY = 1;
-	else if (mlx->orientation == WEST)
-		info->dirX = -1;
-	else if (mlx->orientation == EAST)
+	else if (mlx->config->orientation == 'S')
+		info->dirY = -1;
+	else if (mlx->config->orientation == 'E')
 		info->dirX = 1;
+	else if (mlx->config->orientation == 'W')
+		info->dirX = -1;
 }
 
 void	init_dda(t_dda *dda, t_raycast *info)
@@ -26,11 +26,13 @@ void	init_dda(t_dda *dda, t_raycast *info)
 	if (info->rayDirX == 0)
 		dda->deltaDistX = 1e30;
 	else
-		dda->deltaDistX = sqrt(1 + pow(info->rayDirY, 2.0) / pow(info->rayDirX, 2.0));
+		dda->deltaDistX = ft_abs(1 / info->rayDirX);
+		//dda->deltaDistX = sqrt(1 + pow(info->rayDirY, 2.0) / pow(info->rayDirX, 2.0));
 	if (info->rayDirY == 0)
 		dda->deltaDistY = 1e30;
 	else
-		dda->deltaDistY = sqrt(1 + pow(info->rayDirX, 2.0) / pow(info->rayDirY, 2.0));
+		dda->deltaDistY = ft_abs(1 / info->rayDirY);
+		//dda->deltaDistY = sqrt(1 + pow(info->rayDirX, 2.0) / pow(info->rayDirY, 2.0));
 	dda->stepX = 1;
 	dda->stepY = 1;
 	if (info->rayDirX < 0)
@@ -99,10 +101,20 @@ void	send_rays(t_mlx *mlx, t_raycast *info)
 
 void	draw_line(t_mlx *mlx, t_raycast info, int line)
 {
-	(void)mlx;
-	printf("Start of line %d: %d\n", line, info.start);
-	printf("End of line %d: %d\n", line, info.end);
-	my_mlx_pixel_put(mlx->win.img)
+	const int	x = line;
+	int	y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		if (y < info.start)
+			my_mlx_pixel_put(&(mlx->img), x, y, mlx->config->floor);
+		else if (y >= info.start && y <= info.end)
+			my_mlx_pixel_put(&(mlx->img), x, y, 0xff00ff);
+		else if (y > info.end)
+			my_mlx_pixel_put(&(mlx->img), x, y, mlx->config->ceiling);
+		y++;
+	}
 }
 
 void	raycasting(t_mlx *mlx)
@@ -120,8 +132,7 @@ void	raycasting(t_mlx *mlx)
 		info.rayDirY = info.dirY + PLANE_Y * camera;
 		send_rays(mlx, &info);
 		draw_line(mlx, info, i);
-		usleep(500);
 		i++;
 	}
-	mlx_put_image_to_window(mlx->init, mlx->win, mlx->img, 0, 0);
+	mlx_put_image_to_window(mlx->init, mlx->win, mlx->img.img, 0, 0);
 }

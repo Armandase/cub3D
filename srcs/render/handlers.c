@@ -15,7 +15,7 @@ static void	free_texture(t_texture *config)
 int	destroy_win(t_mlx *mlx)
 {
 	mlx_loop_end(mlx->init);
-	mlx_destroy_image(mlx->init, mlx->img);
+	mlx_destroy_image(mlx->init, &(mlx->img));
 	mlx_clear_window(mlx->init, mlx->win);
 	mlx_destroy_window(mlx->init, mlx->win);
 	mlx_destroy_display(mlx->init);
