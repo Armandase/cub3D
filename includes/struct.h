@@ -8,6 +8,7 @@ enum e_orientation
 	EAST,
 	WEST
 };
+
 typedef struct s_texture{
 	char	*no;
 	char	*so;
@@ -18,18 +19,23 @@ typedef struct s_texture{
 	char	**map;
 }	t_texture;
 
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_px;
+	int		line_len;
+	int		endian;
+}	t_data;
+
 typedef struct s_mlx
 {
 	t_texture	*config;
 	void		*init;
 	void		*win;
-	void		*img;
-	char		*img_addr;
+	t_data		img;
 	int			img_width;
 	int			img_height;
-	int			bits_per_px;
-	int			line_len;
-	int			endian;
 	double		x;
 	double		y;
 	int			orientation;

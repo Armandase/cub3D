@@ -10,9 +10,9 @@ void	init_raycast(t_mlx *mlx, t_raycast *info)
 	info->dirX = 0;
 	info->dirY = 0;
 	if (mlx->orientation == NORTH)
-		info->dirY = 1;
-	else if (mlx->orientation == SOUTH)
 		info->dirY = -1;
+	else if (mlx->orientation == SOUTH)
+		info->dirY = 1;
 	else if (mlx->orientation == WEST)
 		info->dirX = -1;
 	else if (mlx->orientation == EAST)
@@ -102,6 +102,7 @@ void	draw_line(t_mlx *mlx, t_raycast info, int line)
 	(void)mlx;
 	printf("Start of line %d: %d\n", line, info.start);
 	printf("End of line %d: %d\n", line, info.end);
+	my_mlx_pixel_put(mlx->win.img)
 }
 
 void	raycasting(t_mlx *mlx)
@@ -122,4 +123,5 @@ void	raycasting(t_mlx *mlx)
 		usleep(500);
 		i++;
 	}
+	mlx_put_image_to_window(mlx->init, mlx->win, mlx->img, 0, 0);
 }
