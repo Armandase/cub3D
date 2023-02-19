@@ -1,26 +1,5 @@
 # include "../../includes/render.h"
 
-void	init_raycast(t_mlx *mlx, t_raycast *info)
-{
-	double	dirX;
-	double	dirY;
-
-	info->posX = mlx->config->y;
-	info->posY = mlx->config->x;
-	dirX = 0;
-	dirY = 0;
-	if (mlx->config->orientation == 'N')
-		dirY = -1;
-	else if (mlx->config->orientation == 'S')
-		dirY = 1;
-	else if (mlx->config->orientation == 'E')
-		dirX = 1;
-	else if (mlx->config->orientation == 'W')
-		dirX = -1;
-	info->planeX = -(dirY) * 0.66;
-	info->planeY = dirX * 0.66;
-}
-
 void	init_dda(t_dda *dda, t_raycast *info)
 {
 	dda->mapX = (int)(info->posX);
@@ -129,13 +108,14 @@ void	raycasting(t_mlx *mlx)
 	int			side;
 	int			i;
 
-	init_raycast(mlx, &info);
+	info.posX = mlx->config->y;
+	info.posY = mlx->config->x;
 	i = 0;
 	while (i <= WIDTH)
 	{
 		camera = 2 * i / (double)WIDTH - 1;
-		info.rayDirX = mlx->config->dirX + info.planeX * camera;
-		info.rayDirY = mlx->config->dirY + info.planeY * camera;
+		info.rayDirX = mlx->config->dirX + mlx->config->planeX * camera;
+		info.rayDirY = mlx->config->dirY + mlx->config->planeY * camera;
 		side = send_rays(mlx, &info);
 		draw_line(mlx, info, i, side);
 		i++;

@@ -22,6 +22,8 @@ typedef struct s_texture{
 	char	orientation;
 	double	dirX;
 	double	dirY;
+	double	planeX;
+	double	planeY;
 }	t_texture;
 
 typedef struct s_data
@@ -49,8 +51,6 @@ typedef struct s_raycast
 	double	posY;
 	double	rayDirX;
 	double	rayDirY;
-	double	planeX;
-	double	planeY;
 	int		start;
 	int		end;
 }	t_raycast;

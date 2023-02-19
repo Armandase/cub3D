@@ -26,6 +26,23 @@ int	destroy_win(t_mlx *mlx)
 	return (0);
 }
 
+void	rotate_vectors(t_mlx *mlx, int flag)
+{
+	double	angle;
+	const double	dirX = mlx->config->dirX;
+	const double	dirY = mlx->config->dirY;
+	const double	planeX = mlx->config->planeX;
+	const double	planeY = mlx->config->planeY;
+
+	angle = ROTATION_SPEED * (M_1_PI / 180.0);
+	if (flag == LEFT)
+		angle = -angle;
+	mlx->config->dirX = cos(angle) * dirX - sin(angle) * dirY;
+	mlx->config->dirY = sin(angle) * dirX + cos(angle) * dirY;
+	mlx->config->planeX = cos(angle) * planeX - sin(angle) * planeY;
+	mlx->config->planeY = sin(angle) * planeX + cos(angle) * planeY;
+}
+
 int	handle_key(int key, t_mlx *mlx)
 {
 	if (key == XK_Escape)
@@ -42,9 +59,9 @@ int	handle_key(int key, t_mlx *mlx)
 		if (key == 'd')
 			mlx->config->y += 0.05;
 		if (key == XK_Left)
-			mlx->config->dirX -= 0.1;
+			rotate_vectors(mlx, LEFT);
 		if (key == XK_Right)
-			mlx->config->dirX += 0.1;
+			rotate_vectors(mlx, RIGHT);
 		raycasting(mlx);
 	}
 	return (0);

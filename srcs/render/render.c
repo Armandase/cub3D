@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:35:56 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/19 20:31:19 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/02/19 21:07:27 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,47 @@ void	free_render_exit(t_texture *config, t_mlx *mlx, char *error)
 	print_error_exit(error);
 }
 
+void	init_direction_vectors(t_mlx *mlx)
+{
+	mlx->config->dirX = 0;
+	mlx->config->dirY = 0;
+	if (mlx->config->orientation == 'N')
+		mlx->config->dirY = -1;
+	else if (mlx->config->orientation == 'S')
+		mlx->config->dirY = 1;
+	else if (mlx->config->orientation == 'E')
+		mlx->config->dirX = 1;
+	else if (mlx->config->orientation == 'W')
+		mlx->config->dirX = -1;
+}
+
+void	init_raycast(t_mlx *mlx)
+{
+	double	dirX;
+	double	dirY;
+
+	dirX = 0;
+	dirY = 0;
+	if (mlx->config->orientation == 'N')
+		dirY = -1;
+	else if (mlx->config->orientation == 'S')
+		dirY = 1;
+	else if (mlx->config->orientation == 'E')
+		dirX = 1;
+	else if (mlx->config->orientation == 'W')
+		dirX = -1;
+	mlx->config->planeX = -(dirY) * 0.66;
+	mlx->config->planeY = dirX * 0.66;
+}
+
 void	render(t_texture *config)
 {
 	t_mlx	mlx;
 
 	mlx.init = mlx_init();
 	mlx.config = config;
-	mlx.config->dirX = 0;
-	mlx.config->dirY = 0;
-	if (mlx.config->orientation == 'N')
-		mlx.config->dirY = -1;
-	else if (mlx.config->orientation == 'S')
-		mlx.config->dirY = 1;
-	else if (mlx.config->orientation == 'E')
-		mlx.config->dirX = 1;
-	else if (mlx.config->orientation == 'W')
-		mlx.config->dirX = -1;
+	init_direction_vectors(&mlx);
+	init_raycast(&mlx);
 	if (mlx.init == NULL)
 		free_render_exit(config, &mlx, "Initialisation error\n");
 	mlx.win = mlx_new_window(mlx.init, WIDTH, HEIGHT, "Cub3D");
