@@ -1,22 +1,21 @@
 # include "../../includes/render.h"
 
-# define PLANE_X 0
-# define PLANE_Y 0.66
-
 void	init_raycast(t_mlx *mlx, t_raycast *info)
 {
-	info->posX = mlx->config->y;
-	info->posY = mlx->config->x;
+	info->posX = (double)mlx->config->y;
+	info->posY = (double)mlx->config->x;
 	info->dirX = 0;
 	info->dirY = 0;
 	if (mlx->config->orientation == 'N')
-		info->dirY = 1;
-	else if (mlx->config->orientation == 'S')
 		info->dirY = -1;
+	else if (mlx->config->orientation == 'S')
+		info->dirY = 1;
 	else if (mlx->config->orientation == 'E')
 		info->dirX = 1;
 	else if (mlx->config->orientation == 'W')
 		info->dirX = -1;
+	info->planeX = -(info->dirY) * 0.66;
+	info->planeY = info->dirX * 0.66;
 }
 
 void	init_dda(t_dda *dda, t_raycast *info)
@@ -79,7 +78,7 @@ int	apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 	return (side);
 }
 
-void	send_rays(t_mlx *mlx, t_raycast *info)
+int	send_rays(t_mlx *mlx, t_raycast *info)
 {
 	t_dda	dda;
 	int		side;	
@@ -90,27 +89,32 @@ void	send_rays(t_mlx *mlx, t_raycast *info)
 		dda.perpWallDist = dda.sideDistX - dda.deltaDistX;
 	else
 		dda.perpWallDist = dda.sideDistY - dda.deltaDistY;
-	wallHeight = (int)(HEIGHT / dda.perpWallDist);
+	wallHeight = (int)((double)HEIGHT / dda.perpWallDist);
 	info->start = -wallHeight / 2 + HEIGHT / 2;
 	if (info->start < 0)
 		info->start = 0;
 	info->end = wallHeight / 2 + HEIGHT / 2;
 	if (info->end >= HEIGHT)
 		info->end = HEIGHT - 1;
+	return (side);
 }
 
-void	draw_line(t_mlx *mlx, t_raycast info, int line)
+void	draw_line(t_mlx *mlx, t_raycast info, int line, int side)
 {
 	const int	x = line;
 	int	y;
+	int	color;
 
 	y = 0;
-	while (y < HEIGHT)
+	color = 0xff00ff;
+	if (side == 1)
+		color /= 4;
+	while (y <= HEIGHT)
 	{
 		if (y < info.start)
 			my_mlx_pixel_put(&(mlx->img), x, y, mlx->config->floor);
 		else if (y >= info.start && y <= info.end)
-			my_mlx_pixel_put(&(mlx->img), x, y, 0xff00ff);
+			my_mlx_pixel_put(&(mlx->img), x, y, color);
 		else if (y > info.end)
 			my_mlx_pixel_put(&(mlx->img), x, y, mlx->config->ceiling);
 		y++;
@@ -121,17 +125,18 @@ void	raycasting(t_mlx *mlx)
 {
 	t_raycast	info;
 	double		camera;
+	int			side;
 	int			i;
 
-	i = 0;
 	init_raycast(mlx, &info);
-	while (i < WIDTH)
+	i = 0;
+	while (i <= WIDTH)
 	{
 		camera = 2 * i / (double)WIDTH - 1;
-		info.rayDirX = info.dirX + PLANE_X * camera;
-		info.rayDirY = info.dirY + PLANE_Y * camera;
-		send_rays(mlx, &info);
-		draw_line(mlx, info, i);
+		info.rayDirX = info.dirX + info.planeX * camera;
+		info.rayDirY = info.dirY + info.planeY * camera;
+		side = send_rays(mlx, &info);
+		draw_line(mlx, info, i, side);
 		i++;
 	}
 	mlx_put_image_to_window(mlx->init, mlx->win, mlx->img.img, 0, 0);
