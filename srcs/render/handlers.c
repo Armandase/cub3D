@@ -26,9 +26,26 @@ int	destroy_win(t_mlx *mlx)
 	return (0);
 }
 
-int	handle_key(int keysym, t_mlx *mlx)
+int	handle_key(int key, t_mlx *mlx)
 {
-	if (keysym == XK_Escape)
+	if (key == XK_Escape)
 		destroy_win(mlx);
+	if (key == 'a' || key == 'd' || key == 'w' || key == 's'
+		|| key == XK_Left || key == XK_Right)
+	{
+		if (key == 'w')
+			mlx->config->x -= 0.05;
+		if (key == 's')
+			mlx->config->x += 0.05;
+		if (key == 'a')
+			mlx->config->y -= 0.05;
+		if (key == 'd')
+			mlx->config->y += 0.05;
+		if (key == XK_Left)
+			mlx->config->dirX -= 0.1;
+		if (key == XK_Right)
+			mlx->config->dirX += 0.1;
+		raycasting(mlx);
+	}
 	return (0);
 }

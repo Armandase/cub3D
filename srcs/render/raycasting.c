@@ -2,20 +2,23 @@
 
 void	init_raycast(t_mlx *mlx, t_raycast *info)
 {
-	info->posX = (double)mlx->config->y;
-	info->posY = (double)mlx->config->x;
-	info->dirX = 0;
-	info->dirY = 0;
+	double	dirX;
+	double	dirY;
+
+	info->posX = mlx->config->y;
+	info->posY = mlx->config->x;
+	dirX = 0;
+	dirY = 0;
 	if (mlx->config->orientation == 'N')
-		info->dirY = -1;
+		dirY = -1;
 	else if (mlx->config->orientation == 'S')
-		info->dirY = 1;
+		dirY = 1;
 	else if (mlx->config->orientation == 'E')
-		info->dirX = 1;
+		dirX = 1;
 	else if (mlx->config->orientation == 'W')
-		info->dirX = -1;
-	info->planeX = -(info->dirY) * 0.66;
-	info->planeY = info->dirX * 0.66;
+		dirX = -1;
+	info->planeX = -(dirY) * 0.66;
+	info->planeY = dirX * 0.66;
 }
 
 void	init_dda(t_dda *dda, t_raycast *info)
@@ -26,12 +29,10 @@ void	init_dda(t_dda *dda, t_raycast *info)
 		dda->deltaDistX = 1e30;
 	else
 		dda->deltaDistX = ft_abs(1 / info->rayDirX);
-		//dda->deltaDistX = sqrt(1 + pow(info->rayDirY, 2.0) / pow(info->rayDirX, 2.0));
 	if (info->rayDirY == 0)
 		dda->deltaDistY = 1e30;
 	else
 		dda->deltaDistY = ft_abs(1 / info->rayDirY);
-		//dda->deltaDistY = sqrt(1 + pow(info->rayDirX, 2.0) / pow(info->rayDirY, 2.0));
 	dda->stepX = 1;
 	dda->stepY = 1;
 	if (info->rayDirX < 0)
@@ -133,8 +134,8 @@ void	raycasting(t_mlx *mlx)
 	while (i <= WIDTH)
 	{
 		camera = 2 * i / (double)WIDTH - 1;
-		info.rayDirX = info.dirX + info.planeX * camera;
-		info.rayDirY = info.dirY + info.planeY * camera;
+		info.rayDirX = mlx->config->dirX + info.planeX * camera;
+		info.rayDirY = mlx->config->dirY + info.planeY * camera;
 		side = send_rays(mlx, &info);
 		draw_line(mlx, info, i, side);
 		i++;

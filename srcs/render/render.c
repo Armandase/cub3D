@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:35:56 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/18 17:33:51 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/02/19 20:31:19 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ void	render(t_texture *config)
 
 	mlx.init = mlx_init();
 	mlx.config = config;
+	mlx.config->dirX = 0;
+	mlx.config->dirY = 0;
+	if (mlx.config->orientation == 'N')
+		mlx.config->dirY = -1;
+	else if (mlx.config->orientation == 'S')
+		mlx.config->dirY = 1;
+	else if (mlx.config->orientation == 'E')
+		mlx.config->dirX = 1;
+	else if (mlx.config->orientation == 'W')
+		mlx.config->dirX = -1;
 	if (mlx.init == NULL)
 		free_render_exit(config, &mlx, "Initialisation error\n");
 	mlx.win = mlx_new_window(mlx.init, WIDTH, HEIGHT, "Cub3D");
@@ -42,7 +52,7 @@ void	render(t_texture *config)
 		(mlx.img.img, &(mlx.img.bits_per_px),
 			&(mlx.img.line_len), &(mlx.img.endian));
 	raycasting(&mlx);
-	mlx_hook(mlx.win, KeyRelease, KeyReleaseMask, &handle_key, &mlx);
+	mlx_hook(mlx.win, KeyPress, KeyPressMask, &handle_key, &mlx);
 	mlx_hook(mlx.win, DestroyNotify, StructureNotifyMask,
 		  &destroy_win, &mlx);
 	mlx_loop(mlx.init);
