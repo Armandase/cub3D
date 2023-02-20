@@ -88,7 +88,8 @@ void	draw_line(t_mlx *mlx, t_raycast info, int line, int side)
 	(void)side;
 	while (y <= HEIGHT)
 	{
-		color = mlx->config->img_tab[0][x % 64][y % 64];
+		//color = mlx->config->img_tab[0][x % 64][y % 64];
+		color = 0xff00ff;
 		if (y < info.start)
 			my_mlx_pixel_put(&(mlx->img), x, y, mlx->config->floor);
 		else if (y >= info.start && y <= info.end)
