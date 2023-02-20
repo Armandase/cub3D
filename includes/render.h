@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:39:34 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/20 13:22:30 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/02/20 13:51:36 by ulayus           ###   ########.fr       */
 /*                                                                            */ /* ************************************************************************** */
 #ifndef RENDER_H
 # define RENDER_H
@@ -33,5 +33,7 @@ void	raycasting(t_mlx *mlx);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 double	ft_abs(double nb);
 size_t	get_color_from_img(t_data *data, int x, int y);
+void	texture_to_tab(t_texture *config, t_mlx *mlx);
+
 
 #endif

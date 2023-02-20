@@ -5,8 +5,7 @@ void	init_dda(t_dda *dda, t_raycast *info, t_mlx *mlx)
 	dda->mapX = (int)(mlx->config->posX);
 	dda->mapY = (int)(mlx->config->posY);
 	if (info->rayDirX == 0)
-		dda->deltaDistX = 1e30;
-	else
+		dda->deltaDistX = 1e30; else
 		dda->deltaDistX = ft_abs(1 / info->rayDirX);
 	if (info->rayDirY == 0)
 		dda->deltaDistY = 1e30;
@@ -86,11 +85,10 @@ void	draw_line(t_mlx *mlx, t_raycast info, int line, int side)
 	int	color;
 
 	y = 0;
-	color = 0xff00ff;
-	if (side == 1)
-		color /= 4;
+	(void)side;
 	while (y <= HEIGHT)
 	{
+		color = mlx->config->img_tab[0][x % 64][y % 64];
 		if (y < info.start)
 			my_mlx_pixel_put(&(mlx->img), x, y, mlx->config->floor);
 		else if (y >= info.start && y <= info.end)
@@ -109,7 +107,6 @@ void	raycasting(t_mlx *mlx)
 	int			i;
 
 	i = 0;
-	texture_to_tab(mlx->config, mlx);
 	while (i <= WIDTH)
 	{
 		camera = 2 * i / (double)WIDTH - 1;

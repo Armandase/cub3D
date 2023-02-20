@@ -19,7 +19,7 @@ size_t	get_color_from_img(t_data *data, int x, int y)
 	int		g;
 	int		b;
 
-	dest = data->addr + (y * data->line_len + x *(data->bits_per_px / 8));
+	dest = data->addr + (y * data->line_len + x * (data->bits_per_px / 8));
 	ret = ft_atoi(dest);
 	r = (ret / 100 / 100);
 	g = ((ret / 100) % 100);

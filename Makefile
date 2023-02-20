@@ -6,7 +6,7 @@ SRCS		= srcs/main.c srcs/utils_overall.c\
 			  srcs/parsing/verif_map.c\
 			  srcs/render/render.c srcs/render/handlers.c\
 			  srcs/render/raycasting.c srcs/render/drawing.c\
-			  srcs/render/utils.c
+			  srcs/render/utils.c srcs/render/texture.c
 CC			= clang
 LIBS        = -Llibs/libft -lft
 MLX = -Llibs/mlx -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz

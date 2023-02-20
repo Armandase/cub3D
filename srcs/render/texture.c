@@ -2,9 +2,8 @@
 
 void	swap_axes(size_t ***array)
 {
-	int	i;
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	size_t	tmp;
 
 	x = 0;
@@ -22,7 +21,7 @@ void	swap_axes(size_t ***array)
 	}
 }
 
-void	copy_texture_from_img_to_array(t_texture *config, t_mlx *mlx, t_data *img, int i)
+void	copy_texture_from_img_to_array(t_texture *config, t_data *img, int i)
 {
 	int		x;
 	int		y;
@@ -46,28 +45,28 @@ void	copy_texture_from_img_to_array(t_texture *config, t_mlx *mlx, t_data *img, 
 void	texture_to_tab(t_texture *config, t_mlx *mlx)
 {
 	int		i;
-	int		img_len;
-	t_data	*img;
+	int		img_len_x;
+	int		img_len_y;
+	t_data	img;
 
 	i = 0;
-	img_len = 64;
 	while (i < 4)
 	{
 		if (i == 0)
-			img->img = mlx_xpm_file_to_image
-				(mlx, config->no, &img_len, &img_len);
+			img.img = mlx_xpm_file_to_image
+				(mlx->init, config->no, &img_len_x, &img_len_y);
 		else if (i == 1)
-			img->img = mlx_xpm_file_to_image
-				(mlx, config->so, &img_len, &img_len);
+			img.img = mlx_xpm_file_to_image
+				(mlx->init, config->so, &img_len_x, &img_len_y);
 		else if (i == 2)
-			img->img = mlx_xpm_file_to_image
-				(mlx, config->ea, &img_len, &img_len);
+			img.img = mlx_xpm_file_to_image
+				(mlx->init, config->ea, &img_len_x, &img_len_y);
 		else if (i == 3)
-			img->img = mlx_xpm_file_to_image
-				(mlx, config->we, &img_len, &img_len);
-		img->addr = mlx_get_data_addr (img->img, &(img->bits_per_px),
-				&(img->line_len), &(img->endian));
-		copy_texture_from_img_to_array(config, mlx, img, i);
+			img.img = mlx_xpm_file_to_image
+				(mlx->init, config->we, &img_len_x, &img_len_y);
+		img.addr = mlx_get_data_addr (img.img, &img.bits_per_px,
+				&img.line_len, &img.endian);
+		copy_texture_from_img_to_array(config, &img, i);
 		i++;
 	}
 }
