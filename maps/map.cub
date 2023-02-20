@@ -1,7 +1,7 @@
-NO assets/sky.xpm
+NO assets/flower.xpm
 SO assets/sun.xpm
-WE assets/flower.xpm
-EA assets/purple.xpm
+WE assets/purple.xpm
+EA assets/sky.xpm
 
 F 0,40,0
 C 225,30,0

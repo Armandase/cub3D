@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 10:42:11 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/17 16:09:32 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/02/20 15:04:43 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-void	ft_atoi_base(char *str, char *base, size_t *ret);
 void	ft_fprint_addr(unsigned long addr, size_t *ret);
+int		ft_atoi_base(char *str, char *base);
 int		ft_printf(const char *s, ...);
 void	ft_putfchar(char c, size_t *ret);
 void	ft_putfnbr(int nb, size_t *ret);
