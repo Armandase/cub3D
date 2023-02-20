@@ -109,6 +109,7 @@ void	raycasting(t_mlx *mlx)
 	int			i;
 
 	i = 0;
+	texture_to_tab(mlx->config, mlx);
 	while (i <= WIDTH)
 	{
 		camera = 2 * i / (double)WIDTH - 1;

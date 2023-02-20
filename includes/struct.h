@@ -1,6 +1,8 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
+# include "stdlib.h"
+
 enum e_orientation
 {
 	NORTH,
@@ -10,6 +12,7 @@ enum e_orientation
 };
 
 typedef struct s_texture{
+	size_t	**img_tab[4];
 	char	*no;
 	char	*so;
 	char	*we;

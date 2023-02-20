@@ -10,3 +10,20 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 		*(unsigned int *)dest = color;
 	}
 }
+
+size_t	get_color_from_img(t_data *data, int x, int y)
+{
+	char	*dest;
+	size_t	ret;
+	int		r;
+	int		g;
+	int		b;
+
+	dest = data->addr + (y * data->line_len + x *(data->bits_per_px / 8));
+	ret = ft_atoi(dest);
+	r = (ret / 100 / 100);
+	g = ((ret / 100) % 100);
+	b = (ret % 100);
+	ret = (r << 16) + (g << 8) + b;
+	return (ret);
+}

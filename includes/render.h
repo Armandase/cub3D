@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:39:34 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/20 09:37:04 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/02/20 13:22:30 by adamiens         ###   ########.fr       */
 /*                                                                            */ /* ************************************************************************** */
 #ifndef RENDER_H
 # define RENDER_H
@@ -22,7 +22,7 @@
 # define HEIGHT 720
 # define INF 1e30
 # define ROTATION_SPEED 50
-# define MOVEMENT_SPEED 0.08
+# define MOVEMENT_SPEED 0.1
 # define LEFT 1
 # define RIGHT 2
 
@@ -32,5 +32,6 @@ int		handle_key(int keysym, t_mlx *mlx);
 void	raycasting(t_mlx *mlx);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 double	ft_abs(double nb);
+size_t	get_color_from_img(t_data *data, int x, int y);
 
 #endif
