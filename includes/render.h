@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:39:34 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/19 21:20:40 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/02/20 09:37:04 by ulayus           ###   ########.fr       */
 /*                                                                            */ /* ************************************************************************** */
 #ifndef RENDER_H
 # define RENDER_H
@@ -21,7 +21,8 @@
 # define WIDTH 1080
 # define HEIGHT 720
 # define INF 1e30
-# define ROTATION_SPEED 100
+# define ROTATION_SPEED 50
+# define MOVEMENT_SPEED 0.08
 # define LEFT 1
 # define RIGHT 2
 

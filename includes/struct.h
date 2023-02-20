@@ -24,6 +24,8 @@ typedef struct s_texture{
 	double	dirY;
 	double	planeX;
 	double	planeY;
+	double	posX;
+	double	posY;
 }	t_texture;
 
 typedef struct s_data
@@ -47,8 +49,6 @@ typedef struct s_mlx
 
 typedef struct s_raycast
 {
-	double	posX;
-	double	posY;
 	double	rayDirX;
 	double	rayDirY;
 	int		start;

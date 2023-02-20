@@ -1,9 +1,9 @@
 # include "../../includes/render.h"
 
-void	init_dda(t_dda *dda, t_raycast *info)
+void	init_dda(t_dda *dda, t_raycast *info, t_mlx *mlx)
 {
-	dda->mapX = (int)(info->posX);
-	dda->mapY = (int)(info->posY);
+	dda->mapX = (int)(mlx->config->posX);
+	dda->mapY = (int)(mlx->config->posY);
 	if (info->rayDirX == 0)
 		dda->deltaDistX = 1e30;
 	else
@@ -17,17 +17,17 @@ void	init_dda(t_dda *dda, t_raycast *info)
 	if (info->rayDirX < 0)
 	{
 		dda->stepX = -1;
-		dda->sideDistX = (info->posX - dda->mapX) * dda->deltaDistX;
+		dda->sideDistX = (mlx->config->posX - dda->mapX) * dda->deltaDistX;
 	}
 	else
-		dda->sideDistX = (dda->mapX + 1.0 - info->posX) * dda->deltaDistX;
+		dda->sideDistX = (dda->mapX + 1.0 - mlx->config->posX) * dda->deltaDistX;
 	if (info->rayDirY < 0)
 	{
 		dda->stepY = -1;
-		dda->sideDistY = (info->posY - dda->mapY) * dda->deltaDistY;
+		dda->sideDistY = (mlx->config->posY - dda->mapY) * dda->deltaDistY;
 	}
 	else
-		dda->sideDistY = (dda->mapY + 1.0 - info->posY) * dda->deltaDistY;
+		dda->sideDistY = (dda->mapY + 1.0 - mlx->config->posY) * dda->deltaDistY;
 }
 
 int	apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
@@ -35,7 +35,7 @@ int	apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 	bool	hit;
 	int		side;
 
-	init_dda(dda, info);
+	init_dda(dda, info, mlx);
 	hit = false;
 	while (hit == false)
 	{
@@ -108,8 +108,6 @@ void	raycasting(t_mlx *mlx)
 	int			side;
 	int			i;
 
-	info.posX = mlx->config->y;
-	info.posY = mlx->config->x;
 	i = 0;
 	while (i <= WIDTH)
 	{

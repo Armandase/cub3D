@@ -45,19 +45,48 @@ void	rotate_vectors(t_mlx *mlx, int flag)
 
 int	handle_key(int key, t_mlx *mlx)
 {
+	double	tmp_dirX;
+	double	tmp_dirY;
+	double	tmp_planeX;
+	double	tmp_planeY;
+
+	tmp_dirX = mlx->config->dirX * MOVEMENT_SPEED;
+	tmp_dirY = mlx->config->dirY * MOVEMENT_SPEED;
+	tmp_planeX = mlx->config->planeX * MOVEMENT_SPEED;
+	tmp_planeY = mlx->config->planeY * MOVEMENT_SPEED;
 	if (key == XK_Escape)
 		destroy_win(mlx);
 	if (key == 'a' || key == 'd' || key == 'w' || key == 's'
 		|| key == XK_Left || key == XK_Right)
 	{
 		if (key == 'w')
-			mlx->config->x -= 0.05;
+		{
+			if (mlx->config->map[(int)mlx->config->posY][(int)(mlx->config->posX + tmp_dirX)] == '0')
+				mlx->config->posX += tmp_dirX;
+			if (mlx->config->map[(int)(mlx->config->posY + tmp_dirY)][(int)mlx->config->posX] == '0')
+				mlx->config->posY += tmp_dirY;
+		}
 		if (key == 's')
-			mlx->config->x += 0.05;
+		{
+			if (mlx->config->map[(int)mlx->config->posY][(int)(mlx->config->posX - tmp_dirX)] == '0')
+				mlx->config->posX -= tmp_dirX;
+			if (mlx->config->map[(int)(mlx->config->posY - tmp_dirY)][(int)mlx->config->posX] == '0')
+				mlx->config->posY -= tmp_dirY;
+		}
 		if (key == 'a')
-			mlx->config->y -= 0.05;
+		{
+			if (mlx->config->map[(int)mlx->config->planeY][(int)(mlx->config->planeX - tmp_dirX)] == '0')
+				mlx->config->planeX -= tmp_dirX;
+			if (mlx->config->map[(int)(mlx->config->planeY - tmp_dirY)][(int)mlx->config->planeX] == '0')
+				mlx->config->planeY -= tmp_dirY;
+		}
 		if (key == 'd')
-			mlx->config->y += 0.05;
+		{
+			if (mlx->config->map[(int)mlx->config->planeY][(int)(mlx->config->planeX - tmp_dirX)] == '0')
+				mlx->config->planeX -= tmp_dirX;
+			if (mlx->config->map[(int)(mlx->config->planeY - tmp_dirY)][(int)mlx->config->planeX] == '0')
+				mlx->config->planeY -= tmp_dirY;
+		}
 		if (key == XK_Left)
 			rotate_vectors(mlx, LEFT);
 		if (key == XK_Right)
