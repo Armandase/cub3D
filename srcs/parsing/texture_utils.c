@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 09:21:32 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/16 09:31:30 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/02/20 10:08:23 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,36 @@ int	convert_str_rgb_to_int(char **colors, t_texture config, char *buf, int fd)
 	sum = (r * 100000) + (g * 1000) + b;
 	ft_free_strs(colors);
 	return (sum);
+}
+
+void	free_strs_texture_exit(t_texture *config)
+{
+	if (config->so)
+		free(config->so);
+	if (config->no)
+		free(config->no);
+	if (config->ea)
+		free(config->ea);
+	if (config->we)
+		free(config->we);
+	ft_free_strs(config->map);
+	print_error_exit("Our cub3d only works with xpm\n");
+}
+
+void	verif_texture(t_texture *config)
+{
+	char	*extend;
+
+	extend = ft_strnstr(config->so, ".xpm", ft_strlen(config->so));
+	if (!extend || ft_strlen(extend) > ft_strlen(".xpm"))
+		free_strs_texture_exit(config);
+	extend = ft_strnstr(config->no, ".xpm", ft_strlen(config->no));
+	if (!extend || ft_strlen(extend) > ft_strlen(".xpm"))
+		free_strs_texture_exit(config);
+	extend = ft_strnstr(config->we, ".xpm", ft_strlen(config->we));
+	if (!extend || ft_strlen(extend) > ft_strlen(".xpm"))
+		free_strs_texture_exit(config);
+	extend = ft_strnstr(config->ea, ".xpm", ft_strlen(config->ea));
+	if (!extend || ft_strlen(extend) > ft_strlen(".xpm"))
+		free_strs_texture_exit(config);
 }
