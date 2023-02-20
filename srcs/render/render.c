@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:35:56 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/19 21:07:27 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/02/20 10:20:02 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	free_render_exit(t_texture *config, t_mlx *mlx, char *error)
 
 void	init_direction_vectors(t_mlx *mlx)
 {
+	mlx->config->posX = mlx->config->y;
+	mlx->config->posY = mlx->config->x;
 	mlx->config->dirX = 0;
 	mlx->config->dirY = 0;
 	if (mlx->config->orientation == 'N')
