@@ -5,7 +5,8 @@ void	init_dda(t_dda *dda, t_raycast *info, t_mlx *mlx)
 	dda->mapX = (int)(mlx->config->posX);
 	dda->mapY = (int)(mlx->config->posY);
 	if (info->rayDirX == 0)
-		dda->deltaDistX = 1e30; else
+		dda->deltaDistX = 1e30;
+	else
 		dda->deltaDistX = ft_abs(1 / info->rayDirX);
 	if (info->rayDirY == 0)
 		dda->deltaDistY = 1e30;
@@ -56,6 +57,23 @@ t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 	return (dda);
 }
 
+int	select_texture(t_raycast *info, t_dda dda, int side)
+{
+	int	orientation;
+
+	if (info->end >= HEIGHT)
+		info->end = HEIGHT - 1;
+	if (dda.stepX == -1 && side == 0)
+		orientation = WEST;
+	else if (dda.stepX == 1 && side == 0)
+		orientation = EAST;
+	else if (dda.stepY == 1 && side == 1)
+		orientation = NORTH;
+	else
+		orientation = SOUTH;
+	return (orientation);
+}
+
 void	send_rays(t_mlx *mlx, t_raycast *info, t_dda *dda)
 {
 	int		wallHeight;
@@ -72,7 +90,9 @@ void	send_rays(t_mlx *mlx, t_raycast *info, t_dda *dda)
 	info->end = wallHeight / 2 + HEIGHT / 2;
 	if (info->end >= HEIGHT)
 		info->end = HEIGHT - 1;
+	dda->orientation = select_texture(info, *dda, dda->side);
 }
+
 
 void	draw_line(t_mlx *mlx, t_raycast info, int line, t_dda *dda)
 {
@@ -85,7 +105,10 @@ void	draw_line(t_mlx *mlx, t_raycast info, int line, t_dda *dda)
 		if (y < info.start)
 			my_mlx_pixel_put(&(mlx->img), x, y, mlx->config->floor);
 		else if (y >= info.start && y <= info.end)
+		{
 			put_sprite_to_img(mlx, x, dda, &info);
+			y = info.end;
+		}
 		else if (y > info.end)
 			my_mlx_pixel_put(&(mlx->img), x, y, mlx->config->ceiling);
 		y++;

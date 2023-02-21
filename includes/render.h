@@ -1,13 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   render.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 09:39:34 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/21 10:52:35 by adamiens         ###   ########.fr       */
-/*                                                                            */ /* ************************************************************************** */
 #ifndef RENDER_H
 # define RENDER_H
 
@@ -22,7 +12,7 @@
 # define HEIGHT 720
 # define INF 1e30
 # define ROTATION_SPEED 50
-# define MOVEMENT_SPEED 0.1
+# define MOVEMENT_SPEED 0.08
 # define LEFT 1
 # define RIGHT 2
 

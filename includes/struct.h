@@ -70,6 +70,7 @@ typedef struct s_dda
 	int		stepX;
 	int		stepY;
 	int		side;
+	int		orientation;
 }	t_dda;
 
 
