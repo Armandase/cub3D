@@ -28,32 +28,32 @@ int	destroy_win(t_mlx *mlx)
 
 void	rotate_vectors(t_mlx *mlx, int flag)
 {
-	double	angle;
-	const double	dirX = mlx->config->dirX;
-	const double	dirY = mlx->config->dirY;
-	const double	planeX = mlx->config->planeX;
-	const double	planeY = mlx->config->planeY;
+	double			angle;
+	const double	dir_x = mlx->config->dir_x;
+	const double	dir_y = mlx->config->dir_y;
+	const double	plane_x = mlx->config->plane_x;
+	const double	plane_y = mlx->config->plane_y;
 
 	angle = ROTATION_SPEED * (M_1_PI / 180.0);
 	if (flag == LEFT)
 		angle = -angle;
-	mlx->config->dirX = cos(angle) * dirX - sin(angle) * dirY;
-	mlx->config->dirY = sin(angle) * dirX + cos(angle) * dirY;
-	mlx->config->planeX = cos(angle) * planeX - sin(angle) * planeY;
-	mlx->config->planeY = sin(angle) * planeX + cos(angle) * planeY;
+	mlx->config->dir_x = cos(angle) * dir_x - sin(angle) * dir_y;
+	mlx->config->dir_y = sin(angle) * dir_x + cos(angle) * dir_y;
+	mlx->config->plane_x = cos(angle) * plane_x - sin(angle) * plane_y;
+	mlx->config->plane_y = sin(angle) * plane_x + cos(angle) * plane_y;
 }
 
 int	handle_key(int key, t_mlx *mlx)
 {
-	double	tmp_dirX;
-	double	tmp_dirY;
-	double	tmp_planeX;
-	double	tmp_planeY;
+	double	tmp_dir_x;
+	double	tmp_dir_y;
+	double	tmp_plane_x;
+	double	tmp_plane_y;
 
-	tmp_dirX = mlx->config->dirX * MOVEMENT_SPEED;
-	tmp_dirY = mlx->config->dirY * MOVEMENT_SPEED;
-	tmp_planeX = mlx->config->planeX * MOVEMENT_SPEED;
-	tmp_planeY = mlx->config->planeY * MOVEMENT_SPEED;
+	tmp_dir_x = mlx->config->dir_x * MOVEMENT_SPEED;
+	tmp_dir_y = mlx->config->dir_y * MOVEMENT_SPEED;
+	tmp_plane_x = mlx->config->plane_x * MOVEMENT_SPEED;
+	tmp_plane_y = mlx->config->plane_y * MOVEMENT_SPEED;
 	if (key == XK_Escape)
 		destroy_win(mlx);
 	if (key == 'a' || key == 'd' || key == 'w' || key == 's'
@@ -61,31 +61,39 @@ int	handle_key(int key, t_mlx *mlx)
 	{
 		if (key == 'w')
 		{
-			if (mlx->config->map[(int)mlx->config->posY][(int)(mlx->config->posX + tmp_dirX)] == '0')
-				mlx->config->posX += tmp_dirX;
-			if (mlx->config->map[(int)(mlx->config->posY + tmp_dirY)][(int)mlx->config->posX] == '0')
-				mlx->config->posY += tmp_dirY;
+			if (mlx->config->map[(int)mlx->config->pos_y]
+				[(int)(mlx->config->pos_x + tmp_dir_x)] == '0')
+				mlx->config->pos_x += tmp_dir_x;
+			if (mlx->config->map[(int)(mlx->config->pos_y + tmp_dir_y)]
+				[(int)mlx->config->pos_x] == '0')
+				mlx->config->pos_y += tmp_dir_y;
 		}
 		if (key == 's')
 		{
-			if (mlx->config->map[(int)mlx->config->posY][(int)(mlx->config->posX - tmp_dirX)] == '0')
-				mlx->config->posX -= tmp_dirX;
-			if (mlx->config->map[(int)(mlx->config->posY - tmp_dirY)][(int)mlx->config->posX] == '0')
-				mlx->config->posY -= tmp_dirY;
+			if (mlx->config->map[(int)mlx->config->pos_y]
+				[(int)(mlx->config->pos_x - tmp_dir_x)] == '0')
+				mlx->config->pos_x -= tmp_dir_x;
+			if (mlx->config->map[(int)(mlx->config->pos_y - tmp_dir_y)]
+				[(int)mlx->config->pos_x] == '0')
+				mlx->config->pos_y -= tmp_dir_y;
 		}
 		if (key == 'd')
 		{
-			if (mlx->config->map[(int)mlx->config->posY][(int)(mlx->config->posX + tmp_planeX)] == '0')
-				mlx->config->posX += tmp_planeX;
-			if (mlx->config->map[(int)(mlx->config->posY + tmp_planeY)][(int)mlx->config->posX] == '0')
-				mlx->config->posY += tmp_planeY;
+			if (mlx->config->map[(int)mlx->config->pos_y]
+				[(int)(mlx->config->pos_x + tmp_plane_x)] == '0')
+				mlx->config->pos_x += tmp_plane_x;
+			if (mlx->config->map[(int)(mlx->config->pos_y + tmp_plane_y)]
+				[(int)mlx->config->pos_x] == '0')
+				mlx->config->pos_y += tmp_plane_y;
 		}
 		if (key == 'a')
 		{
-			if (mlx->config->map[(int)mlx->config->posY][(int)(mlx->config->posX - tmp_planeX)] == '0')
-				mlx->config->posX -= tmp_planeX;
-			if (mlx->config->map[(int)(mlx->config->posY - tmp_planeY)][(int)mlx->config->posX] == '0')
-				mlx->config->posY -= tmp_planeY;
+			if (mlx->config->map[(int)mlx->config->pos_y]
+				[(int)(mlx->config->pos_x - tmp_plane_x)] == '0')
+				mlx->config->pos_x -= tmp_plane_x;
+			if (mlx->config->map[(int)(mlx->config->pos_y - tmp_plane_y)]
+				[(int)mlx->config->pos_x] == '0')
+				mlx->config->pos_y -= tmp_plane_y;
 		}
 		if (key == XK_Left)
 			rotate_vectors(mlx, LEFT);

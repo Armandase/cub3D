@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:35:56 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/21 15:43:33 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:53:47 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,30 @@ void	free_render_exit(t_texture *config, t_mlx *mlx, char *error)
 
 void	init_direction_vectors(t_mlx *mlx)
 {
-	mlx->config->posX = mlx->config->y;
-	mlx->config->posY = mlx->config->x;
-	mlx->config->dirX = 0;
-	mlx->config->dirY = 0;
+	mlx->config->pos_x = mlx->config->y;
+	mlx->config->pos_y = mlx->config->x;
+	mlx->config->dir_x = 0;
+	mlx->config->dir_y = 0;
 	if (mlx->config->orientation == 'N')
-		mlx->config->dirY = -1;
+		mlx->config->dir_y = -1;
 	else if (mlx->config->orientation == 'S')
-		mlx->config->dirY = 1;
+		mlx->config->dir_y = 1;
 	else if (mlx->config->orientation == 'E')
-		mlx->config->dirX = 1;
+		mlx->config->dir_x = 1;
 	else if (mlx->config->orientation == 'W')
-		mlx->config->dirX = -1;
+		mlx->config->dir_x = -1;
 }
 
 int	mouse_hook_camera(t_mlx *mlx)
 {
 	static int	x = 0;
-	int	y;
-	int	before;
-	double	tmp_planeX;
-	double	tmp_planeY;
+	int			y;
+	int			before;
+	double		tmp_plane_x;
+	double		tmp_plane_y;
 
-	tmp_planeX = mlx->config->planeX * (MOVEMENT_SPEED);
-	tmp_planeY = mlx->config->planeY * (MOVEMENT_SPEED);
+	tmp_plane_x = mlx->config->plane_x * (MOVEMENT_SPEED);
+	tmp_plane_y = mlx->config->plane_y * (MOVEMENT_SPEED);
 	y = 0;
 	before = x;
 	mlx_mouse_get_pos(mlx->init, mlx->win, &x, &y);
@@ -72,21 +72,21 @@ int	mouse_hook_camera(t_mlx *mlx)
 
 void	init_raycast(t_mlx *mlx)
 {
-	double	dirX;
-	double	dirY;
+	double	dir_x;
+	double	dir_y;
 
-	dirX = 0;
-	dirY = 0;
+	dir_x = 0;
+	dir_y = 0;
 	if (mlx->config->orientation == 'N')
-		dirY = -1;
+		dir_y = -1;
 	else if (mlx->config->orientation == 'S')
-		dirY = 1;
+		dir_y = 1;
 	else if (mlx->config->orientation == 'E')
-		dirX = 1;
+		dir_x = 1;
 	else if (mlx->config->orientation == 'W')
-		dirX = -1;
-	mlx->config->planeX = -(dirY) * 0.66;
-	mlx->config->planeY = dirX * 0.66;
+		dir_x = -1;
+	mlx->config->plane_x = -(dir_y) * 0.66;
+	mlx->config->plane_y = dir_x * 0.66;
 }
 
 void	render(t_texture *config)

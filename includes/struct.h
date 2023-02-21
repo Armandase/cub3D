@@ -23,12 +23,12 @@ typedef struct s_texture{
 	double	x;
 	double	y;
 	char	orientation;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-	double	posX;
-	double	posY;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	pos_x;
+	double	pos_y;
 }	t_texture;
 
 typedef struct s_data
@@ -52,27 +52,26 @@ typedef struct s_mlx
 
 typedef struct s_raycast
 {
-	double	rayDirX;
-	double	rayDirY;
+	double	ray_dir_x;
+	double	ray_dir_y;
 	int		start;
 	int		end;
 }	t_raycast;
 
 typedef struct s_dda
 {
-	int		mapX;
-	int		mapY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
-	int		stepX;
-	int		stepY;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
 	int		side;
 	int		orientation;
-	int		wallHeight;
+	int		wall_height;
 }	t_dda;
-
 
 #endif
