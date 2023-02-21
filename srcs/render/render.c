@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:35:56 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/21 10:22:39 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/02/21 15:43:33 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,34 @@ void	init_direction_vectors(t_mlx *mlx)
 		mlx->config->dirX = 1;
 	else if (mlx->config->orientation == 'W')
 		mlx->config->dirX = -1;
+}
+
+int	mouse_hook_camera(t_mlx *mlx)
+{
+	static int	x = 0;
+	int	y;
+	int	before;
+	double	tmp_planeX;
+	double	tmp_planeY;
+
+	tmp_planeX = mlx->config->planeX * (MOVEMENT_SPEED);
+	tmp_planeY = mlx->config->planeY * (MOVEMENT_SPEED);
+	y = 0;
+	before = x;
+	mlx_mouse_get_pos(mlx->init, mlx->win, &x, &y);
+	if (x == before)
+		return (0);
+	if (x > before)
+	{
+		rotate_vectors(mlx, RIGHT);
+		raycasting(mlx);
+	}
+	if (x < before)
+	{
+		rotate_vectors(mlx, LEFT);
+		raycasting(mlx);
+	}
+	return (0);
 }
 
 void	init_raycast(t_mlx *mlx)
@@ -79,6 +107,7 @@ void	render(t_texture *config)
 		(mlx.img.img, &(mlx.img.bits_per_px),
 			&(mlx.img.line_len), &(mlx.img.endian));
 	texture_to_tab(mlx.config, &mlx);
+	mlx_loop_hook(mlx.init, mouse_hook_camera, &mlx);
 	raycasting(&mlx);
 	mlx_hook(mlx.win, KeyPress, KeyPressMask, &handle_key, &mlx);
 	mlx_hook(mlx.win, DestroyNotify, StructureNotifyMask,

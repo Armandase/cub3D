@@ -11,7 +11,7 @@
 # define WIDTH 1080
 # define HEIGHT 720
 # define INF 1e30
-# define ROTATION_SPEED 50
+# define ROTATION_SPEED 25
 # define MOVEMENT_SPEED 0.08
 # define LEFT 1
 # define RIGHT 2
@@ -25,5 +25,6 @@ double	ft_abs(double nb);
 size_t	get_color_from_img(t_data *data, int x, int y);
 void	texture_to_tab(t_texture *config, t_mlx *mlx);
 void	put_sprite_to_img(t_mlx *mlx, int x, t_dda *dda, t_raycast *info);
+void	rotate_vectors(t_mlx *mlx, int flag);
 
 #endif
