@@ -54,6 +54,9 @@ typedef struct s_raycast
 {
 	double	ray_dir_x;
 	double	ray_dir_y;
+	double	tex_pos;
+	double	step;
+	int		tex_x;
 	int		start;
 	int		end;
 }	t_raycast;
