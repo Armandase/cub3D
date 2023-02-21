@@ -51,7 +51,7 @@ t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 			dda->side = 1;
 		}
 		if (mlx->config->map[dda->mapY]
-			&& mlx->config->map[dda->mapY][dda->mapX] != '0')
+			&& mlx->config->map[dda->mapY][dda->mapX] == '1')
 			hit = true;
 	}
 	return (dda);
