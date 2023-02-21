@@ -76,18 +76,16 @@ int	select_texture(t_raycast *info, t_dda dda, int side)
 
 void	send_rays(t_mlx *mlx, t_raycast *info, t_dda *dda)
 {
-	int		wallHeight;
-
 	apply_dda(mlx, info, dda);
 	if (dda->side == 0)
 		dda->perpWallDist = dda->sideDistX - dda->deltaDistX;
 	else
 		dda->perpWallDist = dda->sideDistY - dda->deltaDistY;
-	wallHeight = (int)((double)HEIGHT / dda->perpWallDist);
-	info->start = -wallHeight / 2 + HEIGHT / 2;
+	dda->wallHeight = (int)((double)HEIGHT / dda->perpWallDist);
+	info->start = -(dda->wallHeight) / 2 + HEIGHT / 2;
 	if (info->start < 0)
 		info->start = 0;
-	info->end = wallHeight / 2 + HEIGHT / 2;
+	info->end = dda->wallHeight / 2 + HEIGHT / 2;
 	if (info->end >= HEIGHT)
 		info->end = HEIGHT - 1;
 	dda->orientation = select_texture(info, *dda, dda->side);

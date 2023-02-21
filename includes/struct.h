@@ -71,6 +71,7 @@ typedef struct s_dda
 	int		stepY;
 	int		side;
 	int		orientation;
+	int		wallHeight;
 }	t_dda;
 
 

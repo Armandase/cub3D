@@ -63,7 +63,7 @@ void	put_sprite_to_img(t_mlx *mlx, int x, t_dda *dda, t_raycast *info)
 		tex_x = 64.0 - tex_x - 1;
 	if (dda->side == 1 && info->rayDirY < 0)
 		tex_x = 64.0 - tex_x - 1;
-	step = 1.0 * 64 / (info->end - info->start);
-	tex_pos = (info->start - HEIGHT / 2 + (info->end - info->start) / 2) * step;
+	step = 1.0 * 64 / (double)dda->wallHeight;
+	tex_pos = (info->start - (double)HEIGHT / 2 + (double)dda->wallHeight / 2) * step;
 	iter_in_sprite(info, tex_pos, step, mlx, dda, x, tex_x);
 }
