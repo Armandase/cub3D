@@ -9,7 +9,7 @@ void	swap_axes(size_t ***array)
 	x = 0;
 	while (x < 64)
 	{
-		y = 0;	
+		y = 0;
 		while (y < x)
 		{
 			tmp = (*array)[x][y];

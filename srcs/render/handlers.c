@@ -1,4 +1,4 @@
-# include "../../includes/render.h"
+#include "../../includes/render.h"
 
 static void	free_texture(t_texture *config)
 {

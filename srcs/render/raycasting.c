@@ -1,4 +1,26 @@
-# include "../../includes/render.h"
+#include "../../includes/render.h"
+
+void	init_side_dist_in_dda(t_dda *dda, t_mlx *mlx, t_raycast *info)
+{
+	if (info->ray_dir_x < 0)
+	{
+		dda->step_x = -1;
+		dda->side_dist_x = (mlx->config->pos_x - dda->map_x)
+			* dda->delta_dist_x;
+	}
+	else
+		dda->side_dist_x = (dda->map_x + 1.0 - mlx->config->pos_x)
+			* dda->delta_dist_x;
+	if (info->ray_dir_y < 0)
+	{
+		dda->step_y = -1;
+		dda->side_dist_y = (mlx->config->pos_y - dda->map_y)
+			* dda->delta_dist_y;
+	}
+	else
+		dda->side_dist_y = (dda->map_y + 1.0 - mlx->config->pos_y)
+			* dda->delta_dist_y;
+}
 
 void	init_dda(t_dda *dda, t_raycast *info, t_mlx *mlx)
 {
@@ -14,20 +36,7 @@ void	init_dda(t_dda *dda, t_raycast *info, t_mlx *mlx)
 		dda->delta_dist_y = ft_abs(1 / info->ray_dir_y);
 	dda->step_x = 1;
 	dda->step_y = 1;
-	if (info->ray_dir_x < 0)
-	{
-		dda->step_x = -1;
-		dda->side_dist_x = (mlx->config->pos_x - dda->map_x) * dda->delta_dist_x;
-	}
-	else
-		dda->side_dist_x = (dda->map_x + 1.0 - mlx->config->pos_x) * dda->delta_dist_x;
-	if (info->ray_dir_y < 0)
-	{
-		dda->step_y = -1;
-		dda->side_dist_y = (mlx->config->pos_y - dda->map_y) * dda->delta_dist_y;
-	}
-	else
-		dda->side_dist_y = (dda->map_y + 1.0 - mlx->config->pos_y) * dda->delta_dist_y;
+	init_side_dist_in_dda(dda, mlx, info);
 }
 
 t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)

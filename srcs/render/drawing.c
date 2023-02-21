@@ -1,4 +1,4 @@
-# include "../../includes/render.h"
+#include "../../includes/render.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -27,7 +27,8 @@ size_t	get_color_from_img(t_data *data, int x, int y)
 	return (ret);
 }
 
-void	iter_in_sprite(t_raycast *info, double tex_pos, double step, t_mlx *mlx, t_dda *dda, int x, int tex_x)
+void	iter_in_sprite(t_raycast *info,
+		double tex_pos, double step, t_mlx *mlx, t_dda *dda, int x, int tex_x)
 {
 	int	y;
 	int	tex_y;
@@ -64,6 +65,7 @@ void	put_sprite_to_img(t_mlx *mlx, int x, t_dda *dda, t_raycast *info)
 	if (dda->side == 1 && info->ray_dir_y < 0)
 		tex_x = 64.0 - tex_x - 1;
 	step = 1.0 * 64 / (double)dda->wall_height;
-	tex_pos = (info->start - (double)HEIGHT / 2 + (double)dda->wall_height / 2) * step;
+	tex_pos = (info->start - (double)HEIGHT / 2
+			+ (double)dda->wall_height / 2) * step;
 	iter_in_sprite(info, tex_pos, step, mlx, dda, x, tex_x);
 }
