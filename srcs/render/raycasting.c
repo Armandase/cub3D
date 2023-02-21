@@ -29,10 +29,9 @@ void	init_dda(t_dda *dda, t_raycast *info, t_mlx *mlx)
 		dda->sideDistY = (dda->mapY + 1.0 - mlx->config->posY) * dda->deltaDistY;
 }
 
-int	apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
+t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 {
 	bool	hit;
-	int		side;
 
 	init_dda(dda, info, mlx);
 	hit = false;
@@ -42,57 +41,51 @@ int	apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 		{
 			dda->sideDistX += dda->deltaDistX;
 			dda->mapX += dda->stepX;
-			side = 0;
+			dda->side = 0;
 		}
 		else
 		{
 			dda->sideDistY += dda->deltaDistY;
 			dda->mapY += dda->stepY;
-			side = 1;
+			dda->side = 1;
 		}
 		if (mlx->config->map[dda->mapY]
 			&& mlx->config->map[dda->mapY][dda->mapX] != '0')
 			hit = true;
 	}
-	return (side);
+	return (dda);
 }
 
-int	send_rays(t_mlx *mlx, t_raycast *info)
+void	send_rays(t_mlx *mlx, t_raycast *info, t_dda *dda)
 {
-	t_dda	dda;
-	int		side;	
 	int		wallHeight;
 
-	side = apply_dda(mlx, info, &dda);
-	if (side == 0)
-		dda.perpWallDist = dda.sideDistX - dda.deltaDistX;
+	apply_dda(mlx, info, dda);
+	if (dda->side == 0)
+		dda->perpWallDist = dda->sideDistX - dda->deltaDistX;
 	else
-		dda.perpWallDist = dda.sideDistY - dda.deltaDistY;
-	wallHeight = (int)((double)HEIGHT / dda.perpWallDist);
+		dda->perpWallDist = dda->sideDistY - dda->deltaDistY;
+	wallHeight = (int)((double)HEIGHT / dda->perpWallDist);
 	info->start = -wallHeight / 2 + HEIGHT / 2;
 	if (info->start < 0)
 		info->start = 0;
 	info->end = wallHeight / 2 + HEIGHT / 2;
 	if (info->end >= HEIGHT)
 		info->end = HEIGHT - 1;
-	return (side);
 }
 
-void	draw_line(t_mlx *mlx, t_raycast info, int line, int side)
+void	draw_line(t_mlx *mlx, t_raycast info, int line, t_dda *dda)
 {
 	const int	x = line;
-	int	y;
-	int	color;
+	int			y;
 
 	y = 0;
-	(void)side;
 	while (y <= HEIGHT)
 	{
-		color = mlx->config->img_tab[0][x % 64][y % 64];
 		if (y < info.start)
 			my_mlx_pixel_put(&(mlx->img), x, y, mlx->config->floor);
 		else if (y >= info.start && y <= info.end)
-			my_mlx_pixel_put(&(mlx->img), x, y, color);
+			put_sprite_to_img(mlx, x, dda, &info);
 		else if (y > info.end)
 			my_mlx_pixel_put(&(mlx->img), x, y, mlx->config->ceiling);
 		y++;
@@ -103,7 +96,7 @@ void	raycasting(t_mlx *mlx)
 {
 	t_raycast	info;
 	double		camera;
-	int			side;
+	t_dda		dda;
 	int			i;
 
 	i = 0;
@@ -112,8 +105,8 @@ void	raycasting(t_mlx *mlx)
 		camera = 2 * i / (double)WIDTH - 1;
 		info.rayDirX = mlx->config->dirX + mlx->config->planeX * camera;
 		info.rayDirY = mlx->config->dirY + mlx->config->planeY * camera;
-		side = send_rays(mlx, &info);
-		draw_line(mlx, info, i, side);
+		send_rays(mlx, &info, &dda);
+		draw_line(mlx, info, i, &dda);
 		i++;
 	}
 	mlx_put_image_to_window(mlx->init, mlx->win, mlx->img.img, 0, 0);

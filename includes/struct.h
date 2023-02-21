@@ -69,6 +69,7 @@ typedef struct s_dda
 	double	perpWallDist;
 	int		stepX;
 	int		stepY;
+	int		side;
 }	t_dda;
 
 
