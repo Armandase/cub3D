@@ -5,7 +5,8 @@ void	init_dda(t_dda *dda, t_raycast *info, t_mlx *mlx)
 	dda->mapX = (int)(mlx->config->posX);
 	dda->mapY = (int)(mlx->config->posY);
 	if (info->rayDirX == 0)
-		dda->deltaDistX = 1e30; else
+		dda->deltaDistX = 1e30;
+	else
 		dda->deltaDistX = ft_abs(1 / info->rayDirX);
 	if (info->rayDirY == 0)
 		dda->deltaDistY = 1e30;
@@ -57,11 +58,29 @@ int	apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 	return (side);
 }
 
+int	select_texture(t_raycast *info, t_dda dda, int side)
+{
+	int	orientation;
+
+	if (info->end >= HEIGHT)
+		info->end = HEIGHT - 1;
+	if (dda.stepX == -1 && side == 0)
+		orientation = WEST;
+	else if (dda.stepX == 1 && side == 0)
+		orientation = EAST;
+	else if (dda.stepY == 1 && side == 1)
+		orientation = NORTH;
+	else
+		orientation = SOUTH;
+	return (orientation);
+}
+
 int	send_rays(t_mlx *mlx, t_raycast *info)
 {
 	t_dda	dda;
 	int		side;	
 	int		wallHeight;
+	int		orientation;
 
 	side = apply_dda(mlx, info, &dda);
 	if (side == 0)
@@ -73,23 +92,20 @@ int	send_rays(t_mlx *mlx, t_raycast *info)
 	if (info->start < 0)
 		info->start = 0;
 	info->end = wallHeight / 2 + HEIGHT / 2;
-	if (info->end >= HEIGHT)
-		info->end = HEIGHT - 1;
-	return (side);
+	orientation = select_texture(info, dda, side);
+	return (orientation);
 }
 
-void	draw_line(t_mlx *mlx, t_raycast info, int line, int side)
+void	draw_line(t_mlx *mlx, t_raycast info, int line, int orientation)
 {
 	const int	x = line;
 	int	y;
 	int	color;
 
 	y = 0;
-	(void)side;
 	while (y <= HEIGHT)
 	{
-		//color = mlx->config->img_tab[0][x % 64][y % 64];
-		color = 0xff00ff;
+		color = mlx->config->img_tab[orientation][y % 64][x % 64];
 		if (y < info.start)
 			my_mlx_pixel_put(&(mlx->img), x, y, mlx->config->floor);
 		else if (y >= info.start && y <= info.end)
@@ -104,7 +120,7 @@ void	raycasting(t_mlx *mlx)
 {
 	t_raycast	info;
 	double		camera;
-	int			side;
+	int			orientation;
 	int			i;
 
 	i = 0;
@@ -113,8 +129,8 @@ void	raycasting(t_mlx *mlx)
 		camera = 2 * i / (double)WIDTH - 1;
 		info.rayDirX = mlx->config->dirX + mlx->config->planeX * camera;
 		info.rayDirY = mlx->config->dirY + mlx->config->planeY * camera;
-		side = send_rays(mlx, &info);
-		draw_line(mlx, info, i, side);
+		orientation = send_rays(mlx, &info);
+		draw_line(mlx, info, i, orientation);
 		i++;
 	}
 	mlx_put_image_to_window(mlx->init, mlx->win, mlx->img.img, 0, 0);

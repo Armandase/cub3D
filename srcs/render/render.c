@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:35:56 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/20 15:25:28 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/02/21 10:22:39 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ void	render(t_texture *config)
 	mlx.img.addr = mlx_get_data_addr
 		(mlx.img.img, &(mlx.img.bits_per_px),
 			&(mlx.img.line_len), &(mlx.img.endian));
-	//texture_to_tab(mlx.config, &mlx);
+	texture_to_tab(mlx.config, &mlx);
 	raycasting(&mlx);
 	mlx_hook(mlx.win, KeyPress, KeyPressMask, &handle_key, &mlx);
 	mlx_hook(mlx.win, DestroyNotify, StructureNotifyMask,
-		  &destroy_win, &mlx);
+		&destroy_win, &mlx);
 	mlx_loop(mlx.init);
 }
