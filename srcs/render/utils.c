@@ -1,4 +1,4 @@
-# include "../../includes/render.h"
+#include "../../includes/render.h"
 
 double	ft_abs(double nb)
 {
