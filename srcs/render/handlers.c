@@ -1,7 +1,29 @@
 #include "../../includes/render.h"
 
+void	free_img_tab(size_t **tab[4])
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 64)
+		{
+			free(tab[i][j]);
+			j++;
+		}
+		free(tab[i]);
+		i++;
+	}
+}
+
 static void	free_texture(t_texture *config)
 {
+	int	i;
+
+	i = 0;
 	if (config->no != NULL)
 		ft_free((void *)&config->no);
 	if (config->so != NULL)
@@ -11,6 +33,7 @@ static void	free_texture(t_texture *config)
 	if (config->ea != NULL)
 		ft_free((void *)&config->ea);
 	ft_free_strs(config->map);
+	free_img_tab(config->img_tab);
 }
 
 int	destroy_win(t_mlx *mlx)

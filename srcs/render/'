@@ -21,8 +21,7 @@ void	swap_axes(size_t ***array)
 	}
 }
 
-void	copy_texture_from_img_to_array(t_texture *config,
-		t_data *img, int i, t_mlx *mlx)
+void	copy_texture_from_img_to_array(t_texture *config, t_data *img, int i)
 {
 	int		x;
 	int		y;
@@ -41,8 +40,8 @@ void	copy_texture_from_img_to_array(t_texture *config,
 		x = x + 1;
 	}
 	swap_axes(&config->img_tab[i]);
-	if (img->img)
-		mlx_destroy_image(mlx->init, img->img);
+	if (img.img)
+		mlx_destroy_image(mlx->init, img.img);
 }
 
 void	texture_to_tab(t_texture *config, t_mlx *mlx)
@@ -69,7 +68,7 @@ void	texture_to_tab(t_texture *config, t_mlx *mlx)
 				(mlx->init, config->we, &img_len_x, &img_len_y);
 		img.addr = mlx_get_data_addr (img.img, &img.bits_per_px,
 				&img.line_len, &img.endian);
-		copy_texture_from_img_to_array(config, &img, i, mlx);
+		copy_texture_from_img_to_array(config, &img, i);
 		i++;
 	}
 }
