@@ -1,4 +1,5 @@
 #include "../../includes/parsing.h"
+#include <fcntl.h>
 
 int	copy_path_texture(char **config_texture, char *buf)
 {
@@ -88,6 +89,32 @@ void	configuration(int fd, t_texture *config)
 	}
 }
 
+void	verif_path_texture(t_texture *config)
+{
+	int	fd;
+
+	fd = open(config->no, O_RDONLY);
+	if (fd < 0)
+		free_strs_texture_exit(config, "Open error\n");
+	else
+		close(fd);
+	fd = open(config->so, O_RDONLY);
+	if (fd < 0)
+		free_strs_texture_exit(config, "Open error\n");
+	else
+		close(fd);
+	fd = open(config->we, O_RDONLY);
+	if (fd < 0)
+		free_strs_texture_exit(config, "Open error\n");
+	else
+		close(fd);
+	fd = open(config->ea, O_RDONLY);
+	if (fd < 0)
+		free_strs_texture_exit(config, "Open error\n");
+	else
+		close(fd);
+}
+
 void	map_check(char	*av, t_texture *config)
 {
 	int			fd;
@@ -96,4 +123,5 @@ void	map_check(char	*av, t_texture *config)
 	if (fd < 0)
 		print_error_exit("Open error\n");
 	configuration(fd, config);
+	verif_path_texture(config);
 }
