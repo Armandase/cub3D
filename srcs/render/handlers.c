@@ -21,9 +21,6 @@ void	free_img_tab(size_t **tab[4])
 
 static void	free_texture(t_texture *config)
 {
-	int	i;
-
-	i = 0;
 	if (config->no != NULL)
 		ft_free((void *)&config->no);
 	if (config->so != NULL)
