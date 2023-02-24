@@ -47,11 +47,7 @@ int	mouse_hook_camera(t_mlx *mlx)
 	static int	x = 0;
 	int			y;
 	int			before;
-	double		tmp_plane_x;
-	double		tmp_plane_y;
 
-	tmp_plane_x = mlx->config->plane_x * (MOVEMENT_SPEED);
-	tmp_plane_y = mlx->config->plane_y * (MOVEMENT_SPEED);
 	y = 0;
 	before = x;
 	mlx_mouse_get_pos(mlx->init, mlx->win, &x, &y);

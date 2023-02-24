@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 09:21:32 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/20 10:08:23 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/02/22 13:16:55 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	convert_str_rgb_to_int(char **colors, t_texture config, char *buf, int fd)
 	return (sum);
 }
 
-void	free_strs_texture_exit(t_texture *config)
+void	free_strs_texture_exit(t_texture *config, char *error)
 {
 	if (config->so)
 		free(config->so);
@@ -74,7 +74,7 @@ void	free_strs_texture_exit(t_texture *config)
 	if (config->we)
 		free(config->we);
 	ft_free_strs(config->map);
-	print_error_exit("Our cub3d only works with xpm\n");
+	print_error_exit(error);
 }
 
 void	verif_texture(t_texture *config)
@@ -83,14 +83,14 @@ void	verif_texture(t_texture *config)
 
 	extend = ft_strnstr(config->so, ".xpm", ft_strlen(config->so));
 	if (!extend || ft_strlen(extend) > ft_strlen(".xpm"))
-		free_strs_texture_exit(config);
+		free_strs_texture_exit(config, "Our cub3d only works with xpm\n");
 	extend = ft_strnstr(config->no, ".xpm", ft_strlen(config->no));
 	if (!extend || ft_strlen(extend) > ft_strlen(".xpm"))
-		free_strs_texture_exit(config);
+		free_strs_texture_exit(config, "Our cub3d only works with xpm\n");
 	extend = ft_strnstr(config->we, ".xpm", ft_strlen(config->we));
 	if (!extend || ft_strlen(extend) > ft_strlen(".xpm"))
-		free_strs_texture_exit(config);
+		free_strs_texture_exit(config, "Our cub3d only works with xpm\n");
 	extend = ft_strnstr(config->ea, ".xpm", ft_strlen(config->ea));
 	if (!extend || ft_strlen(extend) > ft_strlen(".xpm"))
-		free_strs_texture_exit(config);
+		free_strs_texture_exit(config, "Our cub3d only works with xpm\n");
 }
