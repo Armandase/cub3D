@@ -13,6 +13,7 @@
 # define INF 1e30
 # define ROTATION_SPEED 25
 # define MOVEMENT_SPEED 0.08
+# define MAX_ITERATIONS 2500
 # define LEFT 1
 # define RIGHT 2
 

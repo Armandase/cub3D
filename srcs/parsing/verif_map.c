@@ -6,13 +6,13 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:06:14 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/21 16:00:40 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/02/24 09:54:49 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
 
-int	check_char(const char **map, int i, int j, t_texture *config)
+bool	check_char(const char **map, int i, int j, t_texture *config)
 {
 	bool	valid;
 
@@ -28,7 +28,8 @@ int	check_char(const char **map, int i, int j, t_texture *config)
 	}
 	else if (i == 0 && map[i][j] != '1' && ft_isspace(map[i][j]) == false)
 		valid = false;
-	else if (map[i][j] == '0' && map[i][j + 1] == '\n')
+	else if (map[i][j] == '0'
+			&& (map[i][j + 1] == '\n' || map[i][j + 1] == ' '))
 		valid = false;
 	else if (ft_isspace(map[i][j]) && map[i][j + 1] == '0')
 		valid = false;
@@ -54,6 +55,8 @@ bool	verif_map(t_texture *config)
 		while (map[i][j])
 		{
 			valid = check_char(map, i, j, config);
+			if (valid == false)
+				return (valid);
 			j++;
 		}
 		i++;

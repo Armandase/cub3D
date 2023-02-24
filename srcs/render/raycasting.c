@@ -42,10 +42,12 @@ void	init_dda(t_dda *dda, t_raycast *info, t_mlx *mlx)
 t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 {
 	bool	hit;
+	int		iterations;
 
 	init_dda(dda, info, mlx);
 	hit = false;
-	while (hit == false)
+	iterations = 0;
+	while (hit == false && iterations < MAX_ITERATIONS)
 	{
 		if (dda->side_dist_x < dda->side_dist_y)
 		{
@@ -59,9 +61,11 @@ t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 			dda->map_y += dda->step_y;
 			dda->side = 1;
 		}
-		if (mlx->config->map[dda->map_y]
-			&& mlx->config->map[dda->map_y][dda->map_x] == '1')
+		if (dda->map_x > -1 && dda->map_y > -1 && mlx->config->map[dda->map_y]
+			&& (mlx->config->map[dda->map_y][dda->map_x] == '1'
+			|| mlx->config->map[dda->map_y][dda->map_x] == 'P'))
 			hit = true;
+		iterations++;
 	}
 	return (dda);
 }
