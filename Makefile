@@ -16,7 +16,7 @@ OBJS		= ${SRCS:.c=.o}
 all: libmlx ${NAME}
 
 libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+	@cmake $(LIBMLX) -DDEBUG=1 -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 .c.o :
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
