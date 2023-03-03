@@ -64,7 +64,11 @@ t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 		if (dda->map_x > -1 && dda->map_y > -1 && mlx->config->map[dda->map_y]
 			&& (mlx->config->map[dda->map_y][dda->map_x] == '1'
 			|| mlx->config->map[dda->map_y][dda->map_x] == 'P'))
+		{
 			hit = true;
+			if (mlx->config->map[dda->map_y][dda->map_x] == 'P')
+				mlx->config->animation = true;
+		}
 		iterations++;
 	}
 	return (dda);
@@ -113,14 +117,14 @@ void	draw_line(t_mlx *mlx, t_raycast info, int line, t_dda *dda)
 	while (y <= HEIGHT)
 	{
 		if (y < info.start)
-			my_mlx_pixel_put(&(mlx->img), x, y, mlx->config->floor);
+			mlx_put_pixel(mlx->img, x, y, mlx->config->floor);
 		else if (y >= info.start && y <= info.end)
 		{
 			put_sprite_to_img(mlx, x, dda, &info);
 			y = info.end;
 		}
 		else if (y > info.end)
-			my_mlx_pixel_put(&(mlx->img), x, y, mlx->config->ceiling);
+			mlx_put_pixel(mlx->img, x, y, mlx->config->ceiling);
 		y++;
 	}
 }
@@ -142,5 +146,4 @@ void	raycasting(t_mlx *mlx)
 		draw_line(mlx, info, i, &dda);
 		i++;
 	}
-	mlx_put_image_to_window(mlx->init, mlx->win, mlx->img.img, 0, 0);
 }

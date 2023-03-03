@@ -2,6 +2,7 @@
 # define STRUCT_H
 
 # include "stdlib.h"
+# include "../libs/MLX42/include/MLX42/MLX42.h"
 
 enum e_orientation
 {
@@ -11,8 +12,13 @@ enum e_orientation
 	WEST
 };
 
-typedef struct s_texture{
+typedef struct s_texture
+{
 	size_t	**img_tab[4];
+	size_t	**portal_frames[23];
+	char	*frames[23];
+	int		frame_id;
+	bool	animation;
 	char	*no;
 	char	*so;
 	char	*we;
@@ -31,21 +37,12 @@ typedef struct s_texture{
 	double	pos_y;
 }	t_texture;
 
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_px;
-	int		line_len;
-	int		endian;
-}	t_data;
-
 typedef struct s_mlx
 {
 	t_texture	*config;
-	void		*init;
+	mlx_t		*init;
 	void		*win;
-	t_data		img;
+	mlx_image_t	*img;
 	int			img_width;
 	int			img_height;
 }	t_mlx;

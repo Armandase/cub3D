@@ -1,13 +1,14 @@
-NO assets/flower.xpm
-SO assets/sun.xpm
-WE assets/purple.xpm
-EA assets/sky.xpm
+NO assets/flower.xpm42
+SO assets/sun.xpm42
+WE assets/purple.xpm42
+EA assets/sky.xpm42
 
 F 0,40,0
 C 225,30,0
 
-        1111111111111111111111111
-        1000000000 10000000000001
+
+        11111111111111111111P1111
+        1000000000110000000000001
         1011000001110000000000001
         1001000000000000000000001
 111111111011000001110000000000001

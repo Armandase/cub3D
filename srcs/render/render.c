@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:35:56 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/23 18:03:12 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/03/03 13:24:30 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,25 @@ void	init_direction_vectors(t_mlx *mlx)
 		mlx->config->dir_x = -1;
 }
 
-int	mouse_hook_camera(t_mlx *mlx)
+void	mouse_hook_camera(void *data)
 {
-	static int	x = 0;
+	t_mlx		*mlx;
+	static int	x;
 	int			y;
 	int			before;
 
+	mlx = (t_mlx *)data;
 	y = 0;
 	before = x;
-	mlx_mouse_get_pos(mlx->init, mlx->win, &x, &y);
+	mlx_get_mouse_pos(mlx->init, &x, &y);
 	if (x == before)
-		return (0);
+		return ;
 	if (x > before)
-	{
 		rotate_vectors(mlx, RIGHT);
-		raycasting(mlx);
-	}
 	if (x < before)
-	{
 		rotate_vectors(mlx, LEFT);
-		raycasting(mlx);
-	}
-	return (0);
+	mlx_set_mouse_pos(mlx->init, WIDTH / 2, HEIGHT / 2);
+	mlx_get_mouse_pos(mlx->init, &x, &y);
 }
 
 void	init_raycast(t_mlx *mlx)
@@ -85,28 +82,49 @@ void	init_raycast(t_mlx *mlx)
 	mlx->config->plane_y = dir_x * 0.66;
 }
 
+void	init_frames(t_texture *config)
+{
+	config->frames[0] = ft_strdup("assets/frames_void/0.xpm");
+	config->frames[1] = ft_strdup("assets/frames_void/1.xpm");
+	config->frames[2] = ft_strdup("assets/frames_void/2.xpm");
+	config->frames[3] = ft_strdup("assets/frames_void/3.xpm");
+	config->frames[4] = ft_strdup("assets/frames_void/4.xpm");
+	config->frames[5] = ft_strdup("assets/frames_void/5.xpm");
+	config->frames[6] = ft_strdup("assets/frames_void/6.xpm");
+	config->frames[7] = ft_strdup("assets/frames_void/7.xpm");
+	config->frames[8] = ft_strdup("assets/frames_void/8.xpm");
+	config->frames[9] = ft_strdup("assets/frames_void/9.xpm");
+	config->frames[10] = ft_strdup("assets/frames_void/10.xpm");
+	config->frames[11] = ft_strdup("assets/frames_void/11.xpm");
+	config->frames[12] = ft_strdup("assets/frames_void/12.xpm");
+	config->frames[13] = ft_strdup("assets/frames_void/13.xpm");
+	config->frames[14] = ft_strdup("assets/frames_void/14.xpm");
+	config->frames[15] = ft_strdup("assets/frames_void/15.xpm");
+	config->frames[16] = ft_strdup("assets/frames_void/16.xpm");
+	config->frames[17] = ft_strdup("assets/frames_void/17.xpm");
+	config->frames[18] = ft_strdup("assets/frames_void/18.xpm");
+	config->frames[19] = ft_strdup("assets/frames_void/19.xpm");
+	config->frames[20] = ft_strdup("assets/frames_void/20.xpm");
+	config->frames[21] = ft_strdup("assets/frames_void/21.xpm");
+	config->frames[22] = ft_strdup("assets/frames_void/22.xpm");
+}
+
 void	render(t_texture *config)
 {
 	t_mlx	mlx;
 
-	mlx.init = mlx_init();
+	mlx.init = mlx_init(WIDTH, HEIGHT, "Cub3d", true);
 	mlx.config = config;
+	mlx.config->frame_id = 0;
+	mlx_set_cursor_mode(mlx.init, MLX_MOUSE_HIDDEN);
 	init_direction_vectors(&mlx);
 	init_raycast(&mlx);
 	if (mlx.init == NULL)
 		free_render_exit(config, &mlx, "Initialisation error\n");
-	mlx.win = mlx_new_window(mlx.init, WIDTH, HEIGHT, "Cub3D");
-	if (mlx.win == NULL)
-		free_render_exit(config, &mlx, "Initialisation error\n");
-	mlx.img.img = mlx_new_image(mlx.init, WIDTH, HEIGHT);
-	mlx.img.addr = mlx_get_data_addr
-		(mlx.img.img, &(mlx.img.bits_per_px),
-			&(mlx.img.line_len), &(mlx.img.endian));
+	mlx.img = mlx_new_image(mlx.init, WIDTH, HEIGHT);
+	mlx_image_to_window(mlx.init, mlx.img, 0, 0);
 	texture_to_tab(mlx.config, &mlx);
-	mlx_loop_hook(mlx.init, mouse_hook_camera, &mlx);
 	raycasting(&mlx);
-	mlx_hook(mlx.win, KeyPress, KeyPressMask, &handle_key, &mlx);
-	mlx_hook(mlx.win, DestroyNotify, StructureNotifyMask,
-		&destroy_win, &mlx);
+	mlx_loop_hook(mlx.init, handle_key, &mlx);
 	mlx_loop(mlx.init);
 }

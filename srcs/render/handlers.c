@@ -33,19 +33,6 @@ static void	free_texture(t_texture *config)
 	free_img_tab(config->img_tab);
 }
 
-int	destroy_win(t_mlx *mlx)
-{
-	mlx_loop_end(mlx->init);
-	mlx_destroy_image(mlx->init, mlx->img.img);
-	mlx_clear_window(mlx->init, mlx->win);
-	mlx_destroy_window(mlx->init, mlx->win);
-	mlx_destroy_display(mlx->init);
-	free_texture(mlx->config);
-	free(mlx->init);
-	exit (0);
-	return (0);
-}
-
 void	rotate_vectors(t_mlx *mlx, int flag)
 {
 	double			angle;
@@ -63,63 +50,65 @@ void	rotate_vectors(t_mlx *mlx, int flag)
 	mlx->config->plane_y = sin(angle) * plane_x + cos(angle) * plane_y;
 }
 
-int	handle_key(int key, t_mlx *mlx)
+void	handle_key(void	*param)
 {
+	t_mlx	*mlx;
 	double	tmp_dir_x;
 	double	tmp_dir_y;
 	double	tmp_plane_x;
 	double	tmp_plane_y;
 
+	mlx = param;
 	tmp_dir_x = mlx->config->dir_x * MOVEMENT_SPEED;
 	tmp_dir_y = mlx->config->dir_y * MOVEMENT_SPEED;
 	tmp_plane_x = mlx->config->plane_x * MOVEMENT_SPEED;
 	tmp_plane_y = mlx->config->plane_y * MOVEMENT_SPEED;
-	if (key == XK_Escape)
-		destroy_win(mlx);
-	if (key == 'a' || key == 'd' || key == 'w' || key == 's'
-		|| key == XK_Left || key == XK_Right)
+	if (mlx_is_key_down(mlx->init, MLX_KEY_ESCAPE))
 	{
-		if (key == 'w')
-		{
-			if (mlx->config->map[(int)mlx->config->pos_y]
-				[(int)(mlx->config->pos_x + tmp_dir_x)] == '0')
-				mlx->config->pos_x += tmp_dir_x;
-			if (mlx->config->map[(int)(mlx->config->pos_y + tmp_dir_y)]
-				[(int)mlx->config->pos_x] == '0')
-				mlx->config->pos_y += tmp_dir_y;
-		}
-		if (key == 's')
-		{
-			if (mlx->config->map[(int)mlx->config->pos_y]
-				[(int)(mlx->config->pos_x - tmp_dir_x)] == '0')
-				mlx->config->pos_x -= tmp_dir_x;
-			if (mlx->config->map[(int)(mlx->config->pos_y - tmp_dir_y)]
-				[(int)mlx->config->pos_x] == '0')
-				mlx->config->pos_y -= tmp_dir_y;
-		}
-		if (key == 'd')
-		{
-			if (mlx->config->map[(int)mlx->config->pos_y]
-				[(int)(mlx->config->pos_x + tmp_plane_x)] == '0')
-				mlx->config->pos_x += tmp_plane_x;
-			if (mlx->config->map[(int)(mlx->config->pos_y + tmp_plane_y)]
-				[(int)mlx->config->pos_x] == '0')
-				mlx->config->pos_y += tmp_plane_y;
-		}
-		if (key == 'a')
-		{
-			if (mlx->config->map[(int)mlx->config->pos_y]
-				[(int)(mlx->config->pos_x - tmp_plane_x)] == '0')
-				mlx->config->pos_x -= tmp_plane_x;
-			if (mlx->config->map[(int)(mlx->config->pos_y - tmp_plane_y)]
-				[(int)mlx->config->pos_x] == '0')
-				mlx->config->pos_y -= tmp_plane_y;
-		}
-		if (key == XK_Left)
-			rotate_vectors(mlx, LEFT);
-		if (key == XK_Right)
-			rotate_vectors(mlx, RIGHT);
-		raycasting(mlx);
+		mlx_terminate(mlx->init);
+		free_texture(mlx->config);
+		free(mlx->init);
 	}
-	return (0);
+	if (mlx_is_key_down(mlx->init, MLX_KEY_W))
+	{
+		if (mlx->config->map[(int)mlx->config->pos_y]
+			[(int)(mlx->config->pos_x + tmp_dir_x)] == '0')
+			mlx->config->pos_x += tmp_dir_x;
+		if (mlx->config->map[(int)(mlx->config->pos_y + tmp_dir_y)]
+			[(int)mlx->config->pos_x] == '0')
+			mlx->config->pos_y += tmp_dir_y;
+	}
+	if (mlx_is_key_down(mlx->init, MLX_KEY_S))
+	{
+		if (mlx->config->map[(int)mlx->config->pos_y]
+			[(int)(mlx->config->pos_x - tmp_dir_x)] == '0')
+			mlx->config->pos_x -= tmp_dir_x;
+		if (mlx->config->map[(int)(mlx->config->pos_y - tmp_dir_y)]
+			[(int)mlx->config->pos_x] == '0')
+			mlx->config->pos_y -= tmp_dir_y;
+	}
+	if (mlx_is_key_down(mlx->init, MLX_KEY_D))
+	{
+		if (mlx->config->map[(int)mlx->config->pos_y]
+			[(int)(mlx->config->pos_x + tmp_plane_x)] == '0')
+			mlx->config->pos_x += tmp_plane_x;
+		if (mlx->config->map[(int)(mlx->config->pos_y + tmp_plane_y)]
+			[(int)mlx->config->pos_x] == '0')
+			mlx->config->pos_y += tmp_plane_y;
+	}
+	if (mlx_is_key_down(mlx->init, MLX_KEY_A))
+	{
+		if (mlx->config->map[(int)mlx->config->pos_y]
+			[(int)(mlx->config->pos_x - tmp_plane_x)] == '0')
+			mlx->config->pos_x -= tmp_plane_x;
+		if (mlx->config->map[(int)(mlx->config->pos_y - tmp_plane_y)]
+			[(int)mlx->config->pos_x] == '0')
+			mlx->config->pos_y -= tmp_plane_y;
+	}
+	if (mlx_is_key_down(mlx->init, MLX_KEY_LEFT))
+		rotate_vectors(mlx, LEFT);
+	if (mlx_is_key_down(mlx->init, MLX_KEY_RIGHT))
+		rotate_vectors(mlx, RIGHT);
+	mouse_hook_camera(mlx);
+	raycasting(mlx);
 }

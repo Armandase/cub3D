@@ -1,30 +1,20 @@
 #include "../../includes/render.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+size_t	get_color_from_img(mlx_image_t *img, int x, int y)
 {
-	char	*dest;
+	uint8_t		*ret;
+	uint32_t	color;
+	int			r;
+	int			g;
+	int			b;
 
-	if (x <= WIDTH && x >= 0 && y <= HEIGHT && y >= 0)
-	{
-		dest = data->addr + (y * data->line_len + x *(data->bits_per_px / 8));
-		*(unsigned int *)dest = color;
-	}
-}
-
-size_t	get_color_from_img(t_data *data, int x, int y)
-{
-	int		offset;
-	size_t	ret;
-	int		r;
-	int		g;
-	int		b;
-
-	offset = (y * data->line_len + x * (data->bits_per_px / 8));
-	r = data->addr[offset + 2];
-	g = data->addr[offset + 1];
-	b = data->addr[offset];
-	ret = (r << 16) + (g << 8) + b;
-	return (ret);
+	ret = &img->pixels[(y * img->width + x) * sizeof(uint32_t)];
+	r = *(ret++);
+	g = *(ret++);
+	b = *(ret++);
+	color = (r << 24) + (g << 16) + (b << 8);
+	printf("Color: %d\n", color);
+	return (color);
 }
 
 void	iter_in_sprite(t_raycast *info, t_mlx *mlx, t_dda *dda, int x)
@@ -41,7 +31,7 @@ void	iter_in_sprite(t_raycast *info, t_mlx *mlx, t_dda *dda, int x)
 		color = mlx->config->img_tab[dda->orientation][tex_y][info->tex_x];
 		if (dda->side == 1)
 			color = (color >> 1) & 8355711;
-		my_mlx_pixel_put(&(mlx->img), x, y, color);
+		mlx_put_pixel(mlx->img, x, y, color);
 		y++;
 	}
 }
