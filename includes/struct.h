@@ -14,27 +14,23 @@ enum e_orientation
 
 typedef struct s_texture
 {
-	size_t	**img_tab[4];
-	size_t	**portal_frames[23];
-	char	*frames[23];
-	int		frame_id;
-	bool	animation;
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	int		floor;
-	int		ceiling;
-	char	**map;
-	double	x;
-	double	y;
-	char	orientation;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-	double	pos_x;
-	double	pos_y;
+	uint32_t	**img_tab[4];
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	int			floor;
+	int			ceiling;
+	char		**map;
+	double		x;
+	double		y;
+	char		orientation;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
+	double		pos_x;
+	double		pos_y;
 }	t_texture;
 
 typedef struct s_mlx

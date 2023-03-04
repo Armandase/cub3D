@@ -1,6 +1,6 @@
 #include "../../includes/render.h"
 
-void	free_img_tab(size_t **tab[4])
+void	free_img_tab(u_int32_t **tab[4])
 {
 	int	i;
 	int	j;

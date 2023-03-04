@@ -64,11 +64,7 @@ t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 		if (dda->map_x > -1 && dda->map_y > -1 && mlx->config->map[dda->map_y]
 			&& (mlx->config->map[dda->map_y][dda->map_x] == '1'
 			|| mlx->config->map[dda->map_y][dda->map_x] == 'P'))
-		{
 			hit = true;
-			if (mlx->config->map[dda->map_y][dda->map_x] == 'P')
-				mlx->config->animation = true;
-		}
 		iterations++;
 	}
 	return (dda);
@@ -118,7 +114,8 @@ void	draw_line(t_mlx *mlx, t_raycast info, int line, t_dda *dda)
 	{
 		if (y < info.start && (uint32_t)y < mlx->img->height && (uint32_t)x < mlx->img->width)
 			mlx_put_pixel(mlx->img, ft_abs(x), y, mlx->config->floor);
-		else if (y >= info.start && y <= info.end && (uint32_t)y < mlx->img->height && (uint32_t)x < mlx->img->width)
+		else if (y >= info.start && y <= info.end
+				&& (uint32_t)y < mlx->img->height && (uint32_t)x < mlx->img->width)
 		{
 			put_sprite_to_img(mlx, x, dda, &info);
 			y = info.end;

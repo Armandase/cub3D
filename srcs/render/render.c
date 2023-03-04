@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:35:56 by adamiens          #+#    #+#             */
-/*   Updated: 2023/03/03 15:14:42 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/03/03 15:47:25 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	render(t_texture *config)
 
 	mlx.init = mlx_init(WIDTH, HEIGHT, "Cub3d", true);
 	mlx.config = config;
-	mlx.config->frame_id = 0;
 	mlx_set_cursor_mode(mlx.init, MLX_MOUSE_HIDDEN);
 	init_direction_vectors(&mlx);
 	init_raycast(&mlx);

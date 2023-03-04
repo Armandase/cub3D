@@ -1,6 +1,6 @@
 #include "../../includes/render.h"
 
-void	swap_axes(size_t ***array)
+void	swap_axes(u_int32_t ***array)
 {
 	int		x;
 	int		y;

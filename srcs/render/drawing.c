@@ -1,6 +1,6 @@
 #include "../../includes/render.h"
 
-size_t	get_color_from_img(mlx_image_t *img, int x, int y)
+uint32_t	get_color_from_img(mlx_image_t *img, int x, int y)
 {
 	uint8_t		*ret;
 	uint32_t	color;
