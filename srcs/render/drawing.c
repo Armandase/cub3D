@@ -2,17 +2,15 @@
 
 uint32_t	get_color_from_img(mlx_image_t *img, int x, int y)
 {
-	uint8_t		*ret;
 	uint32_t	color;
-	int			r;
-	int			g;
-	int			b;
+	uint8_t		r;
+	uint8_t		g;
+	uint8_t		b;
 
-	ret = &img->pixels[(y * img->width + x) * sizeof(uint32_t)];
-	r = *(ret++);
-	g = *(ret++);
-	b = *(ret++);
-	color = (r << 24) + (g << 16) + (b << 8);
+	r = img->pixels[(y * img->width + x) * 4];
+	g = img->pixels[(y * img->width + x) * 4 + 1];
+	b = img->pixels[(y * img->width + x) * 4 + 2];
+	color = (r << 24) | (g << 16) | (b << 8) | 0xFF;
 	printf("Color: %d\n", color);
 	return (color);
 }
