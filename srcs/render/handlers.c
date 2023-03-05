@@ -68,6 +68,7 @@ void	handle_key(void	*param)
 		mlx_terminate(mlx->init);
 		free_texture(mlx->config);
 		free(mlx->init);
+		exit(0);
 	}
 	if (mlx_is_key_down(mlx->init, MLX_KEY_W))
 	{
