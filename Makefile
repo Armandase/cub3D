@@ -6,7 +6,8 @@ SRCS		= srcs/main.c srcs/utils_overall.c\
 			  srcs/parsing/verif_map.c\
 			  srcs/render/render.c srcs/render/handlers.c\
 			  srcs/render/raycasting.c srcs/render/drawing.c\
-			  srcs/render/utils.c srcs/render/texture.c
+			  srcs/render/utils.c srcs/render/texture.c\
+			  srcs/render/minimap.c
 CC			= clang
 LIBMLX		= libs/MLX42
 LIBS        = -Llibs/libft -lft $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm

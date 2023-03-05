@@ -146,4 +146,5 @@ void	raycasting(t_mlx *mlx)
 		draw_line(mlx, info, i, &dda);
 		i++;
 	}
+	minimap(mlx);
 }

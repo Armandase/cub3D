@@ -15,6 +15,7 @@
 # define MAX_ITERATIONS 2500
 # define LEFT 1
 # define RIGHT 2
+# define SQUARE_SIZE 5
 
 void	render(t_texture *config);
 int		destroy_win(t_mlx *mlx);
@@ -29,5 +30,6 @@ void	put_sprite_to_img(t_mlx *mlx, int x, t_dda *dda, t_raycast *info);
 void	put_sprite_to_img_animation(t_mlx *mlx, int x, t_dda *dda,
 			t_raycast *info);
 void	rotate_vectors(t_mlx *mlx, int flag);
+void	minimap(t_mlx *mlx);
 
 #endif
