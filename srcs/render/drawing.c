@@ -11,7 +11,6 @@ size_t	get_color_from_img(mlx_image_t *img, int x, int y)
 	g = img->pixels[(y * img->width + x) * 4 + 1];
 	b = img->pixels[(y * img->width + x) * 4 + 2];
 	color = (r << 24) | (g << 16) | (b << 8) | 0xFF;
-	printf("Color: %d\n", color);
 	return (color);
 }
 
@@ -27,8 +26,6 @@ void	iter_in_sprite(t_raycast *info, t_mlx *mlx, t_dda *dda, int x)
 		tex_y = (int)info->tex_pos % (63);
 		info->tex_pos += info->step;
 		color = mlx->config->img_tab[dda->orientation][tex_y][info->tex_x];
-		if (dda->side == 1)
-			color = (color >> 1) & 8355711;
 		mlx_put_pixel(mlx->img, x, y, color);
 		y++;
 	}
