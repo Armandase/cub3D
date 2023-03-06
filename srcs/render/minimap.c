@@ -1,6 +1,6 @@
 #include "../../includes/render.h"
 
-void	draw_square(t_mlx *mlx, int x, int y, int color)
+void	draw_square(t_mlx *mlx, int x, int y, long int color)
 {
 	int	i;
 	int	j;
