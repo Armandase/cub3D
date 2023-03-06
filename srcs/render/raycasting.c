@@ -42,12 +42,10 @@ void	init_dda(t_dda *dda, t_raycast *info, t_mlx *mlx)
 t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 {
 	bool	hit;
-	int		iterations;
 
 	init_dda(dda, info, mlx);
 	hit = false;
-	iterations = 0;
-	while (hit == false && iterations < MAX_ITERATIONS)
+	while (hit == false)
 	{
 		if (dda->side_dist_x < dda->side_dist_y)
 		{
@@ -69,7 +67,6 @@ t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 			if (mlx->config->map[dda->map_y][dda->map_x] == 'P')
 				mlx->config->animation = true;
 		}
-		iterations++;
 	}
 	return (dda);
 }
@@ -98,6 +95,8 @@ void	send_rays(t_mlx *mlx, t_raycast *info, t_dda *dda)
 		dda->perp_wall_dist = dda->side_dist_x - dda->delta_dist_x;
 	else
 		dda->perp_wall_dist = dda->side_dist_y - dda->delta_dist_y;
+	if (dda->perp_wall_dist == 0)
+		dda->perp_wall_dist = 1e30;
 	dda->wall_height = (int)((double)HEIGHT / dda->perp_wall_dist);
 	info->start = -(dda->wall_height) / 2 + HEIGHT / 2;
 	if (info->start < 0)
