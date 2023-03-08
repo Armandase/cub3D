@@ -65,6 +65,7 @@ void	handle_key(void	*param)
 	tmp_plane_y = mlx->config->plane_y * MOVEMENT_SPEED;
 	if (mlx_is_key_down(mlx->init, MLX_KEY_ESCAPE))
 	{
+		mlx_close_window(mlx->init);
 		mlx_terminate(mlx->init);
 		free_texture(mlx->config);
 		free(mlx->init);
