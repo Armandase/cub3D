@@ -39,7 +39,7 @@ void	get_color(t_texture *config, char *buf, char way, int fd)
 		config->ceiling = convert_str_rgb_to_int(colors, *config, buf, fd);
 }
 
-int	check_config(t_texture *config, char *tmp, int fd)
+int	check_config(t_texture *config, char *tmp, int fd, char *buf)
 {
 	int	ret;
 
@@ -61,9 +61,11 @@ int	check_config(t_texture *config, char *tmp, int fd)
 		get_color(config, tmp, 'C', fd);
 	else
 	{
-		get_map(config, tmp, fd);
+		ft_free((void *)&tmp);
+		get_map(config, buf, fd);
 		return (-1);
 	}
+	ft_free((void *)&buf);
 	ft_free((void *)&tmp);
 	return (ret);
 }
@@ -80,8 +82,7 @@ void	configuration(int fd, t_texture *config)
 		if (!buf)
 			free_texture_exit(*config, buf, fd);
 		tmp = ft_strtrim(buf, " \n");
-		ft_free((void *)&buf);
-		ret = check_config(config, tmp, fd);
+		ret = check_config(config, tmp, fd, buf);
 		if (ret == -1)
 			break ;
 		else if (ret > 0)

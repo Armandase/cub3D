@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:01:52 by adamiens          #+#    #+#             */
-/*   Updated: 2023/02/20 09:52:28 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:24:25 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ void	get_map(t_texture *config, char *buf, int fd)
 	config->map = copy_map(fd, buf);
 	find_spawn(config);
 	if (verif_map(config) == false)
-		print_error_exit("Invalid map\n");
+	{
+		free_strs_texture_exit(config, "Invalid map\n");
+	}
 	verif_texture(config);
 }

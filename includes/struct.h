@@ -15,6 +15,7 @@ enum e_orientation
 typedef struct s_texture
 {
 	uint32_t	**img_tab[4];
+	bool		animation;
 	char		*no;
 	char		*so;
 	char		*we;
