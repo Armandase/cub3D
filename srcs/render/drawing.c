@@ -1,6 +1,6 @@
 #include "../../includes/render.h"
 
-size_t	get_color_from_img(mlx_image_t *img, int x, int y)
+uint32_t	get_color_from_img(mlx_image_t *img, int x, int y)
 {
 	uint32_t	color;
 	uint8_t		r;
@@ -25,7 +25,10 @@ void	iter_in_sprite(t_raycast *info, t_mlx *mlx, t_dda *dda, int x)
 	{
 		tex_y = (int)info->tex_pos % (63);
 		info->tex_pos += info->step;
-		color = mlx->config->img_tab[dda->orientation][tex_y][info->tex_x];
+		if (mlx->config->door == true)
+			color = mlx->config->img_door[tex_y][info->tex_x];
+		else
+			color = mlx->config->img_tab[dda->orientation][tex_y][info->tex_x];
 		mlx_put_pixel(mlx->img, x, y, color);
 		y++;
 	}

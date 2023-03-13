@@ -50,6 +50,13 @@ void	rotate_vectors(t_mlx *mlx, int flag)
 	mlx->config->plane_y = sin(angle) * plane_x + cos(angle) * plane_y;
 }
 
+bool	check_cell(char cell, char orientation)
+{
+	if (cell == '0' || cell == orientation || cell == 'd')
+		return (true);
+	return (false);
+}
+
 void	handle_key(void	*param)
 {
 	t_mlx	*mlx;
@@ -73,38 +80,38 @@ void	handle_key(void	*param)
 	}
 	if (mlx_is_key_down(mlx->init, MLX_KEY_W))
 	{
-		if (mlx->config->map[(int)mlx->config->pos_y]
-			[(int)(mlx->config->pos_x + tmp_dir_x)] == '0')
+		if (check_cell(mlx->config->map[(int)mlx->config->pos_y]
+			[(int)(mlx->config->pos_x + tmp_dir_x)], mlx->config->orientation) == true)
 			mlx->config->pos_x += tmp_dir_x;
-		if (mlx->config->map[(int)(mlx->config->pos_y + tmp_dir_y)]
-			[(int)mlx->config->pos_x] == '0')
+		if (check_cell(mlx->config->map[(int)(mlx->config->pos_y + tmp_dir_y)]
+			[(int)mlx->config->pos_x], mlx->config->orientation) == true)
 			mlx->config->pos_y += tmp_dir_y;
 	}
 	if (mlx_is_key_down(mlx->init, MLX_KEY_S))
 	{
-		if (mlx->config->map[(int)mlx->config->pos_y]
-			[(int)(mlx->config->pos_x - tmp_dir_x)] == '0')
+		if (check_cell(mlx->config->map[(int)mlx->config->pos_y]
+			[(int)(mlx->config->pos_x - tmp_dir_x)], mlx->config->orientation) == true)
 			mlx->config->pos_x -= tmp_dir_x;
-		if (mlx->config->map[(int)(mlx->config->pos_y - tmp_dir_y)]
-			[(int)mlx->config->pos_x] == '0')
+		if (check_cell(mlx->config->map[(int)(mlx->config->pos_y - tmp_dir_y)]
+			[(int)mlx->config->pos_x], mlx->config->orientation) == true)
 			mlx->config->pos_y -= tmp_dir_y;
 	}
 	if (mlx_is_key_down(mlx->init, MLX_KEY_D))
 	{
-		if (mlx->config->map[(int)mlx->config->pos_y]
-			[(int)(mlx->config->pos_x + tmp_plane_x)] == '0')
+		if (check_cell(mlx->config->map[(int)mlx->config->pos_y]
+			[(int)(mlx->config->pos_x + tmp_plane_x)], mlx->config->orientation) == true)
 			mlx->config->pos_x += tmp_plane_x;
-		if (mlx->config->map[(int)(mlx->config->pos_y + tmp_plane_y)]
-			[(int)mlx->config->pos_x] == '0')
+		if (check_cell(mlx->config->map[(int)(mlx->config->pos_y + tmp_plane_y)]
+			[(int)mlx->config->pos_x], mlx->config->orientation) == true)
 			mlx->config->pos_y += tmp_plane_y;
 	}
 	if (mlx_is_key_down(mlx->init, MLX_KEY_A))
 	{
-		if (mlx->config->map[(int)mlx->config->pos_y]
-			[(int)(mlx->config->pos_x - tmp_plane_x)] == '0')
+		if (check_cell(mlx->config->map[(int)mlx->config->pos_y]
+			[(int)(mlx->config->pos_x - tmp_plane_x)], mlx->config->orientation) == true)
 			mlx->config->pos_x -= tmp_plane_x;
-		if (mlx->config->map[(int)(mlx->config->pos_y - tmp_plane_y)]
-			[(int)mlx->config->pos_x] == '0')
+		if (check_cell(mlx->config->map[(int)(mlx->config->pos_y - tmp_plane_y)]
+			[(int)mlx->config->pos_x], mlx->config->orientation) == true)
 			mlx->config->pos_y -= tmp_plane_y;
 	}
 	if (mlx_is_key_down(mlx->init, MLX_KEY_LEFT))

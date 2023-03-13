@@ -61,11 +61,11 @@ t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 		}
 		if (dda->map_x > -1 && dda->map_y > -1 && mlx->config->map[dda->map_y]
 			&& (mlx->config->map[dda->map_y][dda->map_x] == '1'
-			|| mlx->config->map[dda->map_y][dda->map_x] == 'P'))
+			|| mlx->config->map[dda->map_y][dda->map_x] == 'D'))
 		{
 			hit = true;
-			if (mlx->config->map[dda->map_y][dda->map_x] == 'P')
-				mlx->config->animation = true;
+			if (mlx->config->map[dda->map_y][dda->map_x] == 'D')
+				mlx->config->door = true;
 		}
 	}
 	return (dda);
@@ -139,6 +139,7 @@ void	raycasting(t_mlx *mlx)
 	i = 0;
 	while (i <= WIDTH)
 	{
+		mlx->config->door = false;
 		camera = 2 * i / (double)WIDTH - 1;
 		info.ray_dir_x = mlx->config->dir_x + mlx->config->plane_x * camera;
 		info.ray_dir_y = mlx->config->dir_y + mlx->config->plane_y * camera;
