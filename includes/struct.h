@@ -17,6 +17,8 @@ typedef struct s_texture
 	uint32_t	**img_tab[4];
 	uint32_t	**img_door;
 	bool		door;
+	bool		door_opened;
+	bool		middle;
 	char		*no;
 	char		*so;
 	char		*we;

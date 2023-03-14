@@ -63,9 +63,11 @@ void	texture_to_tab(t_texture *config, t_mlx *mlx)
 			xpm = mlx_load_xpm42(config->we);
 		img = mlx_texture_to_image(mlx->init, &xpm->texture);
 		copy_texture_from_img_to_array(img, &config->img_tab[i], mlx);
+		mlx_delete_texture(&xpm->texture);
 		i++;
 	}
 	xpm = mlx_load_xpm42("assets/door.xpm42");
 	img = mlx_texture_to_image(mlx->init, &xpm->texture);
+	mlx_delete_texture(&xpm->texture);
 	copy_texture_from_img_to_array(img, &config->img_door, mlx);
 }

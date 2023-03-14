@@ -61,11 +61,25 @@ t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 		}
 		if (dda->map_x > -1 && dda->map_y > -1 && mlx->config->map[dda->map_y]
 			&& (mlx->config->map[dda->map_y][dda->map_x] == '1'
-			|| mlx->config->map[dda->map_y][dda->map_x] == 'D'))
+			|| mlx->config->map[dda->map_y][dda->map_x] == 'D'
+			|| mlx->config->map[dda->map_y][dda->map_x] == 'd'))
 		{
 			hit = true;
+			if (mlx->config->map[dda->map_y][dda->map_x] == 'D' && mlx->config->door_opened == true&& mlx->config->middle == true)
+			{
+				mlx->config->map[dda->map_y][dda->map_x] = 'd';
+				mlx->config->door_opened = false;
+			}
+			else if (mlx->config->map[dda->map_y][dda->map_x] == 'd' && mlx->config->door_opened == true && mlx->config->middle == true)
+			{
+				mlx->config->map[dda->map_y][dda->map_x] = 'D';
+				mlx->config->door_opened = false;
+				hit = false;
+			}
 			if (mlx->config->map[dda->map_y][dda->map_x] == 'D')
 				mlx->config->door = true;
+			else if (mlx->config->map[dda->map_y][dda->map_x] == 'd')
+				hit = false;
 		}
 	}
 	return (dda);
@@ -139,6 +153,9 @@ void	raycasting(t_mlx *mlx)
 	i = 0;
 	while (i <= WIDTH)
 	{
+		mlx->config->middle = false;
+		if (i == WIDTH / 2)
+			mlx->config->middle = true;
 		mlx->config->door = false;
 		camera = 2 * i / (double)WIDTH - 1;
 		info.ray_dir_x = mlx->config->dir_x + mlx->config->plane_x * camera;

@@ -1,19 +1,12 @@
 #include "../../includes/render.h"
 
-void	free_img_tab(u_int32_t **tab[4])
+void	free_img_tab(u_int32_t **tab)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (i < 4)
+	while (i < 64)
 	{
-		j = 0;
-		while (j < 64)
-		{
-			free(tab[i][j]);
-			j++;
-		}
 		free(tab[i]);
 		i++;
 	}
@@ -30,7 +23,11 @@ static void	free_texture(t_texture *config)
 	if (config->ea != NULL)
 		ft_free((void *)&config->ea);
 	ft_free_strs(config->map);
-	free_img_tab(config->img_tab);
+	free_img_tab(config->img_tab[0]);
+	free_img_tab(config->img_tab[1]);
+	free_img_tab(config->img_tab[2]);
+	free_img_tab(config->img_tab[3]);
+	free_img_tab(config->img_door);
 }
 
 void	rotate_vectors(t_mlx *mlx, int flag)
@@ -50,14 +47,28 @@ void	rotate_vectors(t_mlx *mlx, int flag)
 	mlx->config->plane_y = sin(angle) * plane_x + cos(angle) * plane_y;
 }
 
-bool	check_cell(char cell, char orientation)
+bool	check_cell(char cell, t_texture *config)
 {
-	if (cell == '0' || cell == orientation || cell == 'd')
+	if (cell == '0' || cell == config->orientation || cell == 'd')
 		return (true);
 	return (false);
 }
 
-void	handle_key(void	*param)
+void	handle_key_released(mlx_key_data_t keydata, void *param)
+{
+	t_mlx	*mlx;
+
+	mlx = param;
+	if (keydata.key == MLX_KEY_E && keydata.action == MLX_RELEASE)
+	{
+		if (mlx->config->door_opened == false)
+			mlx->config->door_opened = true;
+		else
+			mlx->config->door_opened = false;
+	}
+}
+
+void	handle_key(void *param)
 {
 	t_mlx	*mlx;
 	double	tmp_dir_x;
@@ -72,7 +83,7 @@ void	handle_key(void	*param)
 	tmp_plane_y = mlx->config->plane_y * MOVEMENT_SPEED;
 	if (mlx_is_key_down(mlx->init, MLX_KEY_ESCAPE))
 	{
-		mlx_close_window(mlx->init);
+		mlx_delete_image(mlx->init, mlx->img);
 		mlx_terminate(mlx->init);
 		free_texture(mlx->config);
 		//free(mlx->init);
@@ -81,37 +92,37 @@ void	handle_key(void	*param)
 	if (mlx_is_key_down(mlx->init, MLX_KEY_W))
 	{
 		if (check_cell(mlx->config->map[(int)mlx->config->pos_y]
-			[(int)(mlx->config->pos_x + tmp_dir_x)], mlx->config->orientation) == true)
+			[(int)(mlx->config->pos_x + tmp_dir_x)], mlx->config) == true)
 			mlx->config->pos_x += tmp_dir_x;
 		if (check_cell(mlx->config->map[(int)(mlx->config->pos_y + tmp_dir_y)]
-			[(int)mlx->config->pos_x], mlx->config->orientation) == true)
+			[(int)mlx->config->pos_x], mlx->config) == true)
 			mlx->config->pos_y += tmp_dir_y;
 	}
 	if (mlx_is_key_down(mlx->init, MLX_KEY_S))
 	{
 		if (check_cell(mlx->config->map[(int)mlx->config->pos_y]
-			[(int)(mlx->config->pos_x - tmp_dir_x)], mlx->config->orientation) == true)
+			[(int)(mlx->config->pos_x - tmp_dir_x)], mlx->config) == true)
 			mlx->config->pos_x -= tmp_dir_x;
 		if (check_cell(mlx->config->map[(int)(mlx->config->pos_y - tmp_dir_y)]
-			[(int)mlx->config->pos_x], mlx->config->orientation) == true)
+			[(int)mlx->config->pos_x], mlx->config) == true)
 			mlx->config->pos_y -= tmp_dir_y;
 	}
 	if (mlx_is_key_down(mlx->init, MLX_KEY_D))
 	{
 		if (check_cell(mlx->config->map[(int)mlx->config->pos_y]
-			[(int)(mlx->config->pos_x + tmp_plane_x)], mlx->config->orientation) == true)
+			[(int)(mlx->config->pos_x + tmp_plane_x)], mlx->config) == true)
 			mlx->config->pos_x += tmp_plane_x;
 		if (check_cell(mlx->config->map[(int)(mlx->config->pos_y + tmp_plane_y)]
-			[(int)mlx->config->pos_x], mlx->config->orientation) == true)
+			[(int)mlx->config->pos_x], mlx->config) == true)
 			mlx->config->pos_y += tmp_plane_y;
 	}
 	if (mlx_is_key_down(mlx->init, MLX_KEY_A))
 	{
 		if (check_cell(mlx->config->map[(int)mlx->config->pos_y]
-			[(int)(mlx->config->pos_x - tmp_plane_x)], mlx->config->orientation) == true)
+			[(int)(mlx->config->pos_x - tmp_plane_x)], mlx->config) == true)
 			mlx->config->pos_x -= tmp_plane_x;
 		if (check_cell(mlx->config->map[(int)(mlx->config->pos_y - tmp_plane_y)]
-			[(int)mlx->config->pos_x], mlx->config->orientation) == true)
+			[(int)mlx->config->pos_x], mlx->config) == true)
 			mlx->config->pos_y -= tmp_plane_y;
 	}
 	if (mlx_is_key_down(mlx->init, MLX_KEY_LEFT))

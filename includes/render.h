@@ -19,7 +19,8 @@
 
 void		render(t_texture *config);
 int			destroy_win(t_mlx *mlx);
-void		handle_key(void *param);
+void		handle_key_released(mlx_key_data_t keydata, void *param);
+void		handle_key(void	*param);
 void		mouse_hook_camera(void *data);
 void		raycasting(t_mlx *mlx);
 double		ft_abs(double nb);

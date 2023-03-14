@@ -85,6 +85,7 @@ void	render(t_texture *config)
 	mlx_image_to_window(mlx.init, mlx.img, 0, 0);
 	texture_to_tab(mlx.config, &mlx);
 	raycasting(&mlx);
+	mlx_key_hook(mlx.init, &handle_key_released, &mlx);
 	mlx_loop_hook(mlx.init, handle_key, &mlx);
 	mlx_loop(mlx.init);
 }
