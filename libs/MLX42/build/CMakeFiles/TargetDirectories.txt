@@ -1,3 +1,0 @@
-/nfs/homes/adamiens/42/cub3D/libs/MLX42/build/CMakeFiles/rebuild_cache.dir
-/nfs/homes/adamiens/42/cub3D/libs/MLX42/build/CMakeFiles/edit_cache.dir
-/nfs/homes/adamiens/42/cub3D/libs/MLX42/build/CMakeFiles/mlx42.dir
