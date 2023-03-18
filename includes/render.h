@@ -32,5 +32,7 @@ void		put_sprite_to_img_animation(t_mlx *mlx, int x, t_dda *dda,
 			t_raycast *info);
 void		rotate_vectors(t_mlx *mlx, int flag);
 void		minimap(t_mlx *mlx);
+void		anim(t_mlx *mlx);
+void		get_animation(t_texture *config, t_mlx *mlx);
 
 #endif

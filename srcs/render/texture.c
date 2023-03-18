@@ -1,13 +1,13 @@
 #include "../../includes/render.h"
 
-void	swap_axes(u_int32_t ***array)
+void	swap_axes(u_int32_t ***array, int max)
 {
 	int			x;
 	int			y;
 	uint32_t	tmp;
 
 	x = 0;
-	while (x < 64)
+	while (x < max)
 	{
 		y = 0;
 		while (y < x)
@@ -21,25 +21,25 @@ void	swap_axes(u_int32_t ***array)
 	}
 }
 
-void	copy_texture_from_img_to_array(mlx_image_t *img, uint32_t ***img_tab, t_mlx *mlx)
+void	copy_texture_from_img_to_array(mlx_image_t *img, uint32_t ***img_tab, t_mlx *mlx, int max)
 {
 	int		x;
 	int		y;
 
 	x = 0;
-	(*img_tab) = malloc(sizeof(uint32_t *) * 64);
-	while (x < 64)
+	(*img_tab) = malloc(sizeof(uint32_t *) * max);
+	while (x < max)
 	{
 		y = 0;
-		(*img_tab)[x] = malloc(sizeof(uint32_t) * 64);
-		while (y < 64)
+		(*img_tab)[x] = malloc(sizeof(uint32_t) * max);
+		while (y < max)
 		{
 			(*img_tab)[x][y] = get_color_from_img(img, x, y);
 			y = y + 1;
 		}
 		x = x + 1;
 	}
-	swap_axes(img_tab);
+	swap_axes(img_tab, max);
 	if (img)
 		mlx_delete_image(mlx->init, img);
 }
@@ -62,12 +62,12 @@ void	texture_to_tab(t_texture *config, t_mlx *mlx)
 		else if (i == 3)
 			xpm = mlx_load_xpm42(config->we);
 		img = mlx_texture_to_image(mlx->init, &xpm->texture);
-		copy_texture_from_img_to_array(img, &config->img_tab[i], mlx);
+		copy_texture_from_img_to_array(img, &config->img_tab[i], mlx, 64);
 		mlx_delete_texture(&xpm->texture);
 		i++;
 	}
 	xpm = mlx_load_xpm42("assets/door.xpm42");
 	img = mlx_texture_to_image(mlx->init, &xpm->texture);
 	mlx_delete_texture(&xpm->texture);
-	copy_texture_from_img_to_array(img, &config->img_door, mlx);
+	copy_texture_from_img_to_array(img, &config->img_door, mlx, 64);
 }

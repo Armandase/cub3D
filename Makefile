@@ -3,11 +3,11 @@ SRCS		= srcs/main.c srcs/utils_overall.c\
 			  srcs/parsing/parsing.c srcs/parsing/extension.c\
 			  srcs/parsing/map_check.c srcs/parsing/atoi_protect.c \
 			  srcs/parsing/texture_utils.c srcs/parsing/get_map.c\
-			  srcs/parsing/verif_map.c\
+			  srcs/parsing/verif_map.c srcs/parsing/get_animation.c\
 			  srcs/render/render.c srcs/render/handlers.c\
 			  srcs/render/raycasting.c srcs/render/drawing.c\
 			  srcs/render/utils.c srcs/render/texture.c\
-			  srcs/render/minimap.c
+			  srcs/render/minimap.c srcs/render/animation.c
 CC			= clang
 LIBMLX		= libs/MLX42
 LIBS        = -Llibs/libft -lft $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm

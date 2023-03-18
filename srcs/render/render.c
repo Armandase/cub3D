@@ -76,6 +76,7 @@ void	render(t_texture *config)
 
 	mlx.init = mlx_init(WIDTH, HEIGHT, "Cub3d", true);
 	mlx.config = config;
+	get_animation(config, &mlx);
 	mlx_set_cursor_mode(mlx.init, MLX_MOUSE_HIDDEN);
 	init_direction_vectors(&mlx);
 	init_raycast(&mlx);

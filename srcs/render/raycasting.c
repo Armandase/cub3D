@@ -165,4 +165,5 @@ void	raycasting(t_mlx *mlx)
 		i++;
 	}
 	minimap(mlx);
+	anim(mlx);
 }
