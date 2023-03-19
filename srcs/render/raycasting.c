@@ -65,7 +65,7 @@ t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 			|| mlx->config->map[dda->map_y][dda->map_x] == 'd'))
 		{
 			hit = true;
-			if (mlx->config->map[dda->map_y][dda->map_x] == 'D' && mlx->config->door_opened == true&& mlx->config->middle == true)
+			if (mlx->config->map[dda->map_y][dda->map_x] == 'D' && mlx->config->door_opened == true && mlx->config->middle == true)
 			{
 				mlx->config->map[dda->map_y][dda->map_x] = 'd';
 				mlx->config->door_opened = false;

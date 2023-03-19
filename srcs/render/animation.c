@@ -39,8 +39,8 @@ void	render_animation(t_mlx *mlx, int img)
 
 void	anim(t_mlx *mlx)
 {
-	static double	time;
-	static int		i;
+	static double	time = 0.0;
+	static int		i = 0;
 
 	if (mlx->config->anim && mlx_get_time() - time > 0.2)
 	{

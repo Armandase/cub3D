@@ -60,4 +60,5 @@ void	get_animation(t_texture *config, t_mlx *mlx)
 	get_hourglass("./assets/hourglass2.xpm42", config, mlx, 2);
 	get_hourglass("./assets/hourglass3.xpm42", config, mlx, 3);
 	get_hourglass("./assets/hourglass4.xpm42", config, mlx, 4);
+	config->anim = 0;
 }
