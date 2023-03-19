@@ -34,5 +34,6 @@ void		rotate_vectors(t_mlx *mlx, int flag);
 void		minimap(t_mlx *mlx);
 void		anim(t_mlx *mlx);
 void		get_animation(t_texture *config, t_mlx *mlx);
+void		hourglass(t_mlx *mlx);
 
 #endif

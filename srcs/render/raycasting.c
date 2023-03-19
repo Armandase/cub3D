@@ -166,4 +166,5 @@ void	raycasting(t_mlx *mlx)
 	}
 	minimap(mlx);
 	anim(mlx);
+	hourglass(mlx);
 }

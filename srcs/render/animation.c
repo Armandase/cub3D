@@ -61,3 +61,42 @@ void	anim(t_mlx *mlx)
 		i = 0;
 	render_animation(mlx, i);
 }
+
+void	render_hourglass(t_mlx *mlx, int img)
+{
+	int		i;
+	int		j;
+	int		scale;
+
+	scale = 512;
+	i = WIDTH - scale;
+	while (i < WIDTH)
+	{
+		j = 0;
+		while (j < scale)
+		{
+			if (mlx->config->hourglass[img][j][(i - WIDTH + scale)] >> 24)
+				mlx_put_pixel(mlx->img,
+					i * 0.25 + WIDTH - scale * 0.5,
+					j * 0.25,
+					mlx->config->hourglass[img][j][(i - WIDTH + scale)]);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	hourglass(t_mlx *mlx)
+{
+	static double	time = 0.0;
+	static int		i = 0;
+
+	if (mlx_get_time() - time > 0.2)
+	{
+		time = mlx_get_time();
+		i++;
+		if (i == 5)
+			i = 0;
+	}
+	render_hourglass(mlx, i);
+}
