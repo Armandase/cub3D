@@ -47,6 +47,7 @@ typedef struct s_mlx
 	mlx_image_t	*img;
 	int			img_width;
 	int			img_height;
+	xpm_t		*icon;
 }	t_mlx;
 
 typedef struct s_raycast

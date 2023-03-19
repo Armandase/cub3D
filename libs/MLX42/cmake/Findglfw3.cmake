@@ -13,15 +13,15 @@
 set(_glfw3_HEADER_SEARCH_DIRS
 "/usr/include"
 "/usr/local/include"
-"C:/Program Files/glfw/include"
-"$ENV{HOME}/.brew/include/"
+"C:/Program Files/GLFW"
+"$ENV{HOME}/.brew/lib/"
 )
 
 # Possbile library locations
 set(_glfw3_LIB_SEARCH_DIRS
 "/usr/lib"
 "/usr/local/lib"
-"C:/Program Files/glfw"
+"C:/Program Files/GLFW"
 "$ENV{HOME}/.brew/lib/"
 )
 

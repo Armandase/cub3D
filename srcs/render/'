@@ -1,5 +1,4 @@
 #include "../../includes/render.h"
-#include <stdio.h>
 
 void	free_render_exit(t_texture *config, t_mlx *mlx, char *error)
 {
@@ -77,8 +76,7 @@ void	render(t_texture *config)
 
 	mlx.init = mlx_init(WIDTH, HEIGHT, "Cub3d", true);
 	mlx.icon = mlx_load_xpm42(config->so);
-	mlx_set_icon(mlx.init, &mlx.icon->texture);
-	mlx_delete_xpm42(mlx.icon);
+	mlx_set_icon(mlx.init, &mlx.icon.texture);
 	mlx.config = config;
 	get_animation(config, &mlx);
 	mlx_set_cursor_mode(mlx.init, MLX_MOUSE_HIDDEN);
