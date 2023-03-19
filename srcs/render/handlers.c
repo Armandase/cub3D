@@ -129,6 +129,8 @@ void	handle_key(void *param)
 		rotate_vectors(mlx, LEFT);
 	if (mlx_is_key_down(mlx->init, MLX_KEY_RIGHT))
 		rotate_vectors(mlx, RIGHT);
+	if (mlx_is_key_down(mlx->init, MLX_KEY_SPACE))
+		mlx->config->anim = 1;
 	mouse_hook_camera(mlx);
 	raycasting(mlx);
 }

@@ -42,12 +42,22 @@ void	anim(t_mlx *mlx)
 	static double	time;
 	static int		i;
 
-	if (mlx_get_time() - time > 0.2)
+	if (mlx->config->anim && mlx_get_time() - time > 0.2)
 	{
 		time = mlx_get_time();
 		i++;
+		mlx->config->anim++;
+		if (mlx->config->anim == 3)
+		{
+			mlx->config->anim = 0;
+			i = 2;
+		}
 		if (i == 3)
 			i = 0;
 	}
+	if (mlx_get_time() - time > 0.8)
+		i = 1;
+	if (mlx_get_time() - time > 1)
+		i = 0;
 	render_animation(mlx, i);
 }
