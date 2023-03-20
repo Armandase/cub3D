@@ -65,5 +65,7 @@ bool	verif_map(t_texture *config)
 		}
 		i++;
 	}
+	if (!config->orientation)
+		valid = false;
 	return (valid);
 }

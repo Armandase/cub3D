@@ -77,6 +77,7 @@ void	configuration(int fd, t_texture *config)
 	char	*tmp;
 	int		ret;	
 
+	config->orientation = 0;
 	while (1)
 	{
 		buf = get_next_line(fd);
