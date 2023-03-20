@@ -59,7 +59,8 @@ int	check_config(t_texture *config, char *tmp, int fd, char *buf)
 		get_color(config, tmp, 'F', fd);
 	else if (ft_strncmp(tmp, "C", 1) == 0 && config->ceiling == -1)
 		get_color(config, tmp, 'C', fd);
-	else
+	else if (config->no && config->so && config->we && config->ea
+		&& config->floor != -1 && config->ceiling != -1)
 	{
 		ft_free((void *)&tmp);
 		get_map(config, buf, fd);
