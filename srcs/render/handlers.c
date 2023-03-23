@@ -61,6 +61,8 @@ void	handle_key_released(mlx_key_data_t keydata, void *param)
 	mlx = param;
 	if (keydata.key == MLX_KEY_E && keydata.action == MLX_RELEASE)
 	{
+		system("paplay assets/biden_blast.ogg &"); 
+		sleep(2);
 		if (mlx->config->door_opened == false)
 			mlx->config->door_opened = true;
 		else
@@ -132,7 +134,7 @@ void	handle_key(void *param)
 	if (mlx_is_key_down(mlx->init, MLX_KEY_SPACE))
 	{
 		mlx->config->anim = 1;
-		system("paplay assets/biden.ogg &"); 
+		system("paplay assets/biden_su.ogg &"); 
 	}
 	mouse_hook_camera(mlx);
 	raycasting(mlx);
