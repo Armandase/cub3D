@@ -130,7 +130,10 @@ void	handle_key(void *param)
 	if (mlx_is_key_down(mlx->init, MLX_KEY_RIGHT))
 		rotate_vectors(mlx, RIGHT);
 	if (mlx_is_key_down(mlx->init, MLX_KEY_SPACE))
+	{
 		mlx->config->anim = 1;
+		system("paplay assets/biden.ogg &"); 
+	}
 	mouse_hook_camera(mlx);
 	raycasting(mlx);
 }
