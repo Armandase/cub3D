@@ -19,12 +19,18 @@ char	**add_strs_back(char *to_add, char	**strs)
 
 	i = 0;
 	ret = malloc(sizeof(char *) * (ft_strlen_2d((const char **)strs) + 2));
+	if (!ret)
+		return (NULL);
 	while (strs[i])
 	{
 		ret[i] = ft_strdup(strs[i]);
+		if (!ret[i])
+			return (NULL);
 		i++;
 	}
 	ret[i] = ft_strdup(to_add);
+	if (!ret[i])
+		return (NULL);
 	ret[i + 1] = NULL;
 	ft_free_strs(strs);
 	ft_free((void *)&to_add);
@@ -95,14 +101,20 @@ char	**copy_map(int fd, char *first_line)
 	char	*to_add;
 
 	strs = malloc(sizeof(char *) * 1);
+	if (!strs)
+		return (NULL);
 	strs[0] = NULL;
 	strs = add_strs_back(first_line, strs);
+	if (!strs)
+		return (NULL);
 	while (1)
 	{
 		to_add = get_next_line(fd);
 		if (to_add == NULL)
 			break ;
 		strs = add_strs_back(to_add, strs);
+		if (!strs)
+			return (NULL);
 	}
 	close(fd);
 	return (strs);
@@ -111,10 +123,10 @@ char	**copy_map(int fd, char *first_line)
 void	get_map(t_texture *config, char *buf, int fd)
 {
 	config->map = copy_map(fd, buf);
+	if (!config->map)
+		free_strs_texture_exit(config, "memory allocation failed\n");
 	find_spawn(config);
 	if (verif_map(config) == false)
-	{
 		free_strs_texture_exit(config, "Invalid map\n");
-	}
 	verif_texture(config);
 }

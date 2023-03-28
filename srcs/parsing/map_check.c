@@ -22,15 +22,24 @@ void	get_color(t_texture *config, char *buf, char way, int fd)
 	char	*tmp;
 
 	colors = ft_split(buf, ' ');
+	if (!colors)
+		free_texture_exit(*config, buf, fd);
 	if (ft_strlen_2d((const char **)colors) != 2)
 	{
 		ft_free_strs(colors);
 		free_texture_exit(*config, buf, fd);
 	}
 	tmp = ft_strdup(colors[1]);
+	if (!tmp)
+	{
+		ft_free_strs(colors);
+		free_texture_exit(*config, buf, fd);
+	}
 	ft_free_strs(colors);
 	colors = ft_split(tmp, ',');
 	ft_free((void *)&tmp);
+	if (!colors)
+		free_texture_exit(*config, buf, fd);
 	if (ft_strlen_2d((const char **)colors) != 3)
 		free_texture_exit(*config, buf, fd);
 	if (way == 'F')
@@ -84,6 +93,11 @@ void	configuration(int fd, t_texture *config)
 		if (!buf)
 			free_texture_exit(*config, buf, fd);
 		tmp = ft_strtrim(buf, " \n");
+		if (!tmp)
+		{
+			free(buf);
+			free_texture_exit(*config, NULL, fd);
+		}
 		ret = check_config(config, tmp, fd, buf);
 		if (ret == -1)
 			break ;
