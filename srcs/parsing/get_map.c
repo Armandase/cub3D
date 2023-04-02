@@ -20,17 +20,26 @@ char	**add_strs_back(char *to_add, char	**strs)
 	i = 0;
 	ret = malloc(sizeof(char *) * (ft_strlen_2d((const char **)strs) + 2));
 	if (!ret)
+	{
+		ft_free_strs(strs);
 		return (NULL);
+	}
 	while (strs[i])
 	{
 		ret[i] = ft_strdup(strs[i]);
 		if (!ret[i])
+		{
+			ft_free_strs(strs);
 			return (NULL);
+		}
 		i++;
 	}
 	ret[i] = ft_strdup(to_add);
 	if (!ret[i])
+	{
+		ft_free_strs(strs);
 		return (NULL);
+	}
 	ret[i + 1] = NULL;
 	ft_free_strs(strs);
 	ft_free((void *)&to_add);
@@ -114,7 +123,7 @@ char	**copy_map(int fd, char *first_line)
 			break ;
 		strs = add_strs_back(to_add, strs);
 		if (!strs)
-			return (NULL);
+			break ;
 	}
 	close(fd);
 	return (strs);

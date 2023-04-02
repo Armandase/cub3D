@@ -1,0 +1,3 @@
+/home/armand/42/cub3D/libs/MLX42/build/CMakeFiles/mlx42.dir
+/home/armand/42/cub3D/libs/MLX42/build/CMakeFiles/edit_cache.dir
+/home/armand/42/cub3D/libs/MLX42/build/CMakeFiles/rebuild_cache.dir
