@@ -28,10 +28,14 @@ void	copy_texture_from_img_to_array(mlx_image_t *img, uint32_t ***img_tab, t_mlx
 
 	x = 0;
 	(*img_tab) = malloc(sizeof(uint32_t *) * max);
+	if (!*img_tab)
+		free_render_exit(mlx->config, mlx, "Malloc error\n");
 	while (x < max)
 	{
 		y = 0;
 		(*img_tab)[x] = malloc(sizeof(uint32_t) * max);
+		if (!*img_tab[x])
+			free_render_exit(mlx->config, mlx, "Malloc error\n");
 		while (y < max)
 		{
 			(*img_tab)[x][y] = get_color_from_img(img, x, y);
