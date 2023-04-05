@@ -1,11 +1,11 @@
 #include "../../includes/render.h"
 
-void	free_img_tab(u_int32_t **tab)
+void	free_img_tab(u_int32_t **tab, int len)
 {
 	int	i;
 
 	i = 0;
-	while (i < 64)
+	while (i < len)
 	{
 		free(tab[i]);
 		i++;
@@ -23,11 +23,19 @@ static void	free_texture(t_texture *config)
 	if (config->ea != NULL)
 		ft_free((void *)&config->ea);
 	ft_free_strs(config->map);
-	free_img_tab(config->img_tab[0]);
-	free_img_tab(config->img_tab[1]);
-	free_img_tab(config->img_tab[2]);
-	free_img_tab(config->img_tab[3]);
-	free_img_tab(config->img_door);
+	free_img_tab(config->img_tab[0], 64);
+	free_img_tab(config->img_tab[1], 64);
+	free_img_tab(config->img_tab[2], 64);
+	free_img_tab(config->img_tab[3], 64);
+	free_img_tab(config->img_anim[0], 128);
+	free_img_tab(config->img_anim[1], 128);
+	free_img_tab(config->img_anim[2], 128);
+	free_img_tab(config->hourglass[0], 512);
+	free_img_tab(config->hourglass[1], 512);
+	free_img_tab(config->hourglass[2], 512);
+	free_img_tab(config->hourglass[3], 512);
+	free_img_tab(config->hourglass[4], 512);
+	free_img_tab(config->img_door, 64);
 }
 
 void	rotate_vectors(t_mlx *mlx, int flag)
