@@ -45,6 +45,8 @@ t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 
 	init_dda(dda, info, mlx);
 	hit = false;
+	mlx->config->middle = false;
+	mlx->config->door_opened = false;
 	while (hit == false)
 	{
 		if (dda->side_dist_x < dda->side_dist_y)

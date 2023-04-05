@@ -11,7 +11,7 @@ SRCS		= srcs/main.c srcs/utils_overall.c\
 CC			= clang
 LIBMLX		= libs/MLX42
 LIBS        = -Llibs/libft -lft $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-CFLAGS		= -Wall -Werror -Wextra -g -Wno-conversion
+CFLAGS		= -Wall -Werror -Wextra -g -Wno-conversion -Ofast
 OBJS		= ${SRCS:.c=.o}
 
 all: libmlx ${NAME}

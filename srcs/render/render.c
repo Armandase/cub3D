@@ -76,7 +76,11 @@ void	render(t_texture *config)
 	t_mlx	mlx;
 
 	mlx.init = mlx_init(WIDTH, HEIGHT, "Cub3d", true);
+	if (mlx.init == NULL)
+		free_render_exit(config, &mlx, "Initialisation error\n");
 	mlx.icon = mlx_load_xpm42(config->so);
+	if (mlx.icon == NULL)
+		free_render_exit(config, &mlx, "Icon error\n");
 	mlx_set_icon(mlx.init, &mlx.icon->texture);
 	mlx_delete_xpm42(mlx.icon);
 	mlx.config = config;
@@ -87,6 +91,8 @@ void	render(t_texture *config)
 	if (mlx.init == NULL)
 		free_render_exit(config, &mlx, "Initialisation error\n");
 	mlx.img = mlx_new_image(mlx.init, WIDTH, HEIGHT);
+	if (mlx.img == NULL)
+		free_render_exit(config, &mlx, "Image error\n");
 	mlx_image_to_window(mlx.init, mlx.img, 0, 0);
 	texture_to_tab(mlx.config, &mlx);
 	raycasting(&mlx);
