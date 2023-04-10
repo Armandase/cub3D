@@ -70,7 +70,6 @@ void	handle_key_released(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_E && keydata.action == MLX_RELEASE)
 	{
 		system("paplay assets/biden_blast.ogg &"); 
-		sleep(2);
 		if (mlx->config->door_opened == false)
 			mlx->config->door_opened = true;
 		else

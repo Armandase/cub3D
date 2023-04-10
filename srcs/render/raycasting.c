@@ -45,8 +45,6 @@ t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 
 	init_dda(dda, info, mlx);
 	hit = false;
-	mlx->config->middle = false;
-	mlx->config->door_opened = false;
 	while (hit == false)
 	{
 		if (dda->side_dist_x < dda->side_dist_y)
@@ -67,16 +65,16 @@ t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 			|| mlx->config->map[dda->map_y][dda->map_x] == 'd'))
 		{
 			hit = true;
-			if (mlx->config->map[dda->map_y][dda->map_x] == 'D' && mlx->config->door_opened == true && mlx->config->middle == true)
+			if (mlx->config->door_opened == true && mlx->config->middle == true)
 			{
-				mlx->config->map[dda->map_y][dda->map_x] = 'd';
+				if (mlx->config->map[dda->map_y][dda->map_x] == 'D')
+					mlx->config->map[dda->map_y][dda->map_x] = 'd';
+				else if (mlx->config->map[dda->map_y][dda->map_x] == 'd')
+				{
+					mlx->config->map[dda->map_y][dda->map_x] = 'D';
+					hit = false;
+				}
 				mlx->config->door_opened = false;
-			}
-			else if (mlx->config->map[dda->map_y][dda->map_x] == 'd' && mlx->config->door_opened == true && mlx->config->middle == true)
-			{
-				mlx->config->map[dda->map_y][dda->map_x] = 'D';
-				mlx->config->door_opened = false;
-				hit = false;
 			}
 			if (mlx->config->map[dda->map_y][dda->map_x] == 'D')
 				mlx->config->door = true;

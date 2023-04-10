@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:06:14 by adamiens          #+#    #+#             */
-/*   Updated: 2023/03/13 10:38:38 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/10 09:08:48 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ bool	check_char(const char **map, int i, int j, t_texture *config)
 	bool	valid;
 
 	valid = true;
-	if (map[i][j] != '1' && map[i][j] != '0' && ft_isspace(map[i][j])
-			== false && map[i][j] != config->orientation && map[i][j] != '\n'
-		&& map[i][j] != 'D')
+	if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'D' && ft_isspace(map[i][j])
+			== false && map[i][j] != config->orientation && map[i][j] != '\n')
 		valid = false;
 	else if (ft_isspace(map[i][j]) == true && !(map[i + 1] != NULL
 		&& (map[i + 1][j] == '1' || ft_isspace(map[i + 1][j]))))
@@ -30,12 +29,12 @@ bool	check_char(const char **map, int i, int j, t_texture *config)
 			valid = false;
 	}
 	else if (i == 0 && map[i][j] != '1' && ft_isspace(map[i][j]) == false
-			&& map[i][j] != 'D' && map[i][j] != '\n')
+			&& map[i][j] != '\n')
 		valid = false;
-	else if (map[i][j] == '0'
+	else if ((map[i][j] == '0' || map[i][j] == 'D')
 			&& (map[i][j + 1] == '\n' || map[i][j + 1] == ' '))
 		valid = false;
-	else if (ft_isspace(map[i][j]) && map[i][j + 1] == '0')
+	else if (ft_isspace(map[i][j]) && (map[i][j + 1] == '0' || map[i][j + 1] == 'D'))
 		valid = false;
 	else if (map[i][j] == '0' && !(map[i + 1] != NULL
 		&& (map[i + 1][j] == '1' || map[i + 1][j] == '0'
