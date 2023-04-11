@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_check.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/11 09:59:08 by adamiens          #+#    #+#             */
+/*   Updated: 2023/04/11 10:05:05 by adamiens         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/parsing.h"
 #include <fcntl.h>
 
@@ -31,10 +43,7 @@ void	get_color(t_texture *config, char *buf, char way, int fd)
 	}
 	tmp = ft_strdup(colors[1]);
 	if (!tmp)
-	{
-		ft_free_strs(colors);
 		free_texture_exit(*config, buf, fd);
-	}
 	ft_free_strs(colors);
 	colors = ft_split(tmp, ',');
 	ft_free((void *)&tmp);
@@ -53,10 +62,7 @@ int	check_config(t_texture *config, char *tmp, int fd, char *buf)
 	int	ret;
 
 	ret = 0;
-	if (ft_strlen(tmp) == 0)
-	{
-	}
-	else if (ft_strncmp(tmp, "NO", 2) == 0 && config->no == NULL)
+	if (ft_strncmp(tmp, "NO", 2) == 0 && config->no == NULL)
 		ret += copy_path_texture(&config->no, tmp);
 	else if (ft_strncmp(tmp, "SO", 2) == 0 && config->so == NULL)
 		ret += copy_path_texture(&config->so, tmp);
@@ -69,7 +75,7 @@ int	check_config(t_texture *config, char *tmp, int fd, char *buf)
 	else if (ft_strncmp(tmp, "C", 1) == 0 && config->ceiling == -1)
 		get_color(config, tmp, 'C', fd);
 	else if (config->no && config->so && config->we && config->ea
-		&& config->floor != -1 && config->ceiling != -1)
+		&& config->floor != -1 && config->ceiling != -1 && ft_strlen(tmp) != 0)
 	{
 		ft_free((void *)&tmp);
 		get_map(config, buf, fd);

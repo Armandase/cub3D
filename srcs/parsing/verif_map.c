@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:06:14 by adamiens          #+#    #+#             */
-/*   Updated: 2023/03/13 10:38:38 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/11 09:58:54 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ bool	check_char(const char **map, int i, int j, t_texture *config)
 		valid = false;
 	else if (ft_isspace(map[i][j]) == true && !(map[i + 1] != NULL
 		&& (map[i + 1][j] == '1' || ft_isspace(map[i + 1][j]))))
-	{
 		if (map[i + 1])
 			valid = false;
-	}
 	else if (i == 0 && map[i][j] != '1' && ft_isspace(map[i][j]) == false
 			&& map[i][j] != 'D' && map[i][j] != '\n')
 		valid = false;
