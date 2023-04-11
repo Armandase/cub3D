@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/11 10:26:07 by adamiens          #+#    #+#             */
+/*   Updated: 2023/04/11 10:27:35 by adamiens         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/render.h"
 
 void	swap_axes(u_int32_t ***array, int max)
@@ -21,7 +33,8 @@ void	swap_axes(u_int32_t ***array, int max)
 	}
 }
 
-void	copy_texture_from_img_to_array(mlx_image_t *img, uint32_t ***img_tab, t_mlx *mlx, int max)
+void	copy_texture_from_img_to_array(mlx_image_t *img,
+		uint32_t ***img_tab, t_mlx *mlx, int max)
 {
 	int		x;
 	int		y;
