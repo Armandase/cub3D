@@ -22,7 +22,7 @@ void	free_texture(t_texture *config)
 	ft_free((void *)&config->ea);
 	ft_free_strs(config->map);
 	i = 0;
-	while (i < 4)
+	/*while (i < 4)
 	{
 		if (config->img_tab && config->img_tab[i])
 			free_img_tab(config->img_tab[i], 64);
@@ -44,6 +44,7 @@ void	free_texture(t_texture *config)
 	}
 	if (config->img_door)
 		free_img_tab(config->img_door, 64);
+	*/
 }
 
 void	rotate_vectors(t_mlx *mlx, int flag)

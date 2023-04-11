@@ -7,8 +7,8 @@
 # include <stdio.h>
 # include <float.h>
 
-# define WIDTH 1900
-# define HEIGHT 1000
+# define WIDTH 1080
+# define HEIGHT 720
 # define INF 1e30
 # define ROTATION_SPEED 40
 # define MOVEMENT_SPEED 0.08
