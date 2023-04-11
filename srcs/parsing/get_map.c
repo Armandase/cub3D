@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:01:52 by adamiens          #+#    #+#             */
-/*   Updated: 2023/03/06 15:24:25 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/04/11 10:52:46 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ char	**add_strs_back(char *to_add, char	**strs)
 	i = 0;
 	ret = malloc(sizeof(char *) * (ft_strlen_2d((const char **)strs) + 2));
 	if (!ret)
-	{
-		ft_free_strs(strs);
 		return (NULL);
-	}
 	while (strs[i])
 	{
 		ret[i] = ft_strdup(strs[i]);
@@ -36,10 +33,7 @@ char	**add_strs_back(char *to_add, char	**strs)
 	}
 	ret[i] = ft_strdup(to_add);
 	if (!ret[i])
-	{
-		ft_free_strs(strs);
 		return (NULL);
-	}
 	ret[i + 1] = NULL;
 	ft_free_strs(strs);
 	ft_free((void *)&to_add);

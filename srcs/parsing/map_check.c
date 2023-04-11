@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:59:08 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/11 10:05:05 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/04/11 10:49:08 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,15 +136,4 @@ void	verif_path_texture(t_texture *config)
 		free_strs_texture_exit(config, "Open error\n");
 	else
 		close(fd);
-}
-
-void	map_check(char	*av, t_texture *config)
-{
-	int			fd;
-
-	fd = open(av, O_RDONLY);
-	if (fd < 0)
-		print_error_exit("Open error\n");
-	configuration(fd, config);
-	verif_path_texture(config);
 }
