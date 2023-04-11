@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:26:00 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/11 10:26:01 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/04/11 15:24:16 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,12 @@ void	minimap(t_mlx *mlx)
 		x = 0;
 		while (mlx->config->map[y][x])
 		{
-			if (mlx->config->map[y][x] == '1' || mlx->config->map[y][x] == 'D')
+			if (mlx->config->map[y][x] == '1')
 				draw_square(mlx, x, y, 255000000);
+			else if (mlx->config->map[y][x] == 'D')
+				draw_square(mlx, x, y, 0x00ff00ff);
+			else if (mlx->config->map[y][x] == 'd')
+				draw_square(mlx, x, y, 0x9acd32ff);
 			else if (mlx->config->map[y][x] == '\n')
 				break ;
 			else
