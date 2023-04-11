@@ -7,9 +7,10 @@ void	free_img_tab(u_int32_t **tab, int len)
 	i = 0;
 	while (i < len)
 	{
-		ft_free((void *)tab[i]);
+		free(tab[i]);
 		i++;
 	}
+	free(tab);
 }
 
 void	free_texture(t_texture *config)
@@ -22,29 +23,28 @@ void	free_texture(t_texture *config)
 	ft_free((void *)&config->ea);
 	ft_free_strs(config->map);
 	i = 0;
-	/*while (i < 4)
+	while (i < 4)
 	{
-		if (config->img_tab && config->img_tab[i])
+		if (config->img_tab[i])
 			free_img_tab(config->img_tab[i], 64);
 		i++;
 	}
 	i = 0;
 	while (i < 3)
 	{
-		if (config->img_anim && config->img_anim[i])
+		if (config->img_anim[i])
 			free_img_tab(config->img_anim[i], 128);
 		i++;
 	}
 	i = 0;
 	while (i < 5)
 	{
-		if (config->hourglass && config->hourglass[i])
+		if (config->hourglass[i])
 			free_img_tab(config->hourglass[i], 512);
 		i++;
 	}
 	if (config->img_door)
 		free_img_tab(config->img_door, 64);
-	*/
 }
 
 void	rotate_vectors(t_mlx *mlx, int flag)
@@ -117,7 +117,6 @@ void	handle_key(void *param)
 		mlx_delete_image(mlx->init, mlx->img);
 		mlx_terminate(mlx->init);
 		free_texture(mlx->config);
-		//free(mlx->init);
 		exit(0);
 	}
 	if (mlx_is_key_down(mlx->init, MLX_KEY_W))
