@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:13:04 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/11 11:04:26 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/11 14:41:32 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,6 @@ void	free_render_exit(t_texture *config, t_mlx *mlx, char *error)
 	if (config->ea != NULL)
 		ft_free((void *)&config->ea);
 	print_error_exit(error);
-}
-
-void	init_direction_vectors(t_mlx *mlx)
-{
-	mlx->config->pos_x = mlx->config->y;
-	mlx->config->pos_y = mlx->config->x;
-	mlx->config->dir_x = 0;
-	mlx->config->dir_y = 0;
-	if (mlx->config->orientation == 'N')
-		mlx->config->dir_y = -1;
-	else if (mlx->config->orientation == 'S')
-		mlx->config->dir_y = 1;
-	else if (mlx->config->orientation == 'E')
-		mlx->config->dir_x = 1;
-	else if (mlx->config->orientation == 'W')
-		mlx->config->dir_x = -1;
 }
 
 void	mouse_hook_camera(void *data)
@@ -61,36 +45,6 @@ void	mouse_hook_camera(void *data)
 		rotate_vectors(mlx, LEFT);
 	mlx_set_mouse_pos(mlx->init, WIDTH / 2, HEIGHT / 2);
 	mlx_get_mouse_pos(mlx->init, &x, &y);
-}
-
-void	init_raycast(t_mlx *mlx)
-{
-	double	dir_x;
-	double	dir_y;
-
-	dir_x = 0;
-	dir_y = 0;
-	mlx->config->middle = false;
-	mlx->config->door_opened = false;
-	if (mlx->config->orientation == 'N')
-		dir_y = -1;
-	else if (mlx->config->orientation == 'S')
-		dir_y = 1;
-	else if (mlx->config->orientation == 'E')
-		dir_x = 1;
-	else if (mlx->config->orientation == 'W')
-		dir_x = -1;
-	mlx->config->plane_x = -(dir_y) * 0.66;
-	mlx->config->plane_y = dir_x * 0.66;
-}
-
-void	set_icon(t_mlx *mlx, t_texture *config)
-{
-	mlx->icon = mlx_load_xpm42("assets/biden.xpm42");
-	if (mlx->icon == NULL)
-		free_render_exit(config, mlx, "icon error\n");
-	mlx_set_icon(mlx->init, &mlx->icon->texture);
-	mlx_delete_xpm42(mlx->icon);
 }
 
 void	render(t_texture *config)
@@ -119,5 +73,5 @@ void	render(t_texture *config)
 	mlx_loop_hook(mlx.init, handle_key, &mlx);
 	mlx_loop(mlx.init);
 	mlx_terminate(mlx.init);
-	free_texture(mlx.config);
+	free_all(mlx.config);
 }

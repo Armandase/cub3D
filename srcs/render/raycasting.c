@@ -1,74 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/11 14:20:15 by ulayus            #+#    #+#             */
+/*   Updated: 2023/04/11 14:23:24 by ulayus           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/render.h"
-
-void	init_side_dist_in_dda(t_dda *dda, t_mlx *mlx, t_raycast *info)
-{
-	if (info->ray_dir_x < 0)
-	{
-		dda->step_x = -1;
-		dda->side_dist_x = (mlx->config->pos_x - dda->map_x)
-			* dda->delta_dist_x;
-	}
-	else
-		dda->side_dist_x = (dda->map_x + 1.0 - mlx->config->pos_x)
-			* dda->delta_dist_x;
-	if (info->ray_dir_y < 0)
-	{
-		dda->step_y = -1;
-		dda->side_dist_y = (mlx->config->pos_y - dda->map_y)
-			* dda->delta_dist_y;
-	}
-	else
-		dda->side_dist_y = (dda->map_y + 1.0 - mlx->config->pos_y)
-			* dda->delta_dist_y;
-}
-
-void	init_dda(t_dda *dda, t_raycast *info, t_mlx *mlx)
-{
-	dda->map_x = (int)(mlx->config->pos_x);
-	dda->map_y = (int)(mlx->config->pos_y);
-	if (info->ray_dir_x == 0)
-		dda->delta_dist_x = 1e30;
-	else
-		dda->delta_dist_x = ft_abs(1 / info->ray_dir_x);
-	if (info->ray_dir_y == 0)
-		dda->delta_dist_y = 1e30;
-	else
-		dda->delta_dist_y = ft_abs(1 / info->ray_dir_y);
-	dda->step_x = 1;
-	dda->step_y = 1;
-	init_side_dist_in_dda(dda, mlx, info);
-}
-
-bool	check_wall(t_mlx *mlx, t_dda *dda)
-{
-	bool		hit;
-	const char	tile = mlx->config->map[dda->map_y][dda->map_x];
-
-	hit = false;
-	if (dda->map_x > -1 && dda->map_y > -1
-		&& (tile == '1' || tile == 'D' || tile == 'd'))
-	{
-		hit = true;
-		pthread_mutex_lock(&mlx->config->door_opened_mtx);	
-		if (mlx->config->door_opened == true && mlx->config->middle == true)
-		{
-			if (mlx->config->map[dda->map_y][dda->map_x] == 'D')
-				mlx->config->map[dda->map_y][dda->map_x] = 'd';
-			else if (mlx->config->map[dda->map_y][dda->map_x] == 'd')
-			{
-				mlx->config->map[dda->map_y][dda->map_x] = 'D';
-				hit = false;
-			}
-			mlx->config->door_opened = false;
-		}
-		pthread_mutex_unlock(&mlx->config->door_opened_mtx);	
-		if (mlx->config->map[dda->map_y][dda->map_x] == 'D')
-			mlx->config->door = true;
-		else if (mlx->config->map[dda->map_y][dda->map_x] == 'd')
-			hit = false;
-	}
-	return (hit);
-}
 
 t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 {
@@ -93,23 +35,6 @@ t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 		hit = check_wall(mlx, dda);
 	}
 	return (dda);
-}
-
-int	select_texture(t_raycast *info, t_dda dda, int side)
-{
-	int	orientation;
-
-	if (info->end >= HEIGHT)
-		info->end = HEIGHT - 1;
-	if (dda.step_x == -1 && side == 0)
-		orientation = WEST;
-	else if (dda.step_x == 1 && side == 0)
-		orientation = EAST;
-	else if (dda.step_y == 1 && side == 1)
-		orientation = NORTH;
-	else
-		orientation = SOUTH;
-	return (orientation);
 }
 
 void	send_rays(t_mlx *mlx, t_raycast *info, t_dda *dda)

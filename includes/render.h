@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:44 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/11 09:46:45 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:48:50 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define LEFT 1
 # define RIGHT 2
 # define SQUARE_SIZE 5
+# define POS_X 1
+# define POS_Y -1
 
 void		render(t_texture *config);
 int			destroy_win(t_mlx *mlx);
@@ -49,6 +51,14 @@ void		anim(t_mlx *mlx);
 void		get_animation(t_texture *config, t_mlx *mlx);
 void		hourglass(t_mlx *mlx);
 void		free_render_exit(t_texture *config, t_mlx *mlx, char *error);
-void		free_texture(t_texture *config);
+void		free_all(t_texture *config);
+void		set_icon(t_mlx *mlx, t_texture *config);
+void		init_raycast(t_mlx *mlx);
+void		init_direction_vectors(t_mlx *mlx);
+void		init_dda(t_dda *dda, t_raycast *info, t_mlx *mlx);
+void		init_side_dist_in_dda(t_dda *dda, t_mlx *mlx, t_raycast *info);
+int			select_texture(t_raycast *info, t_dda dda, int side);
+bool		check_wall(t_mlx *mlx, t_dda *dda);
+void		check_door(t_mlx *mlx, t_dda *dda, char tile, bool *hit);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 10:26:16 by adamiens          #+#    #+#             */
-/*   Updated: 2023/03/18 13:29:39 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/04/11 14:40:39 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	img_open_error(t_mlx *mlx, char *error)
 {
-	free_texture(mlx->config);
+	free_all(mlx->config);
 	mlx_delete_image(mlx->init, mlx->img);
 	mlx_terminate(mlx->init);
 	print_error_exit(error);
