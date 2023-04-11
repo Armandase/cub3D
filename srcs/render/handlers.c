@@ -113,12 +113,7 @@ void	handle_key(void *param)
 	tmp_plane_x = mlx->config->plane_x * MOVEMENT_SPEED;
 	tmp_plane_y = mlx->config->plane_y * MOVEMENT_SPEED;
 	if (mlx_is_key_down(mlx->init, MLX_KEY_ESCAPE))
-	{
-		mlx_delete_image(mlx->init, mlx->img);
-		mlx_terminate(mlx->init);
-		free_texture(mlx->config);
-		exit(0);
-	}
+		mlx_close_window(mlx->init);
 	if (mlx_is_key_down(mlx->init, MLX_KEY_W))
 	{
 		if (check_cell(mlx->config->map[(int)mlx->config->pos_y]

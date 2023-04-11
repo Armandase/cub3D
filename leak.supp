@@ -58,7 +58,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -71,7 +71,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -5371,7 +5371,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -17977,7 +17977,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -17989,7 +17989,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -34899,7 +34899,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -34984,7 +34984,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -35001,7 +35001,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -35018,7 +35018,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -35035,7 +35035,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -35052,7 +35052,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -35069,7 +35069,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -35086,7 +35086,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -35103,7 +35103,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -35120,7 +35120,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -35137,7 +35137,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -35154,7 +35154,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -35172,7 +35172,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
 }
 {
    <insert_a_suppression_name_here>
@@ -35189,7 +35189,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
 }
 {
    <insert_a_suppression_name_here>
@@ -35206,7 +35206,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
 }
 {
    <insert_a_suppression_name_here>
@@ -35223,7 +35223,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
 }
 {
    <insert_a_suppression_name_here>
@@ -35240,7 +35240,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
 }
 {
    <insert_a_suppression_name_here>
@@ -35257,7 +35257,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
 }
 {
    <insert_a_suppression_name_here>
@@ -35273,7 +35273,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -37174,7 +37174,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:mlx_terminate
-   fun:free_all
+   fun:render
 }
 {
    <insert_a_suppression_name_here>
@@ -37763,7 +37763,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {
@@ -37829,7 +37829,7 @@
    obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.3
    fun:glfwInit
    fun:mlx_init
-   fun:create_window
+   fun:render
    fun:main
 }
 {

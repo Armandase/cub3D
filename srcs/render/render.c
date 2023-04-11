@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:13:04 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/11 10:14:04 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/04/11 11:04:26 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	init_raycast(t_mlx *mlx)
 
 void	set_icon(t_mlx *mlx, t_texture *config)
 {
-	mlx->icon = mlx_load_xpm42(config->so);
+	mlx->icon = mlx_load_xpm42("assets/biden.xpm42");
 	if (mlx->icon == NULL)
 		free_render_exit(config, mlx, "icon error\n");
 	mlx_set_icon(mlx->init, &mlx->icon->texture);
@@ -118,4 +118,6 @@ void	render(t_texture *config)
 	mlx_key_hook(mlx.init, &handle_key_released, &mlx);
 	mlx_loop_hook(mlx.init, handle_key, &mlx);
 	mlx_loop(mlx.init);
+	mlx_terminate(mlx.init);
+	free_texture(mlx.config);
 }
