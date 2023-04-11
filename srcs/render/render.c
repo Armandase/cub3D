@@ -70,6 +70,8 @@ void	init_raycast(t_mlx *mlx)
 
 	dir_x = 0;
 	dir_y = 0;
+	mlx->config->middle = false;
+	mlx->config->door_opened = false;
 	if (mlx->config->orientation == 'N')
 		dir_y = -1;
 	else if (mlx->config->orientation == 'S')
