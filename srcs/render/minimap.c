@@ -30,7 +30,7 @@ void	minimap(t_mlx *mlx)
 		x = 0;
 		while (mlx->config->map[y][x])
 		{
-			if (mlx->config->map[y][x] == '1')
+			if (mlx->config->map[y][x] == '1' || mlx->config->map[y][x] == 'D')
 				draw_square(mlx, x, y, 255000000);
 			else if (mlx->config->map[y][x] == '\n')
 				break ;

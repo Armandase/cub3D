@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/11 10:13:04 by adamiens          #+#    #+#             */
+/*   Updated: 2023/04/11 10:14:04 by adamiens         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/render.h"
-#include <stdio.h>
 
 void	free_render_exit(t_texture *config, t_mlx *mlx, char *error)
 {
@@ -73,6 +84,15 @@ void	init_raycast(t_mlx *mlx)
 	mlx->config->plane_y = dir_x * 0.66;
 }
 
+void	set_icon(t_mlx *mlx, t_texture *config)
+{
+	mlx->icon = mlx_load_xpm42(config->so);
+	if (mlx->icon == NULL)
+		free_render_exit(config, mlx, "icon error\n");
+	mlx_set_icon(mlx->init, &mlx->icon->texture);
+	mlx_delete_xpm42(mlx->icon);
+}
+
 void	render(t_texture *config)
 {
 	t_mlx	mlx;
@@ -80,11 +100,7 @@ void	render(t_texture *config)
 	mlx.init = mlx_init(WIDTH, HEIGHT, "Cub3d", true);
 	if (mlx.init == NULL)
 		free_render_exit(config, &mlx, "Initialisation error\n");
-	mlx.icon = mlx_load_xpm42("assets/biden.xpm42");
-	if (mlx.icon == NULL)
-		free_render_exit(config, &mlx, "Icon error\n");
-	mlx_set_icon(mlx.init, &mlx.icon->texture);
-	mlx_delete_xpm42(mlx.icon);
+	set_icon(&mlx, config);
 	mlx.config = config;
 	get_animation(config, &mlx);
 	mlx_set_cursor_mode(mlx.init, MLX_MOUSE_HIDDEN);
