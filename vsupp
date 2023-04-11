@@ -1,0 +1,15 @@
+{
+   mlx
+   Memcheck:Leak
+   ...
+   fun:glfwCreateWindow
+   ...
+}
+
+{
+   mlx
+   Memcheck:Leak
+   ...
+   fun:XrmGetStringDatabase
+   ...
+}

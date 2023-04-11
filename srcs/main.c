@@ -1,3 +1,5 @@
+
+
 #include "../includes/cub3d.h"
 #include "../includes/parsing.h"
 #include "../includes/render.h"
