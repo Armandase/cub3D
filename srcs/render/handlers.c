@@ -62,18 +62,31 @@ bool	check_cell(char cell, t_texture *config)
 	return (false);
 }
 
+void	*routine(void *data)
+{
+	t_texture	*config;
+
+	config = (t_texture *)data;
+	sleep(2);
+	pthread_mutex_lock(&config->door_opened_mtx);	
+	if (config->door_opened == false)
+		config->door_opened = true;
+	else
+		config->door_opened = false;
+	pthread_mutex_unlock(&config->door_opened_mtx);	
+	return (NULL);
+}
+
 void	handle_key_released(mlx_key_data_t keydata, void *param)
 {
-	t_mlx	*mlx;
+	t_mlx			*mlx;
 
 	mlx = param;
 	if (keydata.key == MLX_KEY_E && keydata.action == MLX_RELEASE)
 	{
 		system("paplay assets/biden_blast.ogg &"); 
-		if (mlx->config->door_opened == false)
-			mlx->config->door_opened = true;
-		else
-			mlx->config->door_opened = false;
+		pthread_create(&mlx->config->pthread, NULL, &routine, mlx->config);
+		pthread_detach(mlx->config->pthread);
 	}
 }
 

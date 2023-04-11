@@ -39,6 +39,37 @@ void	init_dda(t_dda *dda, t_raycast *info, t_mlx *mlx)
 	init_side_dist_in_dda(dda, mlx, info);
 }
 
+bool	check_wall(t_mlx *mlx, t_dda *dda)
+{
+	bool		hit;
+	const char	tile = mlx->config->map[dda->map_y][dda->map_x];
+
+	hit = false;
+	if (dda->map_x > -1 && dda->map_y > -1
+		&& (tile == '1' || tile == 'D' || tile == 'd'))
+	{
+		hit = true;
+		pthread_mutex_lock(&mlx->config->door_opened_mtx);	
+		if (mlx->config->door_opened == true && mlx->config->middle == true)
+		{
+			if (mlx->config->map[dda->map_y][dda->map_x] == 'D')
+				mlx->config->map[dda->map_y][dda->map_x] = 'd';
+			else if (mlx->config->map[dda->map_y][dda->map_x] == 'd')
+			{
+				mlx->config->map[dda->map_y][dda->map_x] = 'D';
+				hit = false;
+			}
+			mlx->config->door_opened = false;
+		}
+		pthread_mutex_unlock(&mlx->config->door_opened_mtx);	
+		if (mlx->config->map[dda->map_y][dda->map_x] == 'D')
+			mlx->config->door = true;
+		else if (mlx->config->map[dda->map_y][dda->map_x] == 'd')
+			hit = false;
+	}
+	return (hit);
+}
+
 t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 {
 	bool	hit;
@@ -59,28 +90,7 @@ t_dda	*apply_dda(t_mlx *mlx, t_raycast *info, t_dda *dda)
 			dda->map_y += dda->step_y;
 			dda->side = 1;
 		}
-		if (dda->map_x > -1 && dda->map_y > -1 && mlx->config->map[dda->map_y]
-			&& (mlx->config->map[dda->map_y][dda->map_x] == '1'
-			|| mlx->config->map[dda->map_y][dda->map_x] == 'D'
-			|| mlx->config->map[dda->map_y][dda->map_x] == 'd'))
-		{
-			hit = true;
-			if (mlx->config->door_opened == true && mlx->config->middle == true)
-			{
-				if (mlx->config->map[dda->map_y][dda->map_x] == 'D')
-					mlx->config->map[dda->map_y][dda->map_x] = 'd';
-				else if (mlx->config->map[dda->map_y][dda->map_x] == 'd')
-				{
-					mlx->config->map[dda->map_y][dda->map_x] = 'D';
-					hit = false;
-				}
-				mlx->config->door_opened = false;
-			}
-			if (mlx->config->map[dda->map_y][dda->map_x] == 'D')
-				mlx->config->door = true;
-			else if (mlx->config->map[dda->map_y][dda->map_x] == 'd')
-				hit = false;
-		}
+		hit = check_wall(mlx, dda);
 	}
 	return (dda);
 }
@@ -129,15 +139,17 @@ void	draw_line(t_mlx *mlx, t_raycast info, int line, t_dda *dda)
 	y = 0;
 	while (y < HEIGHT)
 	{
-		if (y < info.start && (uint32_t)y < mlx->img->height && (uint32_t)x < mlx->img->width)
+		if (y < info.start && (uint32_t)y < mlx->img->height
+			&& (uint32_t)x < mlx->img->width)
 			mlx_put_pixel(mlx->img, ft_abs(x), y, mlx->config->floor);
 		else if (y >= info.start && y <= info.end
-				&& (uint32_t)y < mlx->img->height && (uint32_t)x < mlx->img->width)
+			&& (uint32_t)y < mlx->img->height && (uint32_t)x < mlx->img->width)
 		{
 			put_sprite_to_img(mlx, x, dda, &info);
 			y = info.end;
 		}
-		else if (y > info.end && (uint32_t)y < mlx->img->height && (uint32_t)x < mlx->img->width)
+		else if (y > info.end && (uint32_t)y < mlx->img->height
+			&& (uint32_t)x < mlx->img->width)
 			mlx_put_pixel(mlx->img, ft_abs(x), y, mlx->config->ceiling);
 		y++;
 	}

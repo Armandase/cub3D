@@ -78,7 +78,7 @@ void	render(t_texture *config)
 	mlx.init = mlx_init(WIDTH, HEIGHT, "Cub3d", true);
 	if (mlx.init == NULL)
 		free_render_exit(config, &mlx, "Initialisation error\n");
-	mlx.icon = mlx_load_xpm42(config->so);
+	mlx.icon = mlx_load_xpm42("assets/biden.xpm42");
 	if (mlx.icon == NULL)
 		free_render_exit(config, &mlx, "Icon error\n");
 	mlx_set_icon(mlx.init, &mlx.icon->texture);
@@ -86,6 +86,7 @@ void	render(t_texture *config)
 	mlx.config = config;
 	get_animation(config, &mlx);
 	mlx_set_cursor_mode(mlx.init, MLX_MOUSE_HIDDEN);
+	pthread_mutex_init(&mlx.config->door_opened_mtx, NULL);
 	init_direction_vectors(&mlx);
 	init_raycast(&mlx);
 	if (mlx.init == NULL)
