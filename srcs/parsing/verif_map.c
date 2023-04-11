@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:05:59 by ulayus            #+#    #+#             */
-/*   Updated: 2023/04/11 13:06:00 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/11 15:18:32 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ static bool	check_char_context(const char **map, int i, int j)
 	bool	valid;
 
 	valid = true;
-	if (ft_isspace(map[i][j]) == true && !(map[i + 1] != NULL
+	if (j == 0 && map[i][j] != '1'
+		&& ft_isspace(map[i][j]) == false && map[i][j] != '\n')
+		valid = false;
+	else if (ft_isspace(map[i][j]) == true && !(map[i + 1] != NULL
 		&& (map[i + 1][j] == '1' || ft_isspace(map[i + 1][j]))))
 	{
 		if (map[i + 1])
 			valid = false;
 	}
-	else if (i == 0 && map[i][j] != '1'
-		&& ft_isspace(map[i][j]) == false && map[i][j] != '\n')
-		valid = false;
 	else if ((map[i][j] == '0' || map[i][j] == 'D')
 		&& (map[i][j + 1] == '\n' || map[i][j + 1] == ' '))
 		valid = false;
