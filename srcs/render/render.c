@@ -6,12 +6,11 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:13:04 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/11 10:13:05 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/04/11 10:14:04 by adamiens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/render.h"
-#include <stdio.h>
 
 void	free_render_exit(t_texture *config, t_mlx *mlx, char *error)
 {
@@ -103,6 +102,7 @@ void	render(t_texture *config)
 	mlx.config = config;
 	get_animation(config, &mlx);
 	mlx_set_cursor_mode(mlx.init, MLX_MOUSE_HIDDEN);
+	pthread_mutex_init(&mlx.config->door_opened_mtx, NULL);
 	init_direction_vectors(&mlx);
 	init_raycast(&mlx);
 	if (mlx.init == NULL)

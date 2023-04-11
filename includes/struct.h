@@ -26,30 +26,32 @@ enum e_orientation
 
 typedef struct s_texture
 {
-	uint32_t	**img_tab[4];
-	uint32_t	**img_door;
-	uint32_t	**img_anim[3];
-	uint32_t	**hourglass[5];
-	int			anim;
-	bool		door;
-	bool		door_opened;
-	bool		middle;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
-	int			floor;
-	int			ceiling;
-	char		**map;
-	double		x;
-	double		y;
-	char		orientation;
-	double		dir_x;
-	double		dir_y;
-	double		plane_x;
-	double		plane_y;
-	double		pos_x;
-	double		pos_y;
+	uint32_t		**img_tab[4];
+	uint32_t		**img_door;
+	uint32_t		**img_anim[3];
+	uint32_t		**hourglass[5];
+	int				anim;
+	bool			door;
+	bool			door_opened;
+	pthread_t		pthread;
+	pthread_mutex_t	door_opened_mtx;
+	bool			middle;
+	char			*no;
+	char			*so;
+	char			*we;
+	char			*ea;
+	int				floor;
+	int				ceiling;
+	char			**map;
+	double			x;
+	double			y;
+	char			orientation;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
+	double			pos_x;
+	double			pos_y;
 }	t_texture;
 
 typedef struct s_mlx

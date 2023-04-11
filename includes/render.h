@@ -14,6 +14,7 @@
 # define RENDER_H
 
 # include "parsing.h"
+# include <pthread.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include <stdio.h>

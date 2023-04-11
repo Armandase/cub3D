@@ -7,9 +7,10 @@ void	free_img_tab(u_int32_t **tab, int len)
 	i = 0;
 	while (i < len)
 	{
-		ft_free((void *)tab[i]);
+		free(tab[i]);
 		i++;
 	}
+	free(tab);
 }
 
 void	free_texture(t_texture *config)
@@ -22,29 +23,28 @@ void	free_texture(t_texture *config)
 	ft_free((void *)&config->ea);
 	ft_free_strs(config->map);
 	i = 0;
-	/*while (i < 4)
+	while (i < 4)
 	{
-		if (config->img_tab && config->img_tab[i])
+		if (config->img_tab[i])
 			free_img_tab(config->img_tab[i], 64);
 		i++;
 	}
 	i = 0;
 	while (i < 3)
 	{
-		if (config->img_anim && config->img_anim[i])
+		if (config->img_anim[i])
 			free_img_tab(config->img_anim[i], 128);
 		i++;
 	}
 	i = 0;
 	while (i < 5)
 	{
-		if (config->hourglass && config->hourglass[i])
+		if (config->hourglass[i])
 			free_img_tab(config->hourglass[i], 512);
 		i++;
 	}
 	if (config->img_door)
 		free_img_tab(config->img_door, 64);
-	*/
 }
 
 void	rotate_vectors(t_mlx *mlx, int flag)
@@ -71,19 +71,31 @@ bool	check_cell(char cell, t_texture *config)
 	return (false);
 }
 
+void	*routine(void *data)
+{
+	t_texture	*config;
+
+	config = (t_texture *)data;
+	sleep(2);
+	pthread_mutex_lock(&config->door_opened_mtx);	
+	if (config->door_opened == false)
+		config->door_opened = true;
+	else
+		config->door_opened = false;
+	pthread_mutex_unlock(&config->door_opened_mtx);	
+	return (NULL);
+}
+
 void	handle_key_released(mlx_key_data_t keydata, void *param)
 {
-	t_mlx	*mlx;
+	t_mlx			*mlx;
 
 	mlx = param;
 	if (keydata.key == MLX_KEY_E && keydata.action == MLX_RELEASE)
 	{
 		system("paplay assets/biden_blast.ogg &"); 
-		sleep(2);
-		if (mlx->config->door_opened == false)
-			mlx->config->door_opened = true;
-		else
-			mlx->config->door_opened = false;
+		pthread_create(&mlx->config->pthread, NULL, &routine, mlx->config);
+		pthread_detach(mlx->config->pthread);
 	}
 }
 
@@ -105,7 +117,6 @@ void	handle_key(void *param)
 		mlx_delete_image(mlx->init, mlx->img);
 		mlx_terminate(mlx->init);
 		free_texture(mlx->config);
-		//free(mlx->init);
 		exit(0);
 	}
 	if (mlx_is_key_down(mlx->init, MLX_KEY_W))
