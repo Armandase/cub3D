@@ -36,5 +36,6 @@ void		anim(t_mlx *mlx);
 void		get_animation(t_texture *config, t_mlx *mlx);
 void		hourglass(t_mlx *mlx);
 void		free_render_exit(t_texture *config, t_mlx *mlx, char *error);
+void		free_texture(t_texture *config);
 
 #endif
