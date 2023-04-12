@@ -31,5 +31,6 @@ void		copy_texture_from_img_to_array(mlx_image_t *img,
 				uint32_t ***img_tab, t_mlx *mlx, int max);
 void		configuration(int fd, t_texture *config);
 void		verif_path_texture(t_texture *config);
+int			check_add(char **strs, char *to_add, int fd);
 
 #endif

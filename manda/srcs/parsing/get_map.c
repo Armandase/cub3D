@@ -115,6 +115,8 @@ char	**copy_map(int fd, char *first_line)
 		to_add = get_next_line(fd);
 		if (to_add == NULL)
 			break ;
+		else if (ft_strcmp(to_add, "\n") == 0 && check_add(strs, to_add, fd))
+			return (NULL);
 		strs = add_strs_back(to_add, strs);
 		if (!strs)
 			break ;
@@ -127,7 +129,8 @@ void	get_map(t_texture *config, char *buf, int fd)
 {
 	config->map = copy_map(fd, buf);
 	if (!config->map)
-		free_strs_texture_exit(config, "memory allocation failed\n");
+		free_strs_texture_exit(config,
+			"Error inside map or memory allocation fail.\n");
 	find_spawn(config);
 	if (verif_map(config) == false)
 		free_strs_texture_exit(config, "Invalid map\n");

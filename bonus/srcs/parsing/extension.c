@@ -12,6 +12,18 @@
 
 #include "../../includes/parsing.h"
 
+int	check_add(char **strs, char *to_add, int fd)
+{
+	if (ft_strcmp(to_add, "\n") == 0)
+	{
+		close (fd);
+		ft_free_strs(strs);
+		free(to_add);
+		return (1);
+	}
+	return (0);
+}
+
 void	print_error_exit(char *error)
 {
 	ft_putstr_fd("Error\n", 2);
