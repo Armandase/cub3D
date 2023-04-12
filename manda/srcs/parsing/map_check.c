@@ -57,6 +57,35 @@ void	get_color(t_texture *config, char *buf, char way, int fd)
 		config->ceiling = convert_str_rgb_to_int(colors, *config, buf, fd);
 }
 
+int	check_config_extended(t_texture *config, char *tmp, int fd, char **buf)
+{
+	if (ft_strncmp(tmp, "F", 1) == 0 && config->floor == -1)
+	{
+		free(*buf);
+		*buf = NULL;
+		get_color(config, tmp, 'F', fd);
+	}
+	else if (ft_strncmp(tmp, "C", 1) == 0 && config->ceiling == -1)
+	{
+		free(*buf);
+		*buf = NULL;
+		get_color(config, tmp, 'C', fd);
+	}
+	else if (config->no && config->so && config->we && config->ea
+		&& config->floor != -1 && config->ceiling != -1 && ft_strlen(tmp) != 0)
+	{
+		ft_free((void *)&tmp);
+		get_map(config, *buf, fd);
+		return (-1);
+	}
+	else if (ft_strcmp(*buf, "\n") != 0)
+	{
+		free(tmp);
+		free_texture_exit(*config, *buf, fd);
+	}
+	return (0);
+}
+
 int	check_config(t_texture *config, char *tmp, int fd, char *buf)
 {
 	int	ret;
@@ -70,18 +99,10 @@ int	check_config(t_texture *config, char *tmp, int fd, char *buf)
 		ret += copy_path_texture(&config->we, tmp);
 	else if (ft_strncmp(tmp, "EA", 2) == 0 && config->ea == NULL)
 		ret += copy_path_texture(&config->ea, tmp);
-	else if (ft_strncmp(tmp, "F", 1) == 0 && config->floor == -1)
-		get_color(config, tmp, 'F', fd);
-	else if (ft_strncmp(tmp, "C", 1) == 0 && config->ceiling == -1)
-		get_color(config, tmp, 'C', fd);
-	else if (config->no && config->so && config->we && config->ea
-		&& config->floor != -1 && config->ceiling != -1 && ft_strlen(tmp) != 0)
-	{
-		ft_free((void *)&tmp);
-		get_map(config, buf, fd);
+	else if (check_config_extended(config, tmp, fd, &buf) == -1)
 		return (-1);
-	}
-	ft_free((void *)&buf);
+	if (buf)
+		free(buf);
 	ft_free((void *)&tmp);
 	return (ret);
 }
@@ -110,30 +131,4 @@ void	configuration(int fd, t_texture *config)
 		else if (ret > 0)
 			free_texture_exit(*config, NULL, fd);
 	}
-}
-
-void	verif_path_texture(t_texture *config)
-{
-	int	fd;
-
-	fd = open(config->no, O_RDONLY);
-	if (fd < 0)
-		free_strs_texture_exit(config, "Open error\n");
-	else
-		close(fd);
-	fd = open(config->so, O_RDONLY);
-	if (fd < 0)
-		free_strs_texture_exit(config, "Open error\n");
-	else
-		close(fd);
-	fd = open(config->we, O_RDONLY);
-	if (fd < 0)
-		free_strs_texture_exit(config, "Open error\n");
-	else
-		close(fd);
-	fd = open(config->ea, O_RDONLY);
-	if (fd < 0)
-		free_strs_texture_exit(config, "Open error\n");
-	else
-		close(fd);
 }

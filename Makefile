@@ -52,7 +52,7 @@ fclean : clean
 	@printf '\e[5m🚨 \e[0m\x1b[38;2;200;0;20mBinary removed\x1b[0m\e[5m 🚨\n\e[0m'
 
 vg: all
-	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=leak.supp ./${NAME} maps/map.cub 
+	valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=leak.supp ./${NAME} maps/map.cub 
 
 re: fclean all
 
