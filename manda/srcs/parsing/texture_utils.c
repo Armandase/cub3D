@@ -45,20 +45,20 @@ void	free_texture_exit(t_texture config, char *buf, int fd)
 
 int	convert_str_rgb_to_int(char **colors, t_texture config, char *buf, int fd)
 {
-	int	r;
-	int	g;
-	int	b;
-	int	sum;
+	int				r;
+	int				g;
+	int				b;
+	long			sum;
 
 	r = atoi_protect(colors[0]);
 	g = atoi_protect(colors[1]);
 	b = atoi_protect(colors[2]);
-	if (r == -1 || g == -1 || b == -1 || r > 256 || g > 256 || b > 256)
+	if (r == -1 || g == -1 || b == -1 || r > 255 || g > 255 || b > 255)
 	{
 		ft_free_strs(colors);
 		free_texture_exit(config, buf, fd);
 	}
-	sum = (r * 100000) + (g * 1000) + b;
+	sum = (r << 24) | (g << 16) | (b << 8) | 0xFF;
 	ft_free_strs(colors);
 	return (sum);
 }
