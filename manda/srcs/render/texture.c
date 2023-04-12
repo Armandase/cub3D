@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:26:07 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/12 13:56:04 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/12 14:38:56 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	*texture_to_tab(t_texture *config, t_mlx *mlx)
 		if (xpm)
 			img = mlx_texture_to_image(mlx->init, &xpm->texture);
 		else
-			return (NULL);	
+			return (NULL);
 		copy_texture_from_img_to_array(img, &config->img_tab[i], mlx, 64);
 		mlx_delete_texture(&xpm->texture);
 		i++;

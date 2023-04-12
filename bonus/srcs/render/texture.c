@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:26:07 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/12 14:34:34 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/12 14:39:40 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	copy_texture_from_img_to_array(mlx_image_t *img,
 	if (img)
 		mlx_delete_image(mlx->init, img);
 }
+
 static void	*load_door_texture(t_texture*config, t_mlx *mlx)
 {
 	mlx_image_t	*img;
