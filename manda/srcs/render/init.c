@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:48:11 by ulayus            #+#    #+#             */
-/*   Updated: 2023/04/12 10:35:08 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/12 13:42:22 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	init_raycast(t_mlx *mlx)
 {
 	double	dir_x;
 	double	dir_y;
+	int		i;
 
 	dir_x = 0;
 	dir_y = 0;
@@ -45,6 +46,12 @@ void	init_raycast(t_mlx *mlx)
 		dir_x = -1;
 	mlx->config->plane_x = -(dir_y) * 0.66;
 	mlx->config->plane_y = dir_x * 0.66;
+	i = 0;
+	while (i < 4)
+	{
+		mlx->config->img_tab[i] = NULL;
+		i++;
+	}
 }
 
 void	set_icon(t_mlx *mlx, t_texture *config)

@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:13:04 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/12 10:30:09 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/12 13:37:31 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ void	free_render_exit(t_texture *config, t_mlx *mlx, char *error)
 	print_error_exit(error);
 }
 
+static void	ft_exit(t_mlx *mlx)
+{
+	mlx_terminate(mlx->init);
+	free_all(mlx->config);
+	exit(0);
+}
+
 void	render(t_texture *config)
 {
 	t_mlx	mlx;
@@ -43,10 +50,10 @@ void	render(t_texture *config)
 	if (mlx.img == NULL)
 		free_render_exit(config, &mlx, "Image error\n");
 	mlx_image_to_window(mlx.init, mlx.img, 0, 0);
-	texture_to_tab(mlx.config, &mlx);
+	if (texture_to_tab(mlx.config, &mlx) == NULL)
+		ft_exit(&mlx);
 	raycasting(&mlx);
 	mlx_loop_hook(mlx.init, handle_key, &mlx);
 	mlx_loop(mlx.init);
-	mlx_terminate(mlx.init);
-	free_all(mlx.config);
+	ft_exit(&mlx);
 }

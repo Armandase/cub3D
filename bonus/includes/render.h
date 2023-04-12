@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:44 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/11 14:48:50 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/12 13:48:26 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		mouse_hook_camera(void *data);
 void		raycasting(t_mlx *mlx);
 double		ft_abs(double nb);
 uint32_t	get_color_from_img(mlx_image_t *img, int x, int y);
-void		texture_to_tab(t_texture *config, t_mlx *mlx);
+void		*texture_to_tab(t_texture *config, t_mlx *mlx);
 void		animation_sprite(t_texture *config, t_mlx *mlx);
 void		put_sprite_to_img(t_mlx *mlx, int x, t_dda *dda, t_raycast *info);
 void		put_sprite_to_img_animation(t_mlx *mlx, int x, t_dda *dda,

@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:44 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/12 10:32:40 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/12 13:34:56 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		handle_key(void	*param);
 void		raycasting(t_mlx *mlx);
 double		ft_abs(double nb);
 uint32_t	get_color_from_img(mlx_image_t *img, int x, int y);
-void		texture_to_tab(t_texture *config, t_mlx *mlx);
+void		*texture_to_tab(t_texture *config, t_mlx *mlx);
 void		put_sprite_to_img(t_mlx *mlx, int x, t_dda *dda, t_raycast *info);
 void		rotate_vectors(t_mlx *mlx, int flag);
 void		free_render_exit(t_texture *config, t_mlx *mlx, char *error);

@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:26:07 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/11 10:27:35 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/04/12 14:34:34 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,22 @@ void	copy_texture_from_img_to_array(mlx_image_t *img,
 	if (img)
 		mlx_delete_image(mlx->init, img);
 }
+static void	*load_door_texture(t_texture*config, t_mlx *mlx)
+{
+	mlx_image_t	*img;
+	xpm_t		*xpm;
 
-void	texture_to_tab(t_texture *config, t_mlx *mlx)
+	xpm = mlx_load_xpm42("assets/door.xpm42");
+	if (xpm != NULL)
+		img = mlx_texture_to_image(mlx->init, &xpm->texture);
+	else
+		return (NULL);
+	mlx_delete_texture(&xpm->texture);
+	copy_texture_from_img_to_array(img, &config->img_door, mlx, 64);
+	return (mlx);
+}
+
+void	*texture_to_tab(t_texture *config, t_mlx *mlx)
 {
 	int			i;
 	mlx_image_t	*img;
@@ -78,13 +92,14 @@ void	texture_to_tab(t_texture *config, t_mlx *mlx)
 			xpm = mlx_load_xpm42(config->ea);
 		else if (i == 3)
 			xpm = mlx_load_xpm42(config->we);
-		img = mlx_texture_to_image(mlx->init, &xpm->texture);
+		if (xpm != NULL)
+			img = mlx_texture_to_image(mlx->init, &xpm->texture);
+		else
+			return (NULL);
 		copy_texture_from_img_to_array(img, &config->img_tab[i], mlx, 64);
 		mlx_delete_texture(&xpm->texture);
 		i++;
 	}
-	xpm = mlx_load_xpm42("assets/door.xpm42");
-	img = mlx_texture_to_image(mlx->init, &xpm->texture);
-	mlx_delete_texture(&xpm->texture);
-	copy_texture_from_img_to_array(img, &config->img_door, mlx, 64);
+	load_door_texture(config, mlx);
+	return (mlx);
 }

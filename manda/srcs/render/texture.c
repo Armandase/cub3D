@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:26:07 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/12 10:31:23 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/12 13:56:04 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	copy_texture_from_img_to_array(mlx_image_t *img,
 		mlx_delete_image(mlx->init, img);
 }
 
-void	texture_to_tab(t_texture *config, t_mlx *mlx)
+void	*texture_to_tab(t_texture *config, t_mlx *mlx)
 {
 	int			i;
 	mlx_image_t	*img;
@@ -78,9 +78,13 @@ void	texture_to_tab(t_texture *config, t_mlx *mlx)
 			xpm = mlx_load_xpm42(config->ea);
 		else if (i == 3)
 			xpm = mlx_load_xpm42(config->we);
-		img = mlx_texture_to_image(mlx->init, &xpm->texture);
+		if (xpm)
+			img = mlx_texture_to_image(mlx->init, &xpm->texture);
+		else
+			return (NULL);	
 		copy_texture_from_img_to_array(img, &config->img_tab[i], mlx, 64);
 		mlx_delete_texture(&xpm->texture);
 		i++;
 	}
+	return (mlx);
 }

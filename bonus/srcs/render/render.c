@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 10:13:04 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/11 14:41:32 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/12 13:54:17 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,13 @@ void	mouse_hook_camera(void *data)
 	mlx_get_mouse_pos(mlx->init, &x, &y);
 }
 
+static void	ft_exit(t_mlx *mlx)
+{
+	mlx_terminate(mlx->init);
+	free_all(mlx->config);
+	exit(0);
+}
+
 void	render(t_texture *config)
 {
 	t_mlx	mlx;
@@ -67,11 +74,11 @@ void	render(t_texture *config)
 	if (mlx.img == NULL)
 		free_render_exit(config, &mlx, "Image error\n");
 	mlx_image_to_window(mlx.init, mlx.img, 0, 0);
-	texture_to_tab(mlx.config, &mlx);
+	if (texture_to_tab(mlx.config, &mlx) == NULL)
+		ft_exit(&mlx);
 	raycasting(&mlx);
 	mlx_key_hook(mlx.init, &handle_key_released, &mlx);
 	mlx_loop_hook(mlx.init, handle_key, &mlx);
 	mlx_loop(mlx.init);
-	mlx_terminate(mlx.init);
-	free_all(mlx.config);
+	ft_exit(&mlx);
 }
