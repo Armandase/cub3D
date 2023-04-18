@@ -6,7 +6,7 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:44 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/12 13:48:26 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/18 19:42:35 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include <pthread.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
-# include <stdio.h>
-# include <float.h>
 
 # define WIDTH 1080
 # define HEIGHT 720
@@ -33,7 +31,6 @@
 # define POS_Y -1
 
 void		render(t_texture *config);
-int			destroy_win(t_mlx *mlx);
 void		handle_key_released(mlx_key_data_t keydata, void *param);
 void		handle_key(void	*param);
 void		mouse_hook_camera(void *data);

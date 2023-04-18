@@ -6,18 +6,15 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:44 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/12 13:34:56 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/18 19:43:06 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 # define RENDER_H
 # include "parsing.h"
-# include <pthread.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
-# include <stdio.h>
-# include <float.h>
 
 # define WIDTH 1080
 # define HEIGHT 720
@@ -32,7 +29,6 @@
 # define POS_Y -1
 
 void		render(t_texture *config);
-int			destroy_win(t_mlx *mlx);
 void		handle_key(void	*param);
 void		raycasting(t_mlx *mlx);
 double		ft_abs(double nb);

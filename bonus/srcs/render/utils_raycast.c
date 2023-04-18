@@ -6,7 +6,7 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:23:07 by ulayus            #+#    #+#             */
-/*   Updated: 2023/04/11 14:23:30 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/18 19:47:00 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int	select_texture(t_raycast *info, t_dda dda, int side)
 	if (info->end >= HEIGHT)
 		info->end = HEIGHT - 1;
 	if (dda.step_x == -1 && side == 0)
-		orientation = WEST;
-	else if (dda.step_x == 1 && side == 0)
 		orientation = EAST;
+	else if (dda.step_x == 1 && side == 0)
+		orientation = WEST;
 	else if (dda.step_y == 1 && side == 1)
 		orientation = NORTH;
 	else

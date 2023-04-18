@@ -6,14 +6,14 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:46:32 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/12 10:26:57 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/18 19:41:46 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "stdlib.h"
+# include <stdlib.h>
 # include "../../libs/MLX42/include/MLX42/MLX42.h"
 
 enum e_orientation

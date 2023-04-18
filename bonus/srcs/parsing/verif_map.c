@@ -6,24 +6,11 @@
 /*   By: ulayus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:05:59 by ulayus            #+#    #+#             */
-/*   Updated: 2023/04/11 15:18:32 by ulayus           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   verif_map.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 09:06:14 by adamiens          #+#    #+#             */
+/*   Updated: 2023/04/18 19:40:00 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
-
-#include <stdio.h>
 
 static bool	check_char_context(const char **map, int i, int j)
 {
@@ -33,8 +20,8 @@ static bool	check_char_context(const char **map, int i, int j)
 	if (j == 0 && map[i][j] != '1'
 		&& ft_isspace(map[i][j]) == false && map[i][j] != '\n')
 		valid = false;
-	else if (ft_isspace(map[i][j]) == true && !(map[i + 1] != NULL
-		&& (map[i + 1][j] == '1' || ft_isspace(map[i + 1][j]))))
+	else if (ft_isspace(map[i][j]) == true && map[i + 1] != NULL
+		&& (map[i + 1][j] == '0' || map[i + 1][j] == 'D'))
 	{
 		if (map[i + 1])
 			valid = false;
