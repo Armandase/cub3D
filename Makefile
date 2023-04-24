@@ -1,5 +1,5 @@
 NAME		= cub3D
-NAME_B		= cub3D_b
+
 SRCS		= manda/srcs/main.c manda/srcs/utils_overall.c\
 			  manda/srcs/parsing/parsing.c manda/srcs/parsing/extension.c\
 			  manda/srcs/parsing/map_check.c manda/srcs/parsing/atoi_protect.c\
@@ -79,7 +79,7 @@ fclean_b: clean_b
 	@printf '\e[5m🚨 \e[0m\x1b[38;2;200;0;20mBonus binary removed\x1b[0m\e[5m 🚨\n\e[0m'
 
 vg_b: bonus
-	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=leak.supp ./${NAME_B} maps/map.cub 
+	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=leak.supp ./${NAME_B} maps/map_b.cub 
 
 re_b: fclean_b bonus
 
