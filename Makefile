@@ -1,4 +1,5 @@
 NAME		= cub3D
+NAME_B		= cub3D_b
 
 SRCS		= manda/srcs/main.c manda/srcs/utils_overall.c\
 			  manda/srcs/parsing/parsing.c manda/srcs/parsing/extension.c\
