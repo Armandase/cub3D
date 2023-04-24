@@ -20,4 +20,5 @@ The bonus part can be compiled with `make bonus` and has the following features:
 If you want to check for leaks, you can use the `make vg` or `make vg_b` make rule, which uses the leak.supp valgrind suppression file, suppressing the leaks coming from mlx_init
 
 
-![Here is a screenshot of the bonus part](https://user-images.githubusercontent.com/88546076/233985931-f28053ce-a449-4ffd-8637-33d326e2fb32.png)
+![Screenshot of cub3d](https://user-images.githubusercontent.com/88546076/233985931-f28053ce-a449-4ffd-8637-33d326e2fb32.png)
+Here is a screenshot of the bonus part
