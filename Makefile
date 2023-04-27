@@ -26,7 +26,7 @@ SRCS_B		= bonus/srcs/main.c bonus/srcs/utils_overall.c\
 CC			= clang
 LIBMLX		= libs/MLX42
 LIBS        = -Llibs/libft -lft $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-CFLAGS		= -Wall -Werror -Wextra -g -Wno-conversion -Ofast
+CFLAGS		= -Wall -Werror -Wextra -Wno-conversion -Ofast
 OBJS		= ${SRCS:.c=.o}
 OBJS_B		= ${SRCS_B:.c=.o}
 
@@ -54,7 +54,7 @@ fclean : clean
 	@printf '\e[5m🚨 \e[0m\x1b[38;2;200;0;20mBinary removed\x1b[0m\e[5m 🚨\n\e[0m'
 
 vg: all
-	valgrind --track-fds=yes --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=leak.supp ./${NAME} maps/map.cub 
+	valgrind --suppressions=leak.supp ./${NAME} maps/map.cub 
 
 re: fclean all
 
@@ -81,7 +81,7 @@ fclean_b: clean_b
 	@printf '\e[5m🚨 \e[0m\x1b[38;2;200;0;20mBonus binary removed\x1b[0m\e[5m 🚨\n\e[0m'
 
 vg_b: bonus
-	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=leak.supp ./${NAME_B} maps/map_b.cub 
+	valgrind --suppressions=leak.supp ./${NAME_B} maps/map_b.cub 
 
 re_b: fclean_b bonus
 
