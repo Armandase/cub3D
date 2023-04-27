@@ -50,6 +50,7 @@ clean:
 
 fclean : clean
 	@rm -f ${NAME}
+	make fclean -Clibs/libft
 	@printf '\e[5m🚨 \e[0m\x1b[38;2;200;0;20mBinary removed\x1b[0m\e[5m 🚨\n\e[0m'
 
 vg: all

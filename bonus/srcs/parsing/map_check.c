@@ -6,26 +6,22 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 09:59:08 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/11 10:49:08 by adamiens         ###   ########.fr       */
+/*   Updated: 2023/04/27 11:11:48 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
 #include <fcntl.h>
 
-int	copy_path_texture(char **config_texture, char *buf)
+static void	check_colors(char **colors, t_texture *config, char *buf, int fd)
 {
-	char	**tmp;
-
-	tmp = ft_split(buf, ' ');
-	if (ft_strlen_2d((const char **)tmp) != 2)
+	if (!colors)
+		free_texture_exit(*config, buf, fd);
+	if (ft_strlen_2d((const char **)colors) != 3)
 	{
-		ft_free_strs(tmp);
-		return (1);
+		ft_free_strs(colors);
+		free_texture_exit(*config, buf, fd);
 	}
-	*config_texture = ft_strdup(tmp[1]);
-	ft_free_strs(tmp);
-	return (0);
 }
 
 void	get_color(t_texture *config, char *buf, char way, int fd)
@@ -47,10 +43,7 @@ void	get_color(t_texture *config, char *buf, char way, int fd)
 	ft_free_strs(colors);
 	colors = ft_split(tmp, ',');
 	ft_free((void *)&tmp);
-	if (!colors)
-		free_texture_exit(*config, buf, fd);
-	if (ft_strlen_2d((const char **)colors) != 3)
-		free_texture_exit(*config, buf, fd);
+	check_colors(colors, config, buf, fd);
 	if (way == 'F')
 		config->floor = convert_str_rgb_to_int(colors, *config, buf, fd);
 	if (way == 'C')

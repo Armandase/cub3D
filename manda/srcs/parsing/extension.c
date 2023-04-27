@@ -6,11 +6,26 @@
 /*   By: adamiens <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 17:30:11 by adamiens          #+#    #+#             */
-/*   Updated: 2023/04/12 13:13:08 by ulayus           ###   ########.fr       */
+/*   Updated: 2023/04/27 11:12:48 by ulayus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
+
+int	copy_path_texture(char **config_texture, char *buf)
+{
+	char	**tmp;
+
+	tmp = ft_split(buf, ' ');
+	if (ft_strlen_2d((const char **)tmp) != 2)
+	{
+		ft_free_strs(tmp);
+		return (1);
+	}
+	*config_texture = ft_strdup(tmp[1]);
+	ft_free_strs(tmp);
+	return (0);
+}
 
 int	check_add(char **strs, char *to_add, int fd)
 {
